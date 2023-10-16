@@ -12,18 +12,19 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 @Composable
-fun <T> StorageSetting<T>.collectAsState(): State<T> {
-    return flow.collectAsState(initial = defaultValue)
+fun <T> StorageSetting<T>.collectAsState(useDefaultValue: Boolean = false): State<T> {
+    return flow.collectAsState(initial = if (useDefaultValue) defaultValue else value)
 }
 
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    context: CoroutineContext = EmptyCoroutineContext
+    context: CoroutineContext = EmptyCoroutineContext,
+    useDefaultValue: Boolean = false
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
-        initialValue = defaultValue,
+        initialValue = if (useDefaultValue) defaultValue else value,
         lifecycle,
         minActiveState,
         context
@@ -34,10 +35,11 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    context: CoroutineContext = EmptyCoroutineContext
+    context: CoroutineContext = EmptyCoroutineContext,
+    useDefaultValue: Boolean = false
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
-        initialValue = defaultValue,
+        initialValue = if (useDefaultValue) defaultValue else value,
         lifecycleOwner,
         minActiveState,
         context

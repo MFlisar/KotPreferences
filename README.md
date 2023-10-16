@@ -3,8 +3,6 @@
 [![Release](https://jitpack.io/v/MFlisar/KotPreferences.svg)](https://jitpack.io/#MFlisar/KotPreferences)
 ![License](https://img.shields.io/github/license/MFlisar/KotPreferences)
 
-...
-
 ### Gradle (via [JitPack.io](https://jitpack.io/))
 
 1. add jitpack to your project's `build.gradle`:
@@ -38,7 +36,7 @@ The latest release can be found [here](https://github.com/MFlisar/KotPreferences
 
 ### Demo
 
-A full demo is included inside the `demo` module, it shows nearly every usage with working examples.
+A full demo is included inside the [demo module](https://github.com/MFlisar/KotPreferences/tree/main/demo), it shows nearly every usage with working examples.
 
 # Example
 
