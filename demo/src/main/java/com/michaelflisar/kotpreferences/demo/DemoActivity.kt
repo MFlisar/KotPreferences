@@ -11,12 +11,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -41,8 +39,15 @@ class DemoActivity : ComponentActivity() {
 
         setContent {
 
-            val theme = DemoSettingsModel.appTheme.collectAsState()
-            val dynamicTheme = DemoSettingsModel.dynamicTheme.collectAsState()
+            val stateTheme = DemoSettingsModel.appTheme.collectAsState()
+            val stateDynamicTheme = DemoSettingsModel.dynamicTheme.collectAsState()
+
+            // we at least wait for those 2 settings to load before rendering anything
+            // otherwise we must provide an initial state or handle null
+            val theme = stateTheme.value
+            val dynamicTheme = stateDynamicTheme.value
+            if (theme == null || dynamicTheme == null)
+                return@setContent
 
             val initialTestsDone = rememberSaveable {
                 mutableStateOf(false)
@@ -60,8 +65,8 @@ class DemoActivity : ComponentActivity() {
             }
 
             AppTheme(
-                darkTheme = theme.value.isDark(),
-                dynamicColor = dynamicTheme.value
+                darkTheme = theme.isDark(),
+                dynamicColor = dynamicTheme
             ) {
                 Surface(
                     modifier = Modifier
@@ -86,7 +91,7 @@ class DemoActivity : ComponentActivity() {
                                 .padding(8.dp),
                             verticalArrangement = Arrangement.spacedBy(8.dp)
                         ) {
-                            Content(logs)
+                            Content(logs, theme, dynamicTheme)
                         }
                     }
                 }
@@ -99,7 +104,11 @@ class DemoActivity : ComponentActivity() {
     // ----------------
 
     @Composable
-    fun ColumnScope.Content(logs: MutableList<String>) {
+    fun ColumnScope.Content(
+        logs: MutableList<String>,
+        theme: DemoTheme,
+        dynamicTheme: Boolean
+    ) {
 
         val scope = rememberCoroutineScope()
 
@@ -113,11 +122,9 @@ class DemoActivity : ComponentActivity() {
             // Infos about current state
             // --------------------
 
-            val theme = DemoSettingsModel.appTheme.collectAsState()
-            val dynamicTheme = DemoSettingsModel.dynamicTheme.collectAsState()
             MyRegionTitle("Infos")
-            MyInfoLine("Current Theme", theme.value.name)
-            MyInfoLine("Dynamic Theme", if (dynamicTheme.value) "YES" else "NO")
+            MyInfoLine("Current Theme", theme.name)
+            MyInfoLine("Dynamic Theme", if (dynamicTheme) "YES" else "NO")
 
             // --------------------
             // Actions

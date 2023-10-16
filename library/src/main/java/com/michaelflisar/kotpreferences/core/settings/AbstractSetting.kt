@@ -58,6 +58,8 @@ abstract class AbstractSetting<T : Any?> : StorageSetting<T> {
         }
     }
 
+    override fun getCached() = cached?.data
+
     // ---------
     // classes
     // ---------

@@ -59,4 +59,6 @@ interface StorageSetting<T : Any?> : ReadOnlyProperty<SettingsModel, StorageSett
             true
         } else false
     }
+
+    fun getCached(): T?
 }
