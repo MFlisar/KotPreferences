@@ -155,3 +155,10 @@ val name = UserSettingsModel.name.collectAsStateWithLifecycle()
 // simply use the state inside your composables, the state will change whenever the setting behind it will change
 
 ```
+
+# Special Documentation
+
+The modules are documented in their own readmes:
+
+* [encryption module](doc/encryption.md)
+* [storage datastore module](doc/storage-datastore.md)
