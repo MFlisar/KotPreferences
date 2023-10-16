@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.michaelflisar.kotpreferences.compose.collectAsState
+import com.michaelflisar.kotpreferences.compose.collectAsStateNotNull
 import com.michaelflisar.kotpreferences.demo.classes.DemoTheme
 import com.michaelflisar.kotpreferences.demo.classes.DemoUtil
 import com.michaelflisar.kotpreferences.demo.composables.MyInfoLine
@@ -41,6 +42,12 @@ class DemoActivity : ComponentActivity() {
 
             val stateTheme = DemoSettingsModel.appTheme.collectAsState()
             val stateDynamicTheme = DemoSettingsModel.dynamicTheme.collectAsState()
+
+            // alternatively we could do following (this would use the settings cache [if enabled]
+            // or the initial value of the preference or the provided not null initial value) which would give us a not nullable state
+            // for all not nullable preferences
+            // val stateTheme = DemoSettingsModel.appTheme.collectAsStateNotNull()
+            // val stateDynamicTheme = DemoSettingsModel.dynamicTheme.collectAsStateNotNull()
 
             // we at least wait for those 2 settings to load before rendering anything
             // otherwise we must provide an initial state or handle null
