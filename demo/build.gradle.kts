@@ -66,7 +66,7 @@ dependencies {
     implementation(compose.material.extendedicons)
 
     implementation(compose.activity)
-    implementation(compose.drawablepainter)
+    //implementation(compose.drawablepainter)
 
     // ------------------------
     // Libraries
