@@ -7,7 +7,7 @@
 
 1. add jitpack to your project's `build.gradle`:
 
-```
+```gradle
 repositories {
     maven { url "https://jitpack.io" }
 }
@@ -15,7 +15,7 @@ repositories {
 
 2. add the compile statement to your module's `build.gradle`:
 
-```
+```gradle
 dependencies {
 
   val kotPreferences = "<LATEST-VERSION>"
