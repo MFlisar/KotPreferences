@@ -3,7 +3,7 @@
 [![Release](https://jitpack.io/v/MFlisar/KotPreferences.svg)](https://jitpack.io/#MFlisar/KotPreferences)
 ![License](https://img.shields.io/github/license/MFlisar/KotPreferences)
 
-<i>With this library you can declare preferences via **kotlin delegates** and observe and update them via kotlin Flows. This works with any storage implementation, an implementation for JetPack DataStore is provided already.</i>
+With this library you can declare preferences via **kotlin delegates** and observe and update them via kotlin Flows. This works with any storage implementation, an implementation for JetPack DataStore is provided already.
 
 ## :camera: Screenshots
 
