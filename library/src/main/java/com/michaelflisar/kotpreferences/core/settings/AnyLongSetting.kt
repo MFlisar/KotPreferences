@@ -7,7 +7,7 @@ import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlinx.coroutines.flow.map
 import kotlin.reflect.KProperty
 
-class AnyLongSetting<T : Any>(
+abstract class BaseAnyLongSetting<T : Any?>(
     private val model: SettingsModel,
     override val defaultValue: T,
     override val customKey: String?,
@@ -44,3 +44,19 @@ class AnyLongSetting<T : Any>(
         return this
     }
 }
+
+class AnyLongSetting<T : Any>(
+    model: SettingsModel,
+    defaultValue: T,
+    customKey: String?,
+    converter: SettingsConverter<T, Long>,
+    cache: Boolean
+) : BaseAnyLongSetting<T>(model, defaultValue, customKey, converter, cache)
+
+class NullableAnyLongSetting<T : Any?>(
+    model: SettingsModel,
+    defaultValue: T,
+    customKey: String?,
+    converter: SettingsConverter<T, Long>,
+    cache: Boolean
+) : BaseAnyLongSetting<T>(model, defaultValue, customKey, converter, cache)

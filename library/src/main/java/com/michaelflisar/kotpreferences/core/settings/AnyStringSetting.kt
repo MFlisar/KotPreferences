@@ -7,7 +7,7 @@ import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlinx.coroutines.flow.map
 import kotlin.reflect.KProperty
 
-internal class AnyStringSetting<T : Any>(
+abstract class BaseAnyStringSetting<T : Any?>(
     private val model: SettingsModel,
     override val defaultValue: T,
     override val customKey: String?,
@@ -44,3 +44,19 @@ internal class AnyStringSetting<T : Any>(
         return this
     }
 }
+
+class AnyStringSetting<T : Any>(
+    model: SettingsModel,
+    defaultValue: T,
+    customKey: String?,
+    converter: SettingsConverter<T, String>,
+    cache: Boolean
+) : BaseAnyStringSetting<T>(model, defaultValue, customKey, converter, cache)
+
+class NullableAnyStringSetting<T : Any?>(
+    model: SettingsModel,
+    defaultValue: T,
+    customKey: String?,
+    converter: SettingsConverter<T, String>,
+    cache: Boolean
+) : BaseAnyStringSetting<T>(model, defaultValue, customKey, converter, cache)

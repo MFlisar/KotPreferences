@@ -1,6 +1,6 @@
 [versions]
 core = 				"1.12.0"
-lifecycle = 		"2.6.2"
+lifecycle = 		"2.7.0"
 datastoreprefs =    "1.0.0"
 startup =           "1.1.1"
 

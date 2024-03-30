@@ -11,12 +11,16 @@ import com.michaelflisar.kotpreferences.core.settings.IntSetting
 import com.michaelflisar.kotpreferences.core.settings.NullableDoubleSetting
 import com.michaelflisar.kotpreferences.core.settings.NullableIntSetting
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
+import com.michaelflisar.kotpreferences.core.settings.AnyLongSetting
 import com.michaelflisar.kotpreferences.core.settings.BoolSetting
 import com.michaelflisar.kotpreferences.core.settings.DoubleSetSetting
 import com.michaelflisar.kotpreferences.core.settings.FloatSetting
 import com.michaelflisar.kotpreferences.core.settings.IntSetSetting
 import com.michaelflisar.kotpreferences.core.settings.LongSetSetting
 import com.michaelflisar.kotpreferences.core.settings.LongSetting
+import com.michaelflisar.kotpreferences.core.settings.NullableAnyIntSetting
+import com.michaelflisar.kotpreferences.core.settings.NullableAnyLongSetting
+import com.michaelflisar.kotpreferences.core.settings.NullableAnyStringSetting
 import com.michaelflisar.kotpreferences.core.settings.NullableBoolSetting
 import com.michaelflisar.kotpreferences.core.settings.NullableFloatSetting
 import com.michaelflisar.kotpreferences.core.settings.NullableLongSetting
@@ -277,17 +281,91 @@ abstract class SettingsModel(
     ): StorageSetting<T> = AnyIntSetting(this, default, key, EnumConverter(T::class.java), cache)
          .also(::onCreate)
 
+    // --------------------------
+    // ANY Settings
+    // --------------------------
+
     /**
      * Delegate any property
      * @param default default any value
      * @param key custom storage key
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
-    protected fun <T : Any> anyPref(
+    protected fun <T : Any> anyStringPref(
         converter: SettingsConverter<T, String>,
         default: T,
         key: String? = null,
         cache: Boolean = SettingSetup.ENABLE_CACHING
     ): StorageSetting<T> = AnyStringSetting(this, default, key, converter, cache)
          .also(::onCreate)
+
+    /**
+     * Delegate any property
+     * @param default default any value
+     * @param key custom storage key
+     * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
+     */
+    protected fun <T : Any?> nullableAnyStringPref(
+        converter: SettingsConverter<T, String>,
+        default: T,
+        key: String? = null,
+        cache: Boolean = SettingSetup.ENABLE_CACHING
+    ): StorageSetting<T> = NullableAnyStringSetting(this, default, key, converter, cache)
+        .also(::onCreate)
+
+    /**
+     * Delegate any property
+     * @param default default any value
+     * @param key custom storage key
+     * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
+     */
+    protected fun <T : Any> anyIntPref(
+        converter: SettingsConverter<T, Int>,
+        default: T,
+        key: String? = null,
+        cache: Boolean = SettingSetup.ENABLE_CACHING
+    ): StorageSetting<T> = AnyIntSetting(this, default, key, converter, cache)
+        .also(::onCreate)
+
+    /**
+     * Delegate any property
+     * @param default default any value
+     * @param key custom storage key
+     * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
+     */
+    protected fun <T : Any?> nullableAnyIntPref(
+        converter: SettingsConverter<T, Int>,
+        default: T,
+        key: String? = null,
+        cache: Boolean = SettingSetup.ENABLE_CACHING
+    ): StorageSetting<T> = NullableAnyIntSetting(this, default, key, converter, cache)
+        .also(::onCreate)
+
+    /**
+     * Delegate any property
+     * @param default default any value
+     * @param key custom storage key
+     * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
+     */
+    protected fun <T : Any> anyLongPref(
+        converter: SettingsConverter<T, Long>,
+        default: T,
+        key: String? = null,
+        cache: Boolean = SettingSetup.ENABLE_CACHING
+    ): StorageSetting<T> = AnyLongSetting(this, default, key, converter, cache)
+        .also(::onCreate)
+
+    /**
+     * Delegate any property
+     * @param default default any value
+     * @param key custom storage key
+     * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
+     */
+    protected fun <T : Any?> nullableAnyLongPref(
+        converter: SettingsConverter<T, Long>,
+        default: T,
+        key: String? = null,
+        cache: Boolean = SettingSetup.ENABLE_CACHING
+    ): StorageSetting<T> = NullableAnyLongSetting(this, default, key, converter, cache)
+        .also(::onCreate)
 }

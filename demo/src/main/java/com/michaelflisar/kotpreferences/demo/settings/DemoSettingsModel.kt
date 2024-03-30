@@ -28,7 +28,7 @@ object DemoSettingsModel : SettingsModel(
     val testEnum by enumPref(TestEnum.Blue)
 
     // custom class
-    val testClass by anyPref(TestClass.CONVERTER, TestClass())
+    val testClass by anyStringPref(TestClass.CONVERTER, TestClass())
 
     // NULLABLE vs NON NULLABLE
     val nonNullableString by stringPref()

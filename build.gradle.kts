@@ -3,7 +3,6 @@
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
         google()
         gradlePluginPortal()
         maven("https://jitpack.io")
@@ -13,16 +12,5 @@ buildscript {
         classpath("com.github.dcendents:android-maven-gradle-plugin:" + tools.versions.maven.get())
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:" + tools.versions.kotlin.get())
         classpath("org.jetbrains.kotlin:kotlin-serialization:" + tools.versions.kotlin.get())
-    }
-}
-
-
-allprojects {
-    repositories {
-        mavenCentral()
-        jcenter()
-        google()
-        gradlePluginPortal()
-        maven("https://jitpack.io")
     }
 }

@@ -7,11 +7,11 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
 
-        val kotlin = "1.9.10"
-        val ksp = "1.9.10-1.0.13"
+        val kotlin = "1.9.22"
+        val ksp = "1.9.22-1.0.17"
         val coroutines = "1.7.3"
         val json = "1.0.1"
-        val gradle = "8.1.2"
+        val gradle = "8.3.1"
         val maven = "2.0"
 
         // TOML Files
