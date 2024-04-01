@@ -48,7 +48,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 
 @Composable
 fun <T> StorageSetting<T>.collectAsStateNotNull(
-    initialValue: T = getCached() ?: defaultValue
+    initialValue: T = getCached() ?: value
 ): State<T> {
     return flow.collectAsState(initial = initialValue)
 }
@@ -58,7 +58,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getCached() ?: defaultValue
+    initialValue: T = getCached() ?: value
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
@@ -73,7 +73,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getCached() ?: defaultValue
+    initialValue: T = getCached() ?: value
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
