@@ -30,7 +30,7 @@ import com.michaelflisar.kotpreferences.core.settings.StringSetting
 import kotlinx.coroutines.flow.Flow
 
 abstract class SettingsModel(
-    internal val storage: Storage
+    val storage: Storage
 ) {
     internal val internalProperties: MutableMap<String, StorageSetting<*>> = mutableMapOf()
     
@@ -56,7 +56,7 @@ abstract class SettingsModel(
     protected fun stringPref(
         default: String = "",
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<String> = StringSetting(this, default, key, cache)
         .also(::onCreate)
 
@@ -69,7 +69,7 @@ abstract class SettingsModel(
     protected fun nullableStringPref(
         default: String? = null,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<String?> = NullableStringSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -82,7 +82,7 @@ abstract class SettingsModel(
     protected fun stringSetPref(
         default: Set<String> = emptySet(),
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Set<String>> = StringSetSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -95,7 +95,7 @@ abstract class SettingsModel(
     protected fun boolPref(
         default: Boolean = false,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Boolean> = BoolSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -108,7 +108,7 @@ abstract class SettingsModel(
     protected fun nullableBoolPref(
         default: Boolean? = null,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Boolean?> = NullableBoolSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -121,7 +121,7 @@ abstract class SettingsModel(
     protected fun intPref(
         default: Int = 0,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Int> = IntSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -134,7 +134,7 @@ abstract class SettingsModel(
     protected fun nullableIntPref(
         default: Int? = null,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Int?> = NullableIntSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -147,7 +147,7 @@ abstract class SettingsModel(
     protected fun intSetPref(
         default: Set<Int> = emptySet(),
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Set<Int>> = IntSetSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -160,7 +160,7 @@ abstract class SettingsModel(
     protected fun floatPref(
         default: Float = 0f,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Float> = FloatSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -173,7 +173,7 @@ abstract class SettingsModel(
     protected fun nullableFloatPref(
         default: Float? = null,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Float?> = NullableFloatSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -186,7 +186,7 @@ abstract class SettingsModel(
     protected fun floatSetPref(
         default: Set<Float> = emptySet(),
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Set<Float>> = FloatSetSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -199,7 +199,7 @@ abstract class SettingsModel(
     protected fun doublePref(
         default: Double = 0.0,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Double> = DoubleSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -212,7 +212,7 @@ abstract class SettingsModel(
     protected fun nullableDoublePref(
         default: Double? = null,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Double?> = NullableDoubleSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -225,7 +225,7 @@ abstract class SettingsModel(
     protected fun doubleSetPref(
         default: Set<Double> = emptySet(),
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Set<Double>> = DoubleSetSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -238,7 +238,7 @@ abstract class SettingsModel(
     protected fun longPref(
         default: Long = 0L,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Long> = LongSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -251,7 +251,7 @@ abstract class SettingsModel(
     protected fun nullableLongPref(
         default: Long? = null,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Long?> = NullableLongSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -264,7 +264,7 @@ abstract class SettingsModel(
     protected fun longSetPref(
         default: Set<Long> = emptySet(),
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<Set<Long>> = LongSetSetting(this, default, key, cache)
          .also(::onCreate)
 
@@ -277,7 +277,7 @@ abstract class SettingsModel(
     protected inline fun <reified T : Enum<*>> enumPref(
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = AnyIntSetting(this, default, key, EnumConverter(T::class.java), cache)
          .also(::onCreate)
 
@@ -295,7 +295,7 @@ abstract class SettingsModel(
         converter: SettingsConverter<T, String>,
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = AnyStringSetting(this, default, key, converter, cache)
          .also(::onCreate)
 
@@ -309,7 +309,7 @@ abstract class SettingsModel(
         converter: SettingsConverter<T, String>,
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = NullableAnyStringSetting(this, default, key, converter, cache)
         .also(::onCreate)
 
@@ -323,7 +323,7 @@ abstract class SettingsModel(
         converter: SettingsConverter<T, Int>,
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = AnyIntSetting(this, default, key, converter, cache)
         .also(::onCreate)
 
@@ -337,7 +337,7 @@ abstract class SettingsModel(
         converter: SettingsConverter<T, Int>,
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = NullableAnyIntSetting(this, default, key, converter, cache)
         .also(::onCreate)
 
@@ -351,7 +351,7 @@ abstract class SettingsModel(
         converter: SettingsConverter<T, Long>,
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = AnyLongSetting(this, default, key, converter, cache)
         .also(::onCreate)
 
@@ -365,7 +365,7 @@ abstract class SettingsModel(
         converter: SettingsConverter<T, Long>,
         default: T,
         key: String? = null,
-        cache: Boolean = SettingSetup.ENABLE_CACHING
+        cache: Boolean = storage.cache
     ): StorageSetting<T> = NullableAnyLongSetting(this, default, key, converter, cache)
         .also(::onCreate)
 }
