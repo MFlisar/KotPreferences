@@ -192,7 +192,7 @@ class DemoActivity : ComponentActivity() {
                 logs.forEachIndexed { index, log ->
                     item {
                         if (log.isEmpty()) {
-                            Divider()
+                            HorizontalDivider()
                         } else {
                             MyLogInfo("Log $index", log)
                         }

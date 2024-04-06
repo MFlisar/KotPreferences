@@ -72,19 +72,8 @@ dependencies {
     // Libraries
     // ------------------------
 
-    val live = false
-    val kotPreferences = "0.1"
-
-    // release test
-    if (live) {
-        implementation("com.github.MFlisar.KotPreferences:core:$kotPreferences")
-        implementation("com.github.MFlisar.KotPreferences:datastore:$kotPreferences")
-        implementation("com.github.MFlisar.KotPreferences:encryption-aes:$kotPreferences")
-        implementation("com.github.MFlisar.KotPreferences:compose:$kotPreferences")
-    } else {
-        implementation(project(":KotPreferences:Core"))
-        implementation(project(":KotPreferences:Modules:Datastore"))
-        implementation(project(":KotPreferences:Modules:Encryption:Aes"))
-        implementation(project(":KotPreferences:Modules:Compose"))
-    }
+    implementation(project(":KotPreferences:Core"))
+    implementation(project(":KotPreferences:Modules:Datastore"))
+    implementation(project(":KotPreferences:Modules:Encryption:Aes"))
+    implementation(project(":KotPreferences:Modules:Compose"))
 }
