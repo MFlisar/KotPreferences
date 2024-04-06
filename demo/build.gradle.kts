@@ -83,8 +83,8 @@ dependencies {
         implementation("com.github.MFlisar.KotPreferences:compose:$kotPreferences")
     } else {
         implementation(project(":KotPreferences:Core"))
-        implementation(project(":KotPreferences:Modules:DataStore"))
-        implementation(project(":KotPreferences:Modules:EncryptionsAES"))
+        implementation(project(":KotPreferences:Modules:Datastore"))
+        implementation(project(":KotPreferences:Modules:Encryption:Aes"))
         implementation(project(":KotPreferences:Modules:Compose"))
     }
 }

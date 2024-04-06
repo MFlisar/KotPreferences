@@ -7,8 +7,8 @@ dependencyResolutionManagement {
     }
     versionCatalogs {
 
-        val kotlin = "1.9.22"
-        val ksp = "1.9.22-1.0.17"
+        val kotlin = "1.9.23"
+        val ksp = "1.9.23-1.0.20"
         val coroutines = "1.7.3"
         val json = "1.0.1"
         val gradle = "8.3.1"
@@ -53,14 +53,14 @@ dependencyResolutionManagement {
 // --------------
 
 include(":KotPreferences:Core")
-project(":KotPreferences:Core").projectDir = file("library")
+project(":KotPreferences:Core").projectDir = file("library/core")
 
-include(":KotPreferences:Modules:DataStore")
-project(":KotPreferences:Modules:DataStore").projectDir = file("modules/datastore")
-include(":KotPreferences:Modules:EncryptionsAES")
-project(":KotPreferences:Modules:EncryptionsAES").projectDir = file("modules/encryption-aes")
+include(":KotPreferences:Modules:Datastore")
+project(":KotPreferences:Modules:Datastore").projectDir = file("library/modules/datastore")
+include(":KotPreferences:Modules:Encryption:Aes")
+project(":KotPreferences:Modules:Encryption:Aes").projectDir = file("library/modules/encryption-aes")
 include(":KotPreferences:Modules:Compose")
-project(":KotPreferences:Modules:Compose").projectDir = file("modules/compose")
+project(":KotPreferences:Modules:Compose").projectDir = file("library/modules/compose")
 
 include(":demo")
 project(":demo").projectDir = file("demo")
