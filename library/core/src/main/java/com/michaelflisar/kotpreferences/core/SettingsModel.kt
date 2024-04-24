@@ -306,11 +306,11 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any?> nullableAnyStringPref(
-        converter: SettingsConverter<T, String>,
-        default: T,
+        converter: SettingsConverter<T?, String>,
+        default: T?,
         key: String? = null,
         cache: Boolean = storage.cache
-    ): StorageSetting<T> = NullableAnyStringSetting(this, default, key, converter, cache)
+    ): StorageSetting<T?> = NullableAnyStringSetting(this, default, key, converter, cache)
         .also(::onCreate)
 
     /**
@@ -334,11 +334,11 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any?> nullableAnyIntPref(
-        converter: SettingsConverter<T, Int>,
-        default: T,
+        converter: SettingsConverter<T?, Int>,
+        default: T?,
         key: String? = null,
         cache: Boolean = storage.cache
-    ): StorageSetting<T> = NullableAnyIntSetting(this, default, key, converter, cache)
+    ): StorageSetting<T?> = NullableAnyIntSetting(this, default, key, converter, cache)
         .also(::onCreate)
 
     /**
@@ -362,10 +362,10 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any?> nullableAnyLongPref(
-        converter: SettingsConverter<T, Long>,
-        default: T,
+        converter: SettingsConverter<T?, Long>,
+        default: T?,
         key: String? = null,
         cache: Boolean = storage.cache
-    ): StorageSetting<T> = NullableAnyLongSetting(this, default, key, converter, cache)
+    ): StorageSetting<T?> = NullableAnyLongSetting(this, default, key, converter, cache)
         .also(::onCreate)
 }

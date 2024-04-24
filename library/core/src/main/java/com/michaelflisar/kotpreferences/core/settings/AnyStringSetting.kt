@@ -55,8 +55,8 @@ class AnyStringSetting<T : Any>(
 
 class NullableAnyStringSetting<T : Any?>(
     model: SettingsModel,
-    defaultValue: T,
+    defaultValue: T?,
     customKey: String?,
-    converter: SettingsConverter<T, String>,
+    converter: SettingsConverter<T?, String>,
     cache: Boolean
-) : BaseAnyStringSetting<T>(model, defaultValue, customKey, converter, cache)
+) : BaseAnyStringSetting<T?>(model, defaultValue, customKey, converter, cache)

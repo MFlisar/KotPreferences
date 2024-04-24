@@ -55,8 +55,8 @@ class AnyLongSetting<T : Any>(
 
 class NullableAnyLongSetting<T : Any?>(
     model: SettingsModel,
-    defaultValue: T,
+    defaultValue: T?,
     customKey: String?,
-    converter: SettingsConverter<T, Long>,
+    converter: SettingsConverter<T?, Long>,
     cache: Boolean
-) : BaseAnyLongSetting<T>(model, defaultValue, customKey, converter, cache)
+) : BaseAnyLongSetting<T?>(model, defaultValue, customKey, converter, cache)

@@ -55,8 +55,8 @@ class AnyIntSetting<T : Any>(
 
 class NullableAnyIntSetting<T : Any?>(
     model: SettingsModel,
-    defaultValue: T,
+    defaultValue: T?,
     customKey: String?,
-    converter: SettingsConverter<T, Int>,
+    converter: SettingsConverter<T?, Int>,
     cache: Boolean
-) : BaseAnyIntSetting<T>(model, defaultValue, customKey, converter, cache)
+) : BaseAnyIntSetting<T?>(model, defaultValue, customKey, converter, cache)
