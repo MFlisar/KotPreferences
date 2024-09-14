@@ -18,14 +18,14 @@ kotlin {
 
                 implementation(compose.desktop.currentOs)
 
-                //implementation(project(":KotPreferences:Core"))
-                //implementation(project(":KotPreferences:Modules:Datastore"))
-                //implementation(project(":KotPreferences:Modules:Compose"))
+                implementation(project(":KotPreferences:Core"))
+                implementation(project(":KotPreferences:Modules:Datastore"))
+                implementation(project(":KotPreferences:Modules:Compose"))
 
-                val kotpreferences = "7a41bc2d7e"
-                implementation("com.github.MFlisar.KotPreferences:core:$kotpreferences")
-                implementation("com.github.MFlisar.KotPreferences:datastore:$kotpreferences")
-                implementation("com.github.MFlisar.KotPreferences:compose:$kotpreferences")
+                //val kotpreferences = "7a41bc2d7e"
+                //implementation("com.github.MFlisar.KotPreferences:core:$kotpreferences")
+                //implementation("com.github.MFlisar.KotPreferences:datastore:$kotpreferences")
+                //implementation("com.github.MFlisar.KotPreferences:compose:$kotpreferences")
             }
         }
     }

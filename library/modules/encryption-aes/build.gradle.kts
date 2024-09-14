@@ -67,10 +67,8 @@ project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
-                val updated = artifactId.replaceFirst(project.name, "encryption-aes")
-                println("artifactId = $artifactId => $updated")
-                artifactId = updated
-                from(components["kotlin"])
+                artifactId = "encryption-aes"
+                //from(components["kotlin"])
             }
         }
     }
