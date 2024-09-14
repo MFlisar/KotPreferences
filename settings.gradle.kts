@@ -29,7 +29,7 @@ pluginManagement {
 // Library
 // --------------
 
-// KMP ONLY
+// Android + JVM + iOS
 include(":KotPreferences:Core")
 project(":KotPreferences:Core").projectDir = file("library/core")
 

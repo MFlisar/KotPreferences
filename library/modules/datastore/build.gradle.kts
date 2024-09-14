@@ -66,3 +66,14 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                artifactId = "datastore"
+                //from(components["release"])
+            }
+        }
+    }
+}

@@ -7,14 +7,16 @@ With this library you can declare preferences via **kotlin delegates** and obser
 
 This is KMP (kotlin multiplatform) library and the provided modules do support following platforms:
 
-| Modules        | Supported Platforms | Information |
-|:---------------|---------------------|-------------|
-| core           | android, iOS, jvm   |             |
-| datastore      | android, iOS, jvm   |             |
-| encryption-aes | android             | (1)         |
-| compose        | android, iOS, jvm   |             |
+**Supported Platforms**
 
-* (1) Currently I only provide an encrytion module for android. Pull requests with implementations for other platforms are welcome.
+| Modules        | Android | iOS | jvm | Information |
+|:---------------|---------|-----|-----|-------------|
+| core           | √       | √   | √   |             |
+| datastore      | √       | √   | √   |             |
+| encryption-aes | √       |     |     | (1)         |
+| compose        | √       | √   | √   |             |
+
+* (1) Currently I only provide an encryption module for android. Pull requests with implementations for other platforms are welcome.
 
 ## :camera: Screenshots
 

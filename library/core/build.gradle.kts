@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    id("maven-publish")
 }
 
 kotlin {
@@ -62,5 +63,16 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                artifactId = "core"
+                //from(components["release"])
+            }
+        }
     }
 }
