@@ -72,9 +72,10 @@ android {
 publishing {
     publications {
         withType<MavenPublication> {
-            println("artifactId = $artifactId")
             val splitted = artifactId.split("-")
-            "compose" + if (splitted.size == 1) "-${splitted.first()}" else ""
+            val updated = "compose" + if (splitted.size == 2) "-${splitted[1]}" else ""
+            println("artifactId = $artifactId => $updated")
+            artifactId = updated
         }
     }
 }

@@ -66,9 +66,10 @@ android {
 publishing {
     publications {
         withType<MavenPublication> {
-            println("artifactId = $artifactId")
             val splitted = artifactId.split("-")
-            "encryption-aes" + if (splitted.size == 1) "-${splitted.first()}" else ""
+            val updated = "encryption-aes" + if (splitted.size == 2) "-${splitted[1]}" else ""
+            println("artifactId = $artifactId => $updated")
+            artifactId = updated
         }
     }
 }
