@@ -69,13 +69,12 @@ android {
     }
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = "compose"
-                from(components["kotlin"])
-            }
+publishing {
+    publications {
+        withType<MavenPublication> {
+            println("artifactId = $artifactId")
+            val splitted = artifactId.split("-")
+            "compose" + if (splitted.size == 1) "-${splitted.first()}" else ""
         }
     }
 }

@@ -63,13 +63,12 @@ android {
     }
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = "encryption-aes"
-                from(components["kotlin"])
-            }
+publishing {
+    publications {
+        withType<MavenPublication> {
+            println("artifactId = $artifactId")
+            val splitted = artifactId.split("-")
+            "encryption-aes" + if (splitted.size == 1) "-${splitted.first()}" else ""
         }
     }
 }
