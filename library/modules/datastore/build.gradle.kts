@@ -68,12 +68,15 @@ android {
     }
 }
 
-publishing {
-    publications {
-        withType<MavenPublication> {
-            val updated = artifactId.replaceFirst(project.name, "datastore")
-            println("artifactId = $artifactId => $updated")
-            artifactId = updated
+project.afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                val updated = artifactId.replaceFirst(project.name, "datastore")
+                println("artifactId = $artifactId => $updated")
+                artifactId = updated
+                from(components["kotlin"])
+            }
         }
     }
 }
