@@ -69,6 +69,15 @@ android {
     }
 }
 
+publishing {
+    publications {
+        withType<MavenPublication> {
+            artifactId = "compose"
+        }
+    }
+}
+
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -77,4 +86,4 @@ project.afterEvaluate {
             }
         }
     }
-}
+}*/

@@ -67,12 +67,10 @@ android {
     }
 }
 
-project.afterEvaluate {
-    publishing {
-        publications {
-            create<MavenPublication>("maven") {
-                artifactId = "core"
-            }
+publishing {
+    publications {
+        withType<MavenPublication> {
+            artifactId = "core"
         }
     }
 }

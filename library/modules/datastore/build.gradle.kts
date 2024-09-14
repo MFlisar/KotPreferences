@@ -68,6 +68,15 @@ android {
     }
 }
 
+publishing {
+    publications {
+        withType<MavenPublication> {
+            artifactId = "datastore"
+        }
+    }
+}
+
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -76,4 +85,4 @@ project.afterEvaluate {
             }
         }
     }
-}
+}*/

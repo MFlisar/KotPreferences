@@ -63,6 +63,15 @@ android {
     }
 }
 
+publishing {
+    publications {
+        withType<MavenPublication> {
+            artifactId = "encryption-aes"
+        }
+    }
+}
+
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -71,4 +80,4 @@ project.afterEvaluate {
             }
         }
     }
-}
+}*/
