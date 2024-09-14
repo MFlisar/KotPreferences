@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="Core-desktop">
-    <output-path>$PROJECT_DIR$/../../../tmp/KotPreferences/KotPreferences.Core/libs</output-path>
-    <root id="archive" name="Core-desktop.jar">
-      <element id="module-output" name="KotPreferences.KotPreferences.Core.desktopMain" />
-    </root>
-  </artifact>
-</component>

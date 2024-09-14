@@ -67,7 +67,16 @@ android {
     }
 }
 
-
+publishing {
+    publications {
+        withType<MavenPublication> {
+            val updated = artifactId.replaceFirst(project.name, "core")
+            println("artifactId = $artifactId => $updated")
+            artifactId = updated
+        }
+    }
+}
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -77,4 +86,4 @@ project.afterEvaluate {
             }
         }
     }
-}
+}*/
