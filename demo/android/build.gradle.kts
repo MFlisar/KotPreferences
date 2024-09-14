@@ -68,15 +68,15 @@ dependencies {
     // Libraries
     // ------------------------
 
-    implementation(project(":KotPreferences:Core"))
-    implementation(project(":KotPreferences:Modules:Datastore"))
-    implementation(project(":KotPreferences:Modules:Compose"))
-    implementation(project(":KotPreferences:Modules:Encryption:Aes"))
+    //implementation(project(":KotPreferences:Core"))
+    //implementation(project(":KotPreferences:Modules:Datastore"))
+    //implementation(project(":KotPreferences:Modules:Compose"))
+    //implementation(project(":KotPreferences:Modules:Encryption:Aes"))
 
-    //val kotpreferences = "4a0f68c351"
-    //implementation("com.github.MFlisar.KotPreferences:core:$kotpreferences")
-    //implementation("com.github.MFlisar.KotPreferences:datastore:$kotpreferences")
-    //implementation("com.github.MFlisar.KotPreferences:encryption-aes:$kotpreferences")
-    //implementation("com.github.MFlisar.KotPreferences:compose:$kotpreferences")
+    val kotpreferences = "c1f5c272d6"
+    implementation("com.github.MFlisar.KotPreferences:Core:$kotpreferences")
+    implementation("com.github.MFlisar.KotPreferences:Datastore:$kotpreferences")
+    implementation("com.github.MFlisar.KotPreferences:Compose:$kotpreferences")
+    implementation("com.github.MFlisar.KotPreferences:Aes:$kotpreferences")
 
 }
