@@ -68,13 +68,14 @@ android {
     }
 }
 
-
-publishing {
-    publications {
-        withType<MavenPublication> {
-            val updated = artifactId.replaceFirst(project.name, "datastore")
-            println("artifactId = $artifactId => $updated")
-            artifactId = updated
+project.afterEvaluate {
+    publishing {
+        publications {
+            withType<MavenPublication> {
+                val updated = artifactId.replaceFirst(project.name, "datastore")
+                println("artifactId = $artifactId => $updated")
+                artifactId = updated
+            }
         }
     }
 }
