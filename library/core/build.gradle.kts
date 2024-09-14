@@ -66,14 +66,13 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-/*
+
 project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
                 artifactId = "core"
-                //from(components["release"])
             }
         }
     }
-}*/
+}
