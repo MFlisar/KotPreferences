@@ -67,10 +67,13 @@ android {
     }
 }
 
-publishing {
-    publications {
-        withType<MavenPublication> {
-            artifactId = "core"
+project.afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("maven") {
+                artifactId = "core"
+                from(components["kotlin"])
+            }
         }
     }
 }
