@@ -72,9 +72,7 @@ android {
 publishing {
     publications {
         withType<MavenPublication> {
-            val baseArtifactId = "compose"
-            val addon = artifactId.split("-").takeIf { it.size >= 2 }?.joinToString("-") ?: ""
-            val updated = baseArtifactId + addon
+            val updated = artifactId.replaceFirst(project.name, "compose")
             println("artifactId = $artifactId => $updated")
             artifactId = updated
         }
