@@ -42,9 +42,6 @@ kotlin {
             // Library
             implementation(project(":KotPreferences:Core"))
         }
-
-        androidMain.dependencies {
-        }
     }
 }
 
