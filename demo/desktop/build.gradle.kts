@@ -22,7 +22,7 @@ kotlin {
                 implementation(project(":KotPreferences:Modules:Datastore"))
                 implementation(project(":KotPreferences:Modules:Compose"))
 
-                //val kotpreferences = "b6537d3d68"
+                //val kotpreferences = "4a0f68c351"
                 //implementation("com.github.MFlisar.KotPreferences:core:$kotpreferences")
                 //implementation("com.github.MFlisar.KotPreferences:datastore:$kotpreferences")
                 //implementation("com.github.MFlisar.KotPreferences:compose:$kotpreferences")
