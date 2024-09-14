@@ -7,7 +7,7 @@ import java.io.File
 
 fun DataStoreStorage.Companion.create(
     folder: File,
-    name: String,
+    name: String = "settings",
     cache: Boolean = true,
     encryption: StorageEncryption? = null
 ) = DataStoreStorage(

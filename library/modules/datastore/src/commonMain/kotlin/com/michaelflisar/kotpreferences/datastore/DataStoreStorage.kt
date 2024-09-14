@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
 
 @Suppress("UNCHECKED_CAST")
-class DataStoreStorage internal constructor(
+class DataStoreStorage(
     private val dataStore: DataStore<Preferences>,
     private val encryption: StorageEncryption? = null,
     override val cache: Boolean = true

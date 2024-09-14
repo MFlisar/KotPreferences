@@ -11,7 +11,7 @@ import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 
 fun DataStoreStorage.Companion.create(
-    dataStoreFileName: String,
+    name: String = "settings",
     cache: Boolean = true,
     encryption: StorageEncryption? = null
 ) = DataStoreStorage(
@@ -24,7 +24,7 @@ fun DataStoreStorage.Companion.create(
                 create = false,
                 error = null,
             )
-            requireNotNull(documentDirectory).path + "/$dataStoreFileName.preferences_pb"
+            requireNotNull(documentDirectory).path + "/$name.preferences_pb"
         }
     ),
     encryption = encryption,

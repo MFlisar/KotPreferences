@@ -5,6 +5,17 @@
 
 With this library you can declare preferences via **kotlin delegates** and observe and update them via kotlin Flows. This works with any storage implementation, an implementation for JetPack DataStore is provided already.
 
+This is KMP (kotlin multiplatform) library and the provided modules do support following platforms:
+
+| Modules        | Supported Platforms | Information |
+|:---------------|---------------------|-------------|
+| core           | android, iOS, jvm   |             |
+| datastore      | android, iOS, jvm   |             |
+| encryption-aes | android             | (1)         |
+| compose        | android, iOS, jvm   |             |
+
+* (1) Currently I only provide an encrytion module for android. Pull requests with implementations for other platforms are welcome.
+
 ## :camera: Screenshots
 
 | ![Demo](screenshots/demo.png "Demo") |

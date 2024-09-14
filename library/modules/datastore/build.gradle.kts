@@ -10,7 +10,6 @@ plugins {
 kotlin {
 
     // Java
-    jvmToolchain(17)
     jvm()
 
     // Android
@@ -22,11 +21,16 @@ kotlin {
     }
 
     // iOS
-    iosX64()
+    macosX64()
+    macosArm64()
     iosArm64()
+    iosX64()
     iosSimulatorArm64()
 
+    // -------
     // Sources
+    // -------
+
     sourceSets {
 
         commonMain.dependencies {

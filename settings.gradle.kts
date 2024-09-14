@@ -37,15 +37,15 @@ project(":KotPreferences:Core").projectDir = file("library/core")
 // Modules
 // --------------
 
-// Android + JVM + iOS (iOS untested, js missing)
+// Android + JVM + iOS (iOS untested)
 include(":KotPreferences:Modules:Datastore")
 project(":KotPreferences:Modules:Datastore").projectDir = file("library/modules/datastore")
 
-// Android + JVM + iOS + js (iOS/js untested)
+// Android + JVM + iOS + js (iOS untested)
 include(":KotPreferences:Modules:Compose")
 project(":KotPreferences:Modules:Compose").projectDir = file("library/modules/compose")
 
-// Android only for now!
+// Android
 include(":KotPreferences:Modules:Encryption:Aes")
 project(":KotPreferences:Modules:Encryption:Aes").projectDir = file("library/modules/encryption-aes")
 

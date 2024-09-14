@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Compose-js">
+    <output-path>$PROJECT_DIR$/../../../tmp/KotPreferences/KotPreferences.Modules.Compose/libs</output-path>
+    <root id="archive" name="Compose-js.jar">
+      <element id="module-output" name="KotPreferences.KotPreferences.Modules.Compose.jsMain" />
+    </root>
+  </artifact>
+</component>
