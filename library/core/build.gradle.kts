@@ -65,7 +65,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 }
-
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -75,4 +75,4 @@ project.afterEvaluate {
             }
         }
     }
-}
+}*/

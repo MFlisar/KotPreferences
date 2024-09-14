@@ -75,4 +75,10 @@ dependencies {
     implementation(project(":KotPreferences:Modules:Compose"))
     implementation(project(":KotPreferences:Modules:Encryption:Aes"))
 
+    //val kotpreferences = "b6537d3d68"
+    //implementation("com.github.MFlisar.KotPreferences:core:$kotpreferences")
+    //implementation("com.github.MFlisar.KotPreferences:datastore:$kotpreferences")
+    //implementation("com.github.MFlisar.KotPreferences:encryption-aes:$kotpreferences")
+    //implementation("com.github.MFlisar.KotPreferences:compose:$kotpreferences")
+
 }
