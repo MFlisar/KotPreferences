@@ -63,6 +63,7 @@ android {
     }
 }
 
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -72,4 +73,4 @@ project.afterEvaluate {
             }
         }
     }
-}
+}*/
