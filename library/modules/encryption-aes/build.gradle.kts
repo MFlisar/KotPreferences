@@ -66,8 +66,9 @@ android {
 publishing {
     publications {
         withType<MavenPublication> {
-            val splitted = artifactId.split("-")
-            val updated = "encryption-aes" + if (splitted.size == 2) "-${splitted[1]}" else ""
+            val baseArtifactId = "encryption-aes"
+            val addon = artifactId.split("-").takeIf { it.size >= 2 }?.joinToString("-") ?: ""
+            val updated = baseArtifactId + addon
             println("artifactId = $artifactId => $updated")
             artifactId = updated
         }
