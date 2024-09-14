@@ -68,14 +68,14 @@ android {
     }
 }
 
-/*
+
 project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
                 artifactId = "datastore"
-                //from(components["kotlin"])
+                from(components["kotlin"])
             }
         }
     }
-}*/
+}

@@ -69,14 +69,14 @@ android {
     }
 }
 
-/*
+
 project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
                 artifactId = "compose"
-                //from(components["kotlin"])
+                from(components["kotlin"])
             }
         }
     }
-}*/
+}

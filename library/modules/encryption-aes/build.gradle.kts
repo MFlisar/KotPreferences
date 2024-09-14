@@ -60,14 +60,13 @@ android {
     }
 }
 
-/*
 project.afterEvaluate {
     publishing {
         publications {
             create<MavenPublication>("maven") {
                 artifactId = "encryption-aes"
-                //from(components["kotlin"])
+                from(components["kotlin"])
             }
         }
     }
-}*/
+}
