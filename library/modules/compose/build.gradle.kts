@@ -1,3 +1,5 @@
+import com.vanniktech.maven.publish.JavadocJar
+import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -6,9 +8,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
-    //id("maven-publish")
-    id("org.jetbrains.dokka") version "1.9.20"
-    id("com.vanniktech.maven.publish.base") version "0.29.0"
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.gradle.maven.publish.plugin)
 }
 
 kotlin {
@@ -86,25 +87,20 @@ project.afterEvaluate {
 }*/
 
 // Setup for release
-val artifactId = "kotpreferences-compose"
-
-// JavaDoc + Release
-val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
-val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
-    dependsOn(dokkaHtml)
-    archiveClassifier.set("javadoc")
-    from(dokkaHtml.outputDirectory)
-}
-publishing {
-    publications.withType<MavenPublication> {
-        artifact(javadocJar)
-    }
-}
+val groupID = "io.github.mflisar.kotpreferences"
+val artifactId = "compose"
 mavenPublishing {
+
+    configure(
+        KotlinMultiplatform(
+            javadocJar = JavadocJar.Dokka("dokkaHtml"),
+            sourcesJar = true
+        )
+    )
 
     // Define coordinates for the published artifact
     coordinates(
-        groupId = "io.github.mflisar",
+        groupId = groupID,
         artifactId = artifactId,
         version = System.getenv("TAG")
     )
