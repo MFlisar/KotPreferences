@@ -106,6 +106,8 @@ mavenPublishing {
         sourcesJar = true,
     ))
     coordinates(
-        artifactId = artifactId
+        groupId = "io.github.mflisar",
+        artifactId = artifactId,
+        version = System.getenv("TAG")
     )
 }

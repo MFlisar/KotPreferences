@@ -79,25 +79,3 @@ project.afterEvaluate {
 
 // Setup for release
 val artifactId = "kotpreferences-encryption-aes"
-
-// JavaDoc + Release
-val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
-val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
-    dependsOn(dokkaHtml)
-    archiveClassifier.set("javadoc")
-    from(dokkaHtml.outputDirectory)
-}
-publishing {
-    publications.withType<MavenPublication> {
-        artifact(javadocJar)
-    }
-}
-mavenPublishing {
-    configure(KotlinMultiplatform(
-        javadocJar = JavadocJar.Dokka("dokkaHtml"),
-        sourcesJar = true,
-    ))
-    coordinates(
-        artifactId = artifactId
-    )
-}
