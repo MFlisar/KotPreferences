@@ -1,10 +1,9 @@
 ### About
 
-[![Maven metadata URL]([https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue&link=https%3A%2F%2Frepo.maven.apache.org%2Fmaven2%2Fio%2Fgithub%2Fmflisar%2Fkotpreferences%2F
-](https://repo.maven.apache.org/maven2/io/github/mflisar/kotpreferences/)
+[![Maven metadata URL](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue)](https://repo.maven.apache.org/maven2/io/github/mflisar/kotpreferences/)
 [![Android API](https://img.shields.io/badge/api-21%2B-brightgreen.svg?style=for-the-badge)](https://android-arsenal.com/api?level=21)
 [![kotlin](https://img.shields.io/github/languages/top/adrielcafe/voyager.svg?style=for-the-badge&color=blueviolet)](https://kotlinlang.org/)
-[![License](https://img.shields.io/github/license/MFlisar/KotPreferences)](LICENSE)
+[![License](https://img.shields.io/github/license/MFlisar/KotPreferences?style=for-the-badge)](LICENSE)
 
 With this library you can declare preferences via **kotlin delegates** and observe and update them via kotlin Flows. This works with any storage implementation, an implementation for JetPack DataStore is provided already.
 
