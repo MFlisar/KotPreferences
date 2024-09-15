@@ -13,10 +13,6 @@ jobs:
 
     steps:
 
-      - name: Get tag name
-        run: |
-          echo "TAG: $TAG"
-
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -36,12 +32,13 @@ jobs:
 
       - name: Publish Library
         run: |
-          echo "Publishing library🚀 - Version Name: $TAG"
+          echo "TAG: $TAG"
+          echo "Publishing library 🚀"
           echo ""
           ./gradlew publish --no-daemon --no-parallel
           echo "Published✅"
 
-          # echo "Releasing repository...🚀"
+          # echo "Releasing repository... 🚀"
           # ./gradlew closeAndReleaseRepository
           # echo "Released✅"
         env:
