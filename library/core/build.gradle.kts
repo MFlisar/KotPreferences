@@ -6,7 +6,7 @@ plugins {
     alias(libs.plugins.android.library)
     //id("maven-publish")
     id("org.jetbrains.dokka") version "1.9.20"
-    id("com.vanniktech.maven.publish.base") version "0.29.0"
+    id("com.vanniktech.maven.publish") version "0.29.0"
 }
 
 kotlin {
