@@ -101,6 +101,8 @@ publishing {
 
 mavenPublishing {
 
+    println("TAG: " + System.getenv("TAG"))
+
     // Define coordinates for the published artifact
     coordinates(
         groupId = "io.github.mflisar",
