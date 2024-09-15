@@ -1,7 +1,7 @@
-#  secrets.SONATYPE_NEXUS_USERNAME
-#  secrets.SONATYPE_NEXUS_PASSWORD
-#  secrets.SIGNING_PRIVATE_KEY
-#  secrets.SIGNING_PASSWORD
+#  secrets.MAVEN_CENTRAL_USERNAME
+#  secrets.MAVEN_CENTRAL_PASSWORD
+#  secrets.GPG_KEY
+#  secrets.GPG_PASSWORD
 
 name: Publish
 on:
@@ -45,14 +45,14 @@ jobs:
           echo "Released✅"
         env:
           ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.inputs.versionName }}
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
 
       - name: Create and push tag
         run: |
-          git config --global user.email "shreyaspatilg@gmail.com"
+          git config --global user.email "mflisar.development@gmail.com"
           git config --global user.name "$GITHUB_ACTOR"
 
           git tag -a $TAG -m "Release v$TAG"
