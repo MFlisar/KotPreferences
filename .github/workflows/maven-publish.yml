@@ -24,6 +24,8 @@ jobs:
       - name: Get tag name
         run: |
           echo "Tag name: ${{ github.event.release.tag_name }}"
+        env:
+          TAG: ${{ github.event.release.tag_name }}
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -41,12 +43,13 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
-        env:
-          LIBRARY_VERSION: ${{ github.event.release.tag_name }}
+        #env:
+         # LIBRARY_VERSION: ${{ github.event.release.tag_name }}
 
       - name: Publish Library
         run: |
-          echo "Publishing library🚀"
+          echo "Publishing library🚀 - Version Name: ${{ TAG }}"
+          echo ""
           ./gradlew publish --no-daemon --no-parallel
           echo "Published✅"
 
@@ -55,7 +58,8 @@ jobs:
           # echo "Released✅"
         env:
           # ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.inputs.versionName }}
-          ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.release.tag_name }}
+          # ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.release.tag_name }}
+          ORG_GRADLE_PROJECT_VERSION_NAME: ${{ TAG }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
