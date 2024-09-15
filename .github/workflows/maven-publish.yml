@@ -3,6 +3,9 @@ on:
   release:
     types: [published]
 
+env:
+  TAG: ${{ github.event.release.tag_name }}
+
 jobs:
   publish:
     name: Publish
@@ -12,7 +15,7 @@ jobs:
 
       - name: Get tag name
         run: |
-          echo "TAG: ${{ github.event.release.tag_name }}"
+          echo "TAG: $TAG"
 
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -30,12 +33,10 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           arguments: build
-        env:
-          TAG: ${{ github.event.release.tag_name }}
 
       - name: Publish Library
         run: |
-          echo "Publishing library🚀 - Version Name: ${{ github.event.release.tag_name }}"
+          echo "Publishing library🚀 - Version Name: $TAG"
           echo ""
           ./gradlew publish --no-daemon --no-parallel
           echo "Published✅"
@@ -44,7 +45,6 @@ jobs:
           # ./gradlew closeAndReleaseRepository
           # echo "Released✅"
         env:
-          TAG: ${{ github.event.release.tag_name }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
