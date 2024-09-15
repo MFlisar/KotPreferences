@@ -38,7 +38,7 @@ captures/
 
 # IntelliJ
 .idea/
-.koltin/
+.kotlin/
 
 # External native build folder generated in Android Studio 2.2 and later
 .externalNativeBuild
