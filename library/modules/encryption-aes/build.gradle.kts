@@ -1,6 +1,8 @@
 import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.vanniktech.maven.publish.KotlinMultiplatform
+import com.vanniktech.maven.publish.JavadocJar
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -80,7 +82,7 @@ project.afterEvaluate {
 val artifactId = "kotpreferences-encryption-aes"
 
 // JavaDoc + Release
-val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
+/*val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
 val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
     dependsOn(dokkaHtml)
     archiveClassifier.set("javadoc")
@@ -90,8 +92,13 @@ publishing {
     publications.withType<MavenPublication> {
         artifact(javadocJar)
     }
-}
+}*/
 mavenPublishing {
+
+    configure(KotlinMultiplatform(
+        javadocJar = JavadocJar.Dokka("dokkaHtml"),
+        sourcesJar = true
+    ))
 
     // Define coordinates for the published artifact
     coordinates(
