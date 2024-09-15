@@ -10,7 +10,7 @@ name: Publish
 #      versionName:
 #        description: 'Version Name'
 #        required: true
-on: create
+on: release
 
 jobs:
   publish:
@@ -35,7 +35,7 @@ jobs:
         with:
           arguments: build
         env:
-          LIBRARY_VERSION: ${{ github.ref_name }}
+          LIBRARY_VERSION: ${{ github.ref }}
 
       - name: Publish Library
         run: |
