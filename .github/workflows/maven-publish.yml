@@ -59,7 +59,7 @@ jobs:
         env:
           # ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.inputs.versionName }}
           # ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.release.tag_name }}
-          ORG_GRADLE_PROJECT_VERSION_NAME: ${{ TAG }}
+          ORG_GRADLE_PROJECT_VERSION_NAME: TAG
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
           ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.GPG_PASSWORD }}
           ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
