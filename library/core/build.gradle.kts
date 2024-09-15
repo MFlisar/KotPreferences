@@ -92,6 +92,13 @@ val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
     from(dokkaHtml.outputDirectory)
 }
 
+
+publishing {
+    publications.withType<MavenPublication> {
+        artifact(javadocJar)
+    }
+}
+
 mavenPublishing {
 
     // Define coordinates for the published artifact
