@@ -105,7 +105,7 @@ mavenPublishing {
     coordinates(
         groupId = "io.github.mflisar",
         artifactId = "kotpreferences-core",
-        version = System.getenv("ORG_GRADLE_PROJECT_VERSION_NAME")
+        version = System.getenv("LIBRARY_VERSION")
     )
 
     // Configure POM metadata for the published artifact
