@@ -1,49 +1,49 @@
-name: Publish Artifacts
+name: Publish Release
+
 on:
   push:
-    #branches: [ "main" ]
+    tags:
+      - '**'
+
 jobs:
-  build:
-    name: Build
-    runs-on: macos-latest
+  publish:
+
+    runs-on: ubuntu-latest
+    if: github.repository == 'vanniktech/gradle-maven-publish-plugin'
+
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Java
+      - name: Install JDK
         uses: actions/setup-java@v4
         with:
-          distribution: 'zulu'
-          java-version: '17'
+          distribution: zulu
+          java-version: 11
 
-      - name: Install GPG
-        env:
-          SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
+      - name: Get release notes
         run: |
-          brew install gpg
-          echo "$SIGNING_KEY" | gpg --dearmor > ${HOME}/secring.gpg
+          echo "RELEASE_NOTES<<EOF" >> $GITHUB_ENV
+          echo "$(awk '/^## ${{ github.ref_name }}/{flag=1;next}/^## /{flag=0}flag' CHANGELOG.md)" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
-
-      - name: Add Gradle Properties
-        env:
-          MAVEN_CENTRAL_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          SIGNING_KEY_ID: ${{ secrets.SIGNING_KEY_ID }}
-          SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
+      - name: Set version for tag
         run: |
-          echo "mavenCentralUsername=${MAVEN_CENTRAL_USERNAME}" >> gradle.properties
-          echo "mavenCentralPassword=${MAVEN_CENTRAL_PASSWORD}" >> gradle.properties
-          echo "signing.keyId=${SIGNING_KEY_ID}" >> gradle.properties
-          echo "signing.password=${SIGNING_KEY_PASSWORD}" >> gradle.properties
-          echo "signing.secretKeyRingFile=${HOME}/secring.gpg" >> gradle.properties
+          echo "ORG_GRADLE_PROJECT_VERSION_NAME=${{ github.ref_name }}" >> $GITHUB_ENV
 
-      - name: Setup Xcode
-        uses: maxim-lobanov/setup-xcode@v1
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Publish
+        run: ./gradlew publishAndReleaseToMavenCentral
+        env:
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.SONATYPE_NEXUS_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.SONATYPE_NEXUS_PASSWORD }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_PRIVATE_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_PASSWORD }}
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
         with:
-          xcode-version: latest-stable
-
-      - name: Publish To Maven Central
-        run: |
-          ./gradlew publishAndReleaseToMavenCentral --no-configuration-cache
+          token: ${{ secrets.GITHUB_TOKEN }}
+          body: ${{ env.RELEASE_NOTES }}
+        if: ${{ env.RELEASE_NOTES != '' }}
