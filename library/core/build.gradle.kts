@@ -1,4 +1,3 @@
-import com.vanniktech.maven.publish.SonatypeHost
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -85,8 +84,7 @@ project.afterEvaluate {
 */
 
 // Setup for release
-val projectName = "kotpreferences"
-val moduleName = "core"
+val artifactId = "kotpreferences-core"
 
 // JavaDoc + Release
 val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
@@ -101,14 +99,7 @@ publishing {
     }
 }
 mavenPublishing {
-
     coordinates(
-        artifactId = "$projectName-$moduleName"
+        artifactId = artifactId
     )
-
-    // Configure publishing to Maven Central
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-
-    // Enable GPG signing for all publications
-    signAllPublications()
 }

@@ -5,7 +5,9 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
-    id("maven-publish")
+    //id("maven-publish")
+    id("org.jetbrains.dokka") version "1.9.20"
+    id("com.vanniktech.maven.publish.base") version "0.29.0"
 }
 
 kotlin {
@@ -69,6 +71,7 @@ android {
     }
 }
 
+/*
 project.afterEvaluate {
     publishing {
         publications {
@@ -79,4 +82,25 @@ project.afterEvaluate {
             }
         }
     }
+}*/
+
+// Setup for release
+val artifactId = "kotpreferences-compose"
+
+// JavaDoc + Release
+val dokkaHtml by tasks.getting(org.jetbrains.dokka.gradle.DokkaTask::class)
+val javadocJar: TaskProvider<Jar> by tasks.registering(Jar::class) {
+    dependsOn(dokkaHtml)
+    archiveClassifier.set("javadoc")
+    from(dokkaHtml.outputDirectory)
+}
+publishing {
+    publications.withType<MavenPublication> {
+        artifact(javadocJar)
+    }
+}
+mavenPublishing {
+    coordinates(
+        artifactId = artifactId
+    )
 }
