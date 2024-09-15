@@ -24,8 +24,9 @@ jobs:
       - name: Get tag name
         run: |
           echo "Tag name: ${{ github.event.release.tag_name }}"
-        env:
-          TAG: ${{ github.event.release.tag_name }}
+          run: echo "TAG=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+        #env:
+        #  TAG: ${{ github.event.release.tag_name }}
 
       - name: Checkout repository
         uses: actions/checkout@v2
