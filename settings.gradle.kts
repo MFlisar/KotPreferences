@@ -1,5 +1,15 @@
+pluginManagement {
+
+    // repositories for build
+    repositories {
+        mavenCentral()
+        google()
+    }
+}
+
 dependencyResolutionManagement {
 
+    // repositories for dependencies
     repositories {
         mavenCentral()
         google()
@@ -13,16 +23,6 @@ dependencyResolutionManagement {
         }
     }
 
-}
-
-pluginManagement {
-
-    repositories {
-        mavenCentral()
-        google()
-        gradlePluginPortal()
-        maven("https://jitpack.io")
-    }
 }
 
 // --------------
