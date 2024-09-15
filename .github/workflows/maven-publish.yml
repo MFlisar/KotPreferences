@@ -14,7 +14,7 @@ on:
 jobs:
   publish:
     name: Publish
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
@@ -40,9 +40,9 @@ jobs:
           ./gradlew publish --no-daemon --no-parallel
           echo "Published✅"
 
-          echo "Releasing repository...🚀"
-          ./gradlew closeAndReleaseRepository
-          echo "Released✅"
+          # echo "Releasing repository...🚀"
+          # ./gradlew closeAndReleaseRepository
+          # echo "Released✅"
         env:
           ORG_GRADLE_PROJECT_VERSION_NAME: ${{ github.event.inputs.versionName }}
           ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.GPG_KEY }}
