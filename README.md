@@ -20,7 +20,7 @@ Additionally there's also an extension to easily integrate this library into you
 
 --
 
-##  </> Usage
+## </> Basic Usage
 
 <details open>
 <summary><b>1.</b> Define a <code>SettingsModel</code></summary>
@@ -156,10 +156,12 @@ This is a **KMP (kotlin multiplatform)** library and the provided modules do sup
 
 * (1) Currently I only provide an encryption module for android. Pull requests with implementations for other platforms are welcome.
 
-## :: Demo
+## :tada: Demo
 
 A full [demo](demo) is included inside the demo module, it shows nearly every usage with working examples.
 
-## :: Modules
+## :zap: More Informations
 
-TODO
+* Module ReadMes
+  * [Encryption Module](readmes/module-encryption.md)
+  * [Storage DataStore Module](readmes/module-datastore.md)
