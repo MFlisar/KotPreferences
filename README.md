@@ -20,6 +20,39 @@ Additionally there's also an extension to easily integrate this library into you
 
 --
 
+## :link: Dependencies
+
+This library does not have any custom dependencies!
+
+## :elephant: Gradle
+
+This library is distributed via [maven central]([https://central.sonatype.com/](https://repo.maven.apache.org/maven2/io/github/mflisar/kotpreferences/)).
+
+*build.gradle.kts*
+
+```kts
+val kotpreferences = "<LATEST-VERSION>"
+
+// core
+implementation("io.github.mflisar.kotpreferences:core:$kotpreferences")
+
+// storage module
+implementation("io.github.mflisar.kotpreferences:datastore:$kotpreferences")
+
+// extension module
+implementation("io.github.mflisar.kotpreferences:encryption-aes:$kotpreferences")
+implementation("io.github.mflisar.kotpreferences:compose:$kotpreferences")
+```
+
+## :zap: Modules
+
+| Module | Info | Description | Maven Link |
+| - | - |- | - | 
+| `core` | | the core module - must always be included | [core](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core/overview) |
+| `datastore` | | the default datastore based storage module - you probably want that as well if you do not want to provide a custom storage implementation yourself | [datastore](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/datastore/overview) |
+| `encryption-aes` | optional | provides an encryption implementation | [encryption-aes](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/encryption-aes/overview) |
+| `compose` | optional | provides convenient extensions that can be used inside compose | [compose](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/compose/overview) |
+
 ## </> Basic Usage
 
 <details open>
@@ -160,8 +193,7 @@ This is a **KMP (kotlin multiplatform)** library and the provided modules do sup
 
 A full [demo](demo) is included inside the demo module, it shows nearly every usage with working examples.
 
-## :zap: More Informations
+## :information_source: More Informations
 
-* Module ReadMes
-  * [Encryption Module](readmes/module-encryption.md)
-  * [Storage DataStore Module](readmes/module-datastore.md)
+* [Encryption Module](readmes/module-encryption.md)
+* [Storage DataStore Module](readmes/module-datastore.md)
