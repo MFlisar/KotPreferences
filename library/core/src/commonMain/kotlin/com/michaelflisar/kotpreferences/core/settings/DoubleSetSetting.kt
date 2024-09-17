@@ -1,27 +1,31 @@
 package com.michaelflisar.kotpreferences.core.settings
 
 import com.michaelflisar.kotpreferences.core.SettingsModel
+import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
+import com.michaelflisar.kotpreferences.core.classes.get
+import com.michaelflisar.kotpreferences.core.classes.set
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlin.reflect.KProperty
 
 internal class DoubleSetSetting(
-    private val model: com.michaelflisar.kotpreferences.core.SettingsModel,
+    private val model: SettingsModel,
     override val defaultValue: Set<Double>,
     override val customKey: String?,
     override val cache: Boolean
 ) : AbstractSetting<Set<Double>>() {
 
+    override val settingsDataType = SettingsDataType.DoubleSet
     private var name: String? = null
     override val key: String by lazy { customKey ?: name!! }
 
     override val storage: Storage
         get() = model.storage
 
-    override fun createFlow() = model.storage.getDoubleSet(key, defaultValue)
+    override fun createFlow() = model.storage.get(settingsDataType, key, defaultValue)
 
     override suspend fun persistValue(value: Set<Double>) {
-        model.storage.setDoubleSet(key, value)
+        model.storage.set(settingsDataType, key, value)
     }
 
     private fun init(name: String) {
@@ -33,7 +37,7 @@ internal class DoubleSetSetting(
 
     /* Delegate */
     override fun getValue(
-        thisRef: com.michaelflisar.kotpreferences.core.SettingsModel,
+        thisRef: SettingsModel,
         property: KProperty<*>
     ): StorageSetting<Set<Double>> {
         init(property.name)

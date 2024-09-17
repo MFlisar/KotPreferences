@@ -69,7 +69,7 @@ dependencies {
     // ------------------------
 
     implementation(project(":KotPreferences:Core"))
-    implementation(project(":KotPreferences:Modules:Datastore"))
+    implementation(project(":KotPreferences:Modules:Storage:Datastore"))
     implementation(project(":KotPreferences:Modules:Compose"))
     implementation(project(":KotPreferences:Modules:Encryption:Aes"))
 

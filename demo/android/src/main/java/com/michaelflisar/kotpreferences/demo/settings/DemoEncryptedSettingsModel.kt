@@ -1,8 +1,8 @@
 package com.michaelflisar.kotpreferences.demo.settings
 
-import com.michaelflisar.kotpreferences.datastore.initialisation.SettingSetup
-import com.michaelflisar.kotpreferences.datastore.DataStoreStorage
-import com.michaelflisar.kotpreferences.datastore.create
+import com.michaelflisar.kotpreferences.core.initialisation.SettingSetup
+import com.michaelflisar.kotpreferences.storage.datastore.DataStoreStorage
+import com.michaelflisar.kotpreferences.storage.datastore.create
 import com.michaelflisar.kotpreferences.encryption.aes.StorageEncryptionAES
 
 object EncryptionDefinitions {

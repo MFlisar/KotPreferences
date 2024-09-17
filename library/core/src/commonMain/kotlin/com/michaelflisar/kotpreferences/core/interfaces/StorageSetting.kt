@@ -1,6 +1,8 @@
 package com.michaelflisar.kotpreferences.core.interfaces
 
 import com.michaelflisar.kotpreferences.core.SettingsModel
+import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
+import com.michaelflisar.kotpreferences.core.classes.StorageDataType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -14,6 +16,8 @@ interface StorageSetting<T : Any?> : ReadOnlyProperty<SettingsModel, StorageSett
     val defaultValue: T
 
     val flow: Flow<T>
+
+    val storageDataType: StorageDataType
 
     /*
      * returns a cached value or retrieves the value in a blocking way

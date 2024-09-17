@@ -2,17 +2,21 @@ package com.michaelflisar.kotpreferences.core.settings
 
 import com.michaelflisar.kotpreferences.core.SettingsConverter
 import com.michaelflisar.kotpreferences.core.SettingsModel
+import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
+import com.michaelflisar.kotpreferences.core.classes.get
+import com.michaelflisar.kotpreferences.core.classes.set
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlinx.coroutines.flow.map
 import kotlin.reflect.KProperty
 
-abstract class BaseAnyIntSetting<T : Any?>(
-    private val model: com.michaelflisar.kotpreferences.core.SettingsModel,
+abstract class BaseAnyIntSetting<T : Any?> internal constructor(
+    private val model: SettingsModel,
     override val defaultValue: T,
     override val customKey: String?,
-    val converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T, Int>,
-    override val cache: Boolean
+    val converter: SettingsConverter<T, Int>,
+    override val cache: Boolean,
+    override val settingsDataType: SettingsDataType
 ) : AbstractSetting<T>() {
 
     private var name: String? = null
@@ -22,10 +26,10 @@ abstract class BaseAnyIntSetting<T : Any?>(
         get() = model.storage
 
     override fun createFlow() =
-        model.storage.getInt(key, converter.to(defaultValue)).map { converter.from(it) }
+        model.storage.get(settingsDataType, key, converter.to(defaultValue)).map { converter.from(it) }
 
     override suspend fun persistValue(value: T) {
-        model.storage.setInt(key, converter.to(value))
+        model.storage.set(settingsDataType, key, converter.to(value))
     }
 
     private fun init(name: String) {
@@ -37,7 +41,7 @@ abstract class BaseAnyIntSetting<T : Any?>(
 
     /* Delegate */
     override fun getValue(
-        thisRef: com.michaelflisar.kotpreferences.core.SettingsModel,
+        thisRef: SettingsModel,
         property: KProperty<*>
     ): StorageSetting<T> {
         init(property.name)
@@ -46,17 +50,17 @@ abstract class BaseAnyIntSetting<T : Any?>(
 }
 
 class AnyIntSetting<T : Any>(
-    model: com.michaelflisar.kotpreferences.core.SettingsModel,
+    model: SettingsModel,
     defaultValue: T,
     customKey: String?,
-    converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T, Int>,
+    converter: SettingsConverter<T, Int>,
     cache: Boolean
-) : BaseAnyIntSetting<T>(model, defaultValue, customKey, converter, cache)
+) : BaseAnyIntSetting<T>(model, defaultValue, customKey, converter, cache, SettingsDataType.Int)
 
 class NullableAnyIntSetting<T : Any?>(
-    model: com.michaelflisar.kotpreferences.core.SettingsModel,
+    model: SettingsModel,
     defaultValue: T?,
     customKey: String?,
-    converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T?, Int>,
+    converter: SettingsConverter<T?, Int>,
     cache: Boolean
-) : BaseAnyIntSetting<T?>(model, defaultValue, customKey, converter, cache)
+) : BaseAnyIntSetting<T?>(model, defaultValue, customKey, converter, cache, SettingsDataType.NullableInt)

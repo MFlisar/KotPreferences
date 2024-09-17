@@ -32,10 +32,8 @@ abstract class SettingsModel(
     val storage: Storage
 ) {
     internal val internalProperties: MutableMap<String, StorageSetting<*>> = mutableMapOf()
-    
-    //private val internalSettings: MutableList<StorageSetting<*>> = mutableListOf()
 
-    val changes: Flow<com.michaelflisar.kotpreferences.core.SettingsChangeEvent<*>> by lazy {
+    val changes: Flow<SettingsChangeEvent<*>> by lazy {
         storage.changeFlow
     }
 

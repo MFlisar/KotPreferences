@@ -1,12 +1,17 @@
 package com.michaelflisar.kotpreferences.core.settings
 
 import com.michaelflisar.kotpreferences.core.SettingsModel
+import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
+import com.michaelflisar.kotpreferences.core.classes.get
+import com.michaelflisar.kotpreferences.core.classes.set
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 internal abstract class BaseDoubleSetting<T : Double?>(
-    private val model: com.michaelflisar.kotpreferences.core.SettingsModel
+    private val model: SettingsModel,
+    override val settingsDataType: SettingsDataType
 ) : AbstractSetting<T>() {
 
     private var name: String? = null
@@ -15,10 +20,10 @@ internal abstract class BaseDoubleSetting<T : Double?>(
     override val storage: Storage
         get() = model.storage
 
-    override fun createFlow() = model.storage.getDouble(key, defaultValue)
+    override fun createFlow() = model.storage.get(settingsDataType, key, defaultValue)
 
     override suspend fun persistValue(value: T) {
-        model.storage.setDouble(key, value)
+        model.storage.set(settingsDataType, key, value)
     }
 
     private fun init(name: String) {
@@ -30,7 +35,7 @@ internal abstract class BaseDoubleSetting<T : Double?>(
 
     /* Delegate */
     override fun getValue(
-        thisRef: com.michaelflisar.kotpreferences.core.SettingsModel,
+        thisRef: SettingsModel,
         property: KProperty<*>
     ): StorageSetting<T> {
         init(property.name)
@@ -39,15 +44,15 @@ internal abstract class BaseDoubleSetting<T : Double?>(
 }
 
 internal class DoubleSetting(
-    model: com.michaelflisar.kotpreferences.core.SettingsModel,
+    model: SettingsModel,
     override val defaultValue: Double,
     override val customKey: String?,
     override val cache: Boolean
-) : BaseDoubleSetting<Double>(model)
+) : BaseDoubleSetting<Double>(model, SettingsDataType.Double)
 
 internal class NullableDoubleSetting(
-    model: com.michaelflisar.kotpreferences.core.SettingsModel,
+    model: SettingsModel,
     override val defaultValue: Double?,
     override val customKey: String?,
     override val cache: Boolean
-) : BaseDoubleSetting<Double?>(model)
+) : BaseDoubleSetting<Double?>(model, SettingsDataType.NullableDouble)

@@ -7,13 +7,18 @@ dokka =                         "1.9.20"
 gradle-maven-publish-plugin =   "0.29.0"
 
 kotlinx-coroutines = 	        "1.8.1"
-kotlinx-json = 			        "1.6.3"
+kotlinx-json = 			        "1.7.1"
+kotlinx-io-core =               "0.5.3"
+kotlinx-serialization-property = "1.7.2"
+kotlinx-coroutines-test =       "1.9.0"
 
 androidx-core = 		        "1.13.1"
 androidx-lifecycle = 	        "2.8.5"
 androidx-datastoreprefs =       "1.1.1"
 androidx-startup =              "1.1.1"
 androidx-activity = 		    "1.9.2"
+
+okio =                          "3.9.1"
 
 [plugins]
 
@@ -38,11 +43,15 @@ gradle =						    { module = "com.android.tools.build:gradle", 					version.ref 
 kotlin =						    { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", 			version.ref = "kotlin" }
 kotlin-gradle-plugin =			    { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", 		version.ref = "kotlin" }
 kotlin-serialization =			    { module = "org.jetbrains.kotlin:kotlin-serialization", 		version.ref = "kotlin" }
+kotlin-test = 			            { module = "org.jetbrains.kotlin:kotlin-test",                  version.ref = "kotlin" }
 
-kotlinx-coroutines =			    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 	version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-android =	    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", 	version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-swing =		    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", 	version.ref = "kotlinx-coroutines" }
-kotlinx-serialization-json =	    { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", 	version.ref = "kotlinx-json" }
+kotlinx-coroutines =			    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 	        version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-android =	    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", 	        version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-swing =		    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", 	        version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json =	    { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", 	        version.ref = "kotlinx-json" }
+kotlinx-io-core =			        { module = "org.jetbrains.kotlinx:kotlinx-io-core", 		            version.ref = "kotlinx-io-core" }
+kotlinx-serialization-property = 	{ module = "org.jetbrains.kotlinx:kotlinx-serialization-properties",    version.ref = "kotlinx-serialization-property" }
+kotlinx-coroutines-test = 	        { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test",             version.ref = "kotlinx-coroutines-test" }
 
 compose-runtime =                   { module = "org.jetbrains.compose.runtime:runtime",                     version.ref = "compose" }
 compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "compose" }
@@ -55,3 +64,5 @@ androidx-lifecycle-compose =        { module = "androidx.lifecycle:lifecycle-run
 androidx-datastore-preferences = 	{ module = "androidx.datastore:datastore-preferences", 	    version.ref = "androidx-datastoreprefs" }
 androidx-startup = 		            { module = "androidx.startup:startup-runtime", 	            version.ref = "androidx-startup" }
 androidx-activity-compose =         { module = "androidx.activity:activity-compose", 			version.ref = "androidx-activity" }
+
+okio =                              { module = "com.squareup.okio:okio",                        version.ref = "okio" }

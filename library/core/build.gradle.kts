@@ -48,6 +48,7 @@ kotlin {
 
         androidMain.dependencies {
             implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.androidx.startup)
         }
 
         jvmMain.dependencies {

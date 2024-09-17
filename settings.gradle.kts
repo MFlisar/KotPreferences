@@ -38,8 +38,10 @@ project(":KotPreferences:Core").projectDir = file("library/core")
 // --------------
 
 // Android + JVM + iOS (iOS untested)
-include(":KotPreferences:Modules:Datastore")
-project(":KotPreferences:Modules:Datastore").projectDir = file("library/modules/datastore")
+include(":KotPreferences:Modules:Storage:Datastore")
+project(":KotPreferences:Modules:Storage:Datastore").projectDir = file("library/modules/storage/datastore")
+include(":KotPreferences:Modules:Storage:KeyValue")
+project(":KotPreferences:Modules:Storage:KeyValue").projectDir = file("library/modules/storage/keyvalue")
 
 // Android + JVM + iOS + js (iOS untested)
 include(":KotPreferences:Modules:Compose")
@@ -53,5 +55,6 @@ project(":KotPreferences:Modules:Encryption:Aes").projectDir = file("library/mod
 // App
 // --------------
 
+include(":test")
 include(":demo:android")
 include(":demo:desktop")

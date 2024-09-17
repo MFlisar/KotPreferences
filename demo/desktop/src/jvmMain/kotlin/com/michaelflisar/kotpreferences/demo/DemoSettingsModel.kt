@@ -1,8 +1,9 @@
 package com.michaelflisar.kotpreferences.demo
 
+
 import com.michaelflisar.kotpreferences.core.SettingsModel
-import com.michaelflisar.kotpreferences.datastore.DataStoreStorage
-import com.michaelflisar.kotpreferences.datastore.create
+import com.michaelflisar.kotpreferences.storage.datastore.DataStoreStorage
+import com.michaelflisar.kotpreferences.storage.datastore.create
 import java.io.File
 
 object DemoSettingsModel : SettingsModel(

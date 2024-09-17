@@ -1,5 +1,7 @@
 package com.michaelflisar.kotpreferences.core.settings
 
+import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
+import com.michaelflisar.kotpreferences.core.classes.StorageDataType
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlinx.coroutines.Dispatchers
@@ -15,6 +17,10 @@ abstract class AbstractSetting<T : Any?> : StorageSetting<T> {
     abstract val customKey: String?
     protected abstract val storage: Storage
     protected abstract val cache: Boolean
+
+    protected abstract val settingsDataType: SettingsDataType
+    final override val storageDataType: StorageDataType
+        get() = settingsDataType.storageDataType
 
     protected abstract fun createFlow(): Flow<T>
     protected abstract suspend fun persistValue(value: T)

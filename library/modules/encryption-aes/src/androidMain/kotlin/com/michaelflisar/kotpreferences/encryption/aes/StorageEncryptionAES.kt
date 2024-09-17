@@ -1,6 +1,7 @@
 package com.michaelflisar.kotpreferences.encryption.aes
 
 import android.util.Base64
+import com.michaelflisar.kotpreferences.core.classes.StorageDataType
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
 import java.io.*
 import java.security.SecureRandom
@@ -108,36 +109,23 @@ class StorageEncryptionAES(
     // Interface implementations
     // -------------------------
 
-    override fun decryptString(data: String) = decrypt(data)
-    override fun encryptString(value: String) = encrypt(value)
+    override fun <T> encrypt(value: T, type: StorageDataType.NotNullable) = when (type) {
+        StorageDataType.Boolean -> encrypt(value.toString())
+        StorageDataType.Double -> encrypt(value.toString())
+        StorageDataType.Float -> encrypt(value.toString())
+        StorageDataType.Int -> encrypt(value.toString())
+        StorageDataType.Long -> encrypt(value.toString())
+        StorageDataType.String -> encrypt(value as String)
+        StorageDataType.StringSet -> encryptSealedObject(LinkedHashSet(value as Set<String>))
+    }
 
-    override fun decryptBool(data: String) = decrypt(data).toBoolean()
-    override fun encryptBool(value: Boolean) = encrypt(value.toString())
-
-    override fun decryptInt(data: String) = decrypt(data).toInt()
-    override fun encryptInt(value: Int) = encrypt(value.toString())
-
-    override fun decryptLong(data: String) = decrypt(data).toLong()
-    override fun encryptLong(value: Long) = encrypt(value.toString())
-
-    override fun decryptFloat(data: String) = decrypt(data).toFloat()
-    override fun encryptFloat(value: Float) = encrypt(value.toString())
-
-    override fun decryptDouble(data: String) = decrypt(data).toDouble()
-    override fun encryptDouble(value: Double) = encrypt(value.toString())
-
-    override fun decryptStringSet(data: String) = decryptSealedObject<LinkedHashSet<String>>(data)
-    override fun encryptStringSet(value: Set<String>) = encryptSealedObject(LinkedHashSet(value))
-
-    override fun decryptIntSet(data: String) = decryptSealedObject<LinkedHashSet<Int>>(data)
-    override fun encryptIntSet(value: Set<Int>) = encryptSealedObject(LinkedHashSet(value))
-
-    override fun decryptLongSet(data: String) = decryptSealedObject<LinkedHashSet<Long>>(data)
-    override fun encryptLongSet(value: Set<Long>) = encryptSealedObject(LinkedHashSet(value))
-
-    override fun decryptFloatSet(data: String) = decryptSealedObject<LinkedHashSet<Float>>(data)
-    override fun encryptFloatSet(value: Set<Float>) = encryptSealedObject(LinkedHashSet(value))
-
-    override fun decryptDoubleSet(data: String) = decryptSealedObject<LinkedHashSet<Double>>(data)
-    override fun encryptDoubleSet(value: Set<Double>) = encryptSealedObject(LinkedHashSet(value))
+    override fun <T> decrypt(data: String, type: StorageDataType.NotNullable) = when (type) {
+        StorageDataType.Boolean -> decrypt(data).toBoolean()
+        StorageDataType.Double -> decrypt(data).toDouble()
+        StorageDataType.Float -> decrypt(data).toFloat()
+        StorageDataType.Int ->  decrypt(data).toInt()
+        StorageDataType.Long -> decrypt(data).toLong()
+        StorageDataType.String -> decrypt(data)
+        StorageDataType.StringSet -> decryptSealedObject<LinkedHashSet<String>>(data)
+    } as T
 }

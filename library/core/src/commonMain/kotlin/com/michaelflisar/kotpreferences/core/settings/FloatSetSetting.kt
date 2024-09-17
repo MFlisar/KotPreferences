@@ -1,27 +1,31 @@
 package com.michaelflisar.kotpreferences.core.settings
 
 import com.michaelflisar.kotpreferences.core.SettingsModel
+import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
+import com.michaelflisar.kotpreferences.core.classes.get
+import com.michaelflisar.kotpreferences.core.classes.set
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlin.reflect.KProperty
 
 internal class FloatSetSetting(
-    private val model: com.michaelflisar.kotpreferences.core.SettingsModel,
+    private val model: SettingsModel,
     override val defaultValue: Set<Float>,
     override val customKey: String?,
     override val cache: Boolean
 ) : AbstractSetting<Set<Float>>() {
 
+    override val settingsDataType = SettingsDataType.FloatSet
     private var name: String? = null
     override val key: String by lazy { customKey ?: name!! }
 
     override val storage: Storage
         get() = model.storage
 
-    override fun createFlow() = model.storage.getFloatSet(key, defaultValue)
+    override fun createFlow() = model.storage.get(settingsDataType, key, defaultValue)
 
     override suspend fun persistValue(value: Set<Float>) {
-        model.storage.setFloatSet(key, value)
+        model.storage.set(settingsDataType, key, value)
     }
 
     private fun init(name: String) {
@@ -33,7 +37,7 @@ internal class FloatSetSetting(
 
     /* Delegate */
     override fun getValue(
-        thisRef: com.michaelflisar.kotpreferences.core.SettingsModel,
+        thisRef: SettingsModel,
         property: KProperty<*>
     ): StorageSetting<Set<Float>> {
         init(property.name)
