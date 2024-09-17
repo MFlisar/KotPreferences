@@ -59,7 +59,11 @@ implementation("io.github.mflisar.kotpreferences:compose:$kotpreferences")
 <summary><b>1.</b> Define a <code>SettingsModel</code></summary>
 
 ```kotlin
-object Preferences : SettingsModel(DataStoreStorage(name = "preferences")) {
+// Depending on the platform:
+// jvm: DataStoreStorage.create(folder = File(System.getProperty("user.dir")), name = "settings")
+// android: DataStoreStorage.create(name = "preferences")
+// iOS: DataStoreStorage contructor - pull request with fitting create function would be appreciated
+object Preferences : SettingsModel(DataStoreStorage.create(name = "preferences")) {
 
     // main data types
     val someString by stringPref("value")
