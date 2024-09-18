@@ -1,9 +1,7 @@
 package com.michaelflisar.kotpreferences.demo
 
-import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
-import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,21 +22,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.toMutableStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.luminance
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.composedemobaseactivity.classes.DemoTheme
-import com.michaelflisar.composedemobaseactivity.classes.listSaverKeepEntryStateList
-import com.michaelflisar.composedemobaseactivity.composables.DemoAppThemeRegion
-import com.michaelflisar.composedemobaseactivity.composables.DemoCollapsibleRegion
-import com.michaelflisar.composedemobaseactivity.composables.rememberExpandedRegions
-import com.michaelflisar.composethemer.ComposeTheme
-import com.michaelflisar.composethemer.defaultScrim
-import com.michaelflisar.kotpreferences.compose.collectAsStateNotNull
 import com.michaelflisar.kotpreferences.demo.classes.DemoUtil
 import com.michaelflisar.kotpreferences.demo.composables.MyLogInfo
 import com.michaelflisar.kotpreferences.demo.composables.MyRegionTitle
@@ -66,21 +57,7 @@ class DemoActivity : ComponentActivity() {
                 }
             }
 
-            val baseTheme = DemoSettingsModel.baseTheme.collectAsStateNotNull()
-            val theme = DemoSettingsModel.theme.collectAsStateNotNull()
-            val dynamicTheme = DemoSettingsModel.dynamicTheme.collectAsStateNotNull()
-            val themeState = ComposeTheme.State(
-                base = baseTheme,
-                dynamic = dynamicTheme,
-                theme = theme
-            )
-
-            ComposeTheme(
-                state = themeState
-            ) {
-                // Update Edge-To-Edge state based on the current theme
-                //UpdateEdgeToEdgeDefault(this, themeState)
-
+            MaterialTheme {
                 Scaffold(
                     topBar = {
                         TopAppBar(
@@ -92,7 +69,7 @@ class DemoActivity : ComponentActivity() {
                         )
                     }
                 ) { paddingValues ->
-                    Content(paddingValues, logs, themeState)
+                    Content(paddingValues, logs)
                 }
             }
         }
@@ -105,11 +82,8 @@ class DemoActivity : ComponentActivity() {
     @Composable
     fun Content(
         paddingValues: PaddingValues,
-        logs: MutableList<String>,
-        themeState: ComposeTheme.State
+        logs: MutableList<String>
     ) {
-
-        val regions = rememberExpandedRegions(listOf(1))
 
         Column(
             modifier = Modifier
@@ -118,27 +92,6 @@ class DemoActivity : ComponentActivity() {
                 .padding(16.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-
-            // --------------------
-            // Infos about current state
-            // --------------------
-
-            DemoAppThemeRegion(
-                regionId = 0,
-                theme = DemoTheme(
-                    themeState.base.value,
-                    themeState.theme.value,
-                    themeState.dynamic.value,
-                    ComposeTheme.getRegisteredThemes().map { it.key }
-                ),
-                onThemeChanged = {
-                    DemoSettingsModel.baseTheme.update(it.baseTheme)
-                    DemoSettingsModel.theme.update(it.colorScheme)
-                    DemoSettingsModel.dynamicTheme.update(it.dynamic)
-                },
-                expandedRegionsState = regions
-            )
-
             // --------------------
             // Logs
             // --------------------
@@ -155,23 +108,17 @@ class DemoActivity : ComponentActivity() {
                 }
             }
 
-            DemoCollapsibleRegion(
-                //modifier = Modifier.weight(1f),
-                title = "Logs",
-                regionId = 1,
-                expandedRegionsState = regions
+            MyRegionTitle("Logs")
+            LazyColumn(
+                state = listState,
+                modifier = Modifier.weight(1f)
             ) {
-                MyRegionTitle("Logs")
-                LazyColumn(
-                    state = listState
-                ) {
-                    logs.forEachIndexed { index, log ->
-                        item {
-                            if (log.isEmpty()) {
-                                HorizontalDivider()
-                            } else {
-                                MyLogInfo("Log $index", log)
-                            }
+                logs.forEachIndexed { index, log ->
+                    item {
+                        if (log.isEmpty()) {
+                            HorizontalDivider()
+                        } else {
+                            MyLogInfo("Log $index", log)
                         }
                     }
                 }
@@ -260,4 +207,44 @@ class DemoActivity : ComponentActivity() {
             addLogLine(logs, "'testClass' after update = $testClass2")
         }
     }
+
+    // ----------------
+    // helper functions
+    // ----------------
+
+
+    fun <Original, Saveable> listSaverKeepEmpty(
+        save: SaverScope.(value: Original) -> List<Saveable>,
+        restore: (list: List<Saveable>) -> Original?
+    ): Saver<Original, Any> = @Suppress("UNCHECKED_CAST") (Saver(
+        save = {
+            val list = save(it)
+            for (index in list.indices) {
+                val item = list[index]
+                if (item != null) {
+                    require(canBeSaved(item))
+                }
+            }
+            ArrayList(list)
+        },
+        restore = restore as (Any) -> Original?
+    )
+            )
+
+    fun <T : Any> listSaverKeepEntryStateList() = listSaverKeepEmpty<SnapshotStateList<T>, T>(
+        save = { stateList ->
+            if (stateList.isNotEmpty()) {
+                val first = stateList.first()
+                if (!canBeSaved(first)) {
+                    throw IllegalStateException("${first::class} cannot be saved. By default only types which can be stored in the Bundle class can be saved.")
+                }
+                stateList.toList()
+            } else {
+                emptyList()
+            }
+        },
+        restore = {
+            it.toMutableStateList()
+        }
+    )
 }
