@@ -121,7 +121,7 @@ val flow = Preferences.someString.flow
 // 2) read/update values by suspend functions
 scope.launch(Dispatchers.IO) {
     val value = Preferences.someInt.read()
-    Preferences.someString.update(value + 1)
+    Preferences.someInt.update(value + 1)
 }
 ```
 
@@ -133,7 +133,7 @@ scope.launch(Dispatchers.IO) {
 ```kotlin
 // 1) simply observe a setting
 Preferences.someString.observe(lifecycleScope) {
-    L.d { "name = $it"}
+    L.d { "someString = $it"}
 }
 
 // 2) direct read (not recommended if not necessary but may be useful in many cases)
@@ -142,7 +142,7 @@ val name = Preferences.someString.value
 
 // 3) observe a setting once
 Preferences.someString.observeOnce(lifecycleScope) {
-    L.d { "name = $it"}
+    L.d { "someString = $it"}
 }
 
 // 4) observe ALL settings
