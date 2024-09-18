@@ -1,6 +1,5 @@
+=
 intSet=[]
 nullableInt=5
 stringSet=[]
-int=5
-
 int=5

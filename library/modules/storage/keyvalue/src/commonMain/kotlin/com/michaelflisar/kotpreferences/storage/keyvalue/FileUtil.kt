@@ -2,12 +2,15 @@ package com.michaelflisar.kotpreferences.storage.keyvalue
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okio.FileSystem
+import okio.IOException
 import okio.Path
+import okio.SYSTEM
 import okio.buffer
-import java.io.IOException
+import okio.use
 
 object FileUtil {
 
