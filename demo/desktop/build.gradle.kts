@@ -18,12 +18,6 @@ kotlin {
 
                 implementation(compose.desktop.currentOs)
 
-                val kotpreferences = null//"0.6.0-alpha01"
-                implementation("io.github.mflisar:kotpreferences-core:$kotpreferences")
-                implementation("io.github.mflisar:kotpreferences-storage-datastore:$kotpreferences")
-                implementation("io.github.mflisar:kotpreferences-storage-keyvalue:$kotpreferences")
-                implementation("io.github.mflisar:kotpreferences-extension-compose:$kotpreferences")
-
                 implementation(project(":KotPreferences:Core"))
                 implementation(project(":KotPreferences:Modules:Storage:Datastore"))
                 implementation(project(":KotPreferences:Modules:Storage:KeyValue"))

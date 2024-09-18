@@ -1,35 +1,50 @@
 package com.michaelflisar.kotpreferences.demo
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.michaelflisar.kotpreferences.compose.collectAsState
+import com.michaelflisar.composedemobaseactivity.classes.DemoTheme
+import com.michaelflisar.composedemobaseactivity.classes.listSaverKeepEntryStateList
+import com.michaelflisar.composedemobaseactivity.composables.DemoAppThemeRegion
+import com.michaelflisar.composedemobaseactivity.composables.DemoCollapsibleRegion
+import com.michaelflisar.composedemobaseactivity.composables.rememberExpandedRegions
+import com.michaelflisar.composethemer.ComposeTheme
+import com.michaelflisar.composethemer.defaultScrim
 import com.michaelflisar.kotpreferences.compose.collectAsStateNotNull
-import com.michaelflisar.kotpreferences.demo.classes.DemoTheme
 import com.michaelflisar.kotpreferences.demo.classes.DemoUtil
-import com.michaelflisar.kotpreferences.demo.composables.MyInfoLine
 import com.michaelflisar.kotpreferences.demo.composables.MyLogInfo
 import com.michaelflisar.kotpreferences.demo.composables.MyRegionTitle
 import com.michaelflisar.kotpreferences.demo.settings.DemoSettingsModel
 import com.michaelflisar.kotpreferences.demo.settings.TestEnum
-import com.michaelflisar.kotpreferences.demo.ui.theme.AppTheme
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class DemoActivity : ComponentActivity() {
@@ -40,29 +55,9 @@ class DemoActivity : ComponentActivity() {
 
         setContent {
 
-            val stateTheme = DemoSettingsModel.appTheme.collectAsState()
-            val stateDynamicTheme = DemoSettingsModel.dynamicTheme.collectAsState()
-
-            // alternatively we could do following (this would use the settings cache [if enabled]
-            // or the initial value of the preference or the provided not null initial value) which would give us a not nullable state
-            // for all not nullable preferences
-            // val stateTheme = DemoSettingsModel.appTheme.collectAsStateNotNull()
-            // val stateDynamicTheme = DemoSettingsModel.dynamicTheme.collectAsStateNotNull()
-
-            // we at least wait for those 2 settings to load before rendering anything
-            // otherwise we must provide an initial state or handle null
-            val theme = stateTheme.value
-            val dynamicTheme = stateDynamicTheme.value
-            if (theme == null || dynamicTheme == null)
-                return@setContent
-
-            val initialTestsDone = rememberSaveable {
-                mutableStateOf(false)
-            }
-
-            val logs = rememberSaveable(saver = DemoUtil.LIST_SAVER) {
-                mutableStateListOf()
-            }
+            val initialTestsDone = rememberSaveable { mutableStateOf(false) }
+            val logs =
+                rememberSaveable(saver = listSaverKeepEntryStateList()) { mutableStateListOf<String>() }
 
             LaunchedEffect(initialTestsDone.value) {
                 if (!initialTestsDone.value) {
@@ -71,18 +66,23 @@ class DemoActivity : ComponentActivity() {
                 }
             }
 
-            AppTheme(
-                darkTheme = theme.isDark(),
-                dynamicColor = dynamicTheme
-            ) {
-                Surface(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .imePadding(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Column {
+            val baseTheme = DemoSettingsModel.baseTheme.collectAsStateNotNull()
+            val theme = DemoSettingsModel.theme.collectAsStateNotNull()
+            val dynamicTheme = DemoSettingsModel.dynamicTheme.collectAsStateNotNull()
+            val themeState = ComposeTheme.State(
+                base = baseTheme,
+                dynamic = dynamicTheme,
+                theme = theme
+            )
 
+            ComposeTheme(
+                state = themeState
+            ) {
+                // Update Edge-To-Edge state based on the current theme
+                //UpdateEdgeToEdgeDefault(this, themeState)
+
+                Scaffold(
+                    topBar = {
                         TopAppBar(
                             title = { Text(stringResource(R.string.app_name)) },
                             colors = TopAppBarDefaults.topAppBarColors(
@@ -90,17 +90,9 @@ class DemoActivity : ComponentActivity() {
                                 titleContentColor = MaterialTheme.colorScheme.onPrimary
                             )
                         )
-
-                        Column(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .weight(1f)
-                                .padding(8.dp),
-                            verticalArrangement = Arrangement.spacedBy(8.dp)
-                        ) {
-                            Content(logs, theme, dynamicTheme)
-                        }
                     }
+                ) { paddingValues ->
+                    Content(paddingValues, logs, themeState)
                 }
             }
         }
@@ -111,91 +103,75 @@ class DemoActivity : ComponentActivity() {
     // ----------------
 
     @Composable
-    fun ColumnScope.Content(
+    fun Content(
+        paddingValues: PaddingValues,
         logs: MutableList<String>,
-        theme: DemoTheme,
-        dynamicTheme: Boolean
+        themeState: ComposeTheme.State
     ) {
 
-        val scope = rememberCoroutineScope()
+        val regions = rememberExpandedRegions(listOf(1))
 
         Column(
             modifier = Modifier
-                .weight(1f)
-                .verticalScroll(rememberScrollState())
+                .padding(paddingValues)
+                .fillMaxSize()
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
 
             // --------------------
             // Infos about current state
             // --------------------
 
-            MyRegionTitle("Infos")
-            MyInfoLine("Current Theme", theme.name)
-            MyInfoLine("Dynamic Theme", if (dynamicTheme) "YES" else "NO")
-
+            DemoAppThemeRegion(
+                regionId = 0,
+                theme = DemoTheme(
+                    themeState.base.value,
+                    themeState.theme.value,
+                    themeState.dynamic.value,
+                    ComposeTheme.getRegisteredThemes().map { it.key }
+                ),
+                onThemeChanged = {
+                    DemoSettingsModel.baseTheme.update(it.baseTheme)
+                    DemoSettingsModel.theme.update(it.colorScheme)
+                    DemoSettingsModel.dynamicTheme.update(it.dynamic)
+                },
+                expandedRegionsState = regions
+            )
 
             // --------------------
-            // Actions
+            // Logs
             // --------------------
 
-            MyRegionTitle("Actions")
-            Button(onClick = {
-                scope.launch(Dispatchers.IO) {
-                    val value = DemoSettingsModel.appTheme.read()
-                    val next = DemoTheme.values()[(value.ordinal + 1) % DemoTheme.values().size]
-                    DemoSettingsModel.appTheme.update(next)
-                    logs.add("DemoTheme changed from $value to $next")
+            val listState = rememberLazyListState()
+            val lastScroll = rememberSaveable { mutableIntStateOf(logs.size) }
+
+            // always scroll to last item (but don't repeat this on screen rotation/recreation)
+            LaunchedEffect(logs.size) {
+                if (logs.size > 0 && lastScroll.value != logs.size - 1) {
+                    listState.scrollToItem(logs.size - 1)
+                    println("logs.size = scrolling...")
+                    lastScroll.value = logs.size - 1
                 }
-            }) {
-                Text("Next Theme")
             }
-            Button(onClick = {
-                scope.launch(Dispatchers.IO) {
-                    val value = DemoSettingsModel.dynamicTheme.read()
-                    val next = !value
-                    DemoSettingsModel.dynamicTheme.update(next)
-                    logs.add("DynamicTheme changed from $value to $next")
-                }
-            }) {
-                Text("Toggle dynamic theme")
-            }
-            Button(onClick = {
-                scope.launch { runTests(logs) }
-            }) {
-                Text("Rerun tests")
-            }
-        }
 
-        // --------------------
-        // Logs
-        // --------------------
-
-        val listState = rememberLazyListState()
-
-        val lastScroll = rememberSaveable {
-            mutableStateOf(logs.size)
-        }
-
-        // always scroll to last item (but don't repeat this on screen rotation/recreation)
-        LaunchedEffect(logs.size) {
-            if (logs.size > 0 && lastScroll.value != logs.size - 1) {
-                listState.scrollToItem(logs.size - 1)
-                println("logs.size = scrolling...")
-                lastScroll.value = logs.size - 1
-            }
-        }
-
-        Column(modifier = Modifier.weight(1f)) {
-            MyRegionTitle("Logs")
-            LazyColumn(
-                state = listState
+            DemoCollapsibleRegion(
+                //modifier = Modifier.weight(1f),
+                title = "Logs",
+                regionId = 1,
+                expandedRegionsState = regions
             ) {
-                logs.forEachIndexed { index, log ->
-                    item {
-                        if (log.isEmpty()) {
-                            HorizontalDivider()
-                        } else {
-                            MyLogInfo("Log $index", log)
+                MyRegionTitle("Logs")
+                LazyColumn(
+                    state = listState
+                ) {
+                    logs.forEachIndexed { index, log ->
+                        item {
+                            if (log.isEmpty()) {
+                                HorizontalDivider()
+                            } else {
+                                MyLogInfo("Log $index", log)
+                            }
                         }
                     }
                 }

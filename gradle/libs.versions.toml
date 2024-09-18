@@ -65,4 +65,4 @@ androidx-datastore-preferences = 	{ module = "androidx.datastore:datastore-prefe
 androidx-startup = 		            { module = "androidx.startup:startup-runtime", 	            version.ref = "androidx-startup" }
 androidx-activity-compose =         { module = "androidx.activity:activity-compose", 			version.ref = "androidx-activity" }
 
-okio =                              { module = "com.squareup.okio:okio",                        version.ref = "okio" }
+okio =                              { module = "com.squareup.okio:okio",                            version.ref = "okio" }

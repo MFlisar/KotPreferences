@@ -64,6 +64,12 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
 
+    // simple demo activity helper classes and functions I use in my demo activities
+    // + my theming library dependency
+    implementation("io.github.mflisar.composedemobaseactivity:library:0.8-alpha02")
+    implementation("com.github.MFlisar.ComposeThemer:core:0.2.1")
+    implementation("com.github.MFlisar.ComposeThemer:themes:0.2.1")
+
     // ------------------------
     // Libraries
     // ------------------------
