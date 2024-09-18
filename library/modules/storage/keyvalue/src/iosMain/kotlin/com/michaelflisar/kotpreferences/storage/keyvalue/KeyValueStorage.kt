@@ -7,6 +7,7 @@ import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 import okio.Path.Companion.toPath
 
+@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
 fun KeyValueStorage.Companion.create(
     fileName: String = "settings.txt",
     delimiter: String = "=",
