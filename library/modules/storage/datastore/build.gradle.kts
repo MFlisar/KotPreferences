@@ -123,6 +123,10 @@ mavenPublishing {
                 email.set("mflisar.development@gmail.com")
             }
         }
+
+        scm {
+            url.set(github)
+        }
     }
 
     // Configure publishing to Maven Central

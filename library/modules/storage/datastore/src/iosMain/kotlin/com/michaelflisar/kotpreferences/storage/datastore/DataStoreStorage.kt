@@ -21,9 +21,9 @@ fun DataStoreStorage.Companion.create(
                 inDomain = NSUserDomainMask,
                 appropriateForURL = null,
                 create = false,
-                error = null,
+                error = null
             ).let {
-                requireNotNull(it).path + name + ".preferences_pb"
+                requireNotNull(it).path + "/$name.preferences_pb"
             }.toPath()
         }
     ),

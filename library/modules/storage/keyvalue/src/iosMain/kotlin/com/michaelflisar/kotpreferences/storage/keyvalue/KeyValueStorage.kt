@@ -19,7 +19,7 @@ fun KeyValueStorage.Companion.create(
         inDomain = NSUserDomainMask,
         appropriateForURL = null,
         create = false,
-        error = null,
+        error = null
     ).let {
         requireNotNull(it).path + "/$fileName"
     }.toPath(),
