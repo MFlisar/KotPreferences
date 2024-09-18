@@ -12,6 +12,26 @@ plugins {
     alias(libs.plugins.gradle.maven.publish.plugin)
 }
 
+// -------------------
+// Informations
+// -------------------
+
+// Module
+val artifactId = "extension-compose"
+
+// Library
+val libraryName = "KotPreferences"
+val libraryDescription = "$artifactId module"
+val groupID = "io.github.mflisar.kotpreferences"
+val release = 2024
+val github = "https://github.com/MFlisar/KotPreferences"
+val license = "Apache License 2.0"
+val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Setup
+// -------------------
+
 kotlin {
 
     // Java
@@ -73,22 +93,6 @@ android {
     }
 }
 
-/*
-project.afterEvaluate {
-    publishing {
-        publications {
-            withType<MavenPublication> {
-                val updated = artifactId.replaceFirst(project.name, "compose")
-                println("artifactId = $artifactId => $updated")
-                artifactId = updated
-            }
-        }
-    }
-}*/
-
-// Setup for release
-val groupID = "io.github.mflisar.kotpreferences"
-val artifactId = "compose"
 mavenPublishing {
 
     configure(
@@ -98,39 +102,31 @@ mavenPublishing {
         )
     )
 
-    // Define coordinates for the published artifact
     coordinates(
         groupId = groupID,
         artifactId = artifactId,
         version = System.getenv("TAG")
     )
 
-    // Configure POM metadata for the published artifact
     pom {
-        name.set("KotPreferences")
-        description.set("With this library you can declare preferences via kotlin delegates and observe and update them via kotlin Flows. This works with any storage implementation, an implementation for JetPack DataStore is provided already.")
-        inceptionYear.set("2024")
-        url.set("https://github.com/MFlisar/KotPreferences")
+        name.set(libraryName)
+        description.set(libraryDescription)
+        inceptionYear.set("$release")
+        url.set(github)
 
         licenses {
             license {
-                name.set("Apache License 2.0")
-                url.set("https://github.com/MFlisar/KotPreferences/blob/main/LICENSE")
+                name.set(license)
+                url.set(licenseUrl)
             }
         }
 
-        // Specify developer information
         developers {
             developer {
                 id.set("mflisar")
                 name.set("Michael Flisar")
                 email.set("mflisar.development@gmail.com")
             }
-        }
-
-        // Specify SCM information
-        scm {
-            url.set("https://github.com/MFlisar/KotPreferences")
         }
     }
 

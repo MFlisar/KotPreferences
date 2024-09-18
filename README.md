@@ -49,12 +49,13 @@ implementation("io.github.mflisar.kotpreferences:extension-compose:$kotpreferenc
 
 ## :zap: Modules
 
-| Module | Info | Description | Maven Link |
-| - | - |- | - | 
-| `core` | | the core module - must always be included | [core](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core/overview) |
-| `datastore` | | the default datastore based storage module - you probably want that as well if you do not want to provide a custom storage implementation yourself | [datastore](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/datastore/overview) |
-| `encryption-aes` | optional | provides an encryption implementation | [encryption-aes](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/encryption-aes/overview) |
-| `compose` | optional | provides convenient extensions that can be used inside compose | [compose](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/compose/overview) |
+| Module              | Info     | Description                                                                                                                                        | Maven Link                                                                                                             |
+|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------| 
+| `core`              |          | the core module - must always be included                                                                                                          | [core](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core/overview)                           |
+| `storage-datastore` |          | the default datastore based storage module - you probably want that as well if you do not want to provide a custom storage implementation yourself | [storage-datastore](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/storage-datastore/overview) |
+| `storage-keyvalue`  |          | an alternative storage module that simply saves your data in a plain key-value based text file                                                     | [storage-keyvalue](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/storage-keyvalue/overview)   |
+| `encryption-aes`    | optional | provides an encryption implementation                                                                                                              | [encryption-aes](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/encryption-aes/overview)       |
+| `extension-compose` | optional | provides convenient extensions that can be used inside compose                                                                                     | [extension-compose](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/extension-compose/overview) |
 
 ## </> Basic Usage
 
@@ -80,9 +81,9 @@ object Preferences : SettingsModel(DataStoreStorage.create(name = "preferences")
     val someEnum by enumPref(Enum.Value1)
 
     // custom
-    val someCustomClass by anyStringPref(TestClass.CONVERTER, TestClass()) // converts TestClass to a string and saves this string
-    val someCustomClass by anyIntPref(TestClass.CONVERTER, TestClass())    // converts TestClass to an int and saves this int
-    val someCustomClass by anyLongPref(TestClass.CONVERTER, TestClass())   // converts TestClass to a long and saves this long
+    val someCustomClass1 by anyStringPref(TestClass.CONVERTER, TestClass()) // converts TestClass to a string and saves this string
+    val someCustomClass2 by anyIntPref(TestClass.CONVERTER, TestClass())    // converts TestClass to an int and saves this int
+    val someCustomClass3 by anyLongPref(TestClass.CONVERTER, TestClass())   // converts TestClass to a long and saves this long
 
     // sets
     val someStringSet by stringSetPref(setOf("a"))
@@ -106,9 +107,9 @@ object Preferences : SettingsModel(DataStoreStorage.create(name = "preferences")
     val nullableBool by nullableBoolPref()
 
     // custom
-    val someCustomClass by nullableAnyStringPref(TestClass.CONVERTER, TestClass())
-    val someCustomClass by nullableAnyIntPref(TestClass.CONVERTER, TestClass())
-    val someCustomClass by nullableAnyLongPref(TestClass.CONVERTER, TestClass())
+    val someCustomClass4 by nullableAnyStringPref(TestClass.CONVERTER, TestClass())
+    val someCustomClass5 by nullableAnyIntPref(TestClass.CONVERTER, TestClass())
+    val someCustomClass6 by nullableAnyLongPref(TestClass.CONVERTER, TestClass())
 }
 ```
 
@@ -187,12 +188,13 @@ val name = Preferences.someString.collectAsStateWithLifecycle()
 
 This is a **KMP (kotlin multiplatform)** library and the provided modules do support following platforms:
 
-| Modules        | Android | iOS | jvm | Information |
-|:---------------|---------|-----|-----|-------------|
-| core           | √       | √   | √   |             |
-| datastore      | √       | √   | √   |             |
-| encryption-aes | √       |     |     | (1)         |
-| compose        | √       | √   | √   |             |
+| Modules           | Android | iOS | jvm | Information |
+|:------------------|---------|-----|-----|-------------|
+| core              | √       | √   | √   |             |
+| storage-datastore | √       | √   | √   |             |
+| storage-keyvalue  | √       | √   | √   |             |
+| encryption-aes    | √       |     |     | (1)         |
+| extension-compose | √       | √   | √   |             |
 
 * (1) Currently I only provide an encryption module for android. Pull requests with implementations for other platforms are welcome.
 
@@ -203,4 +205,5 @@ A full [demo](demo) is included inside the demo module, it shows nearly every us
 ## :information_source: More Informations
 
 * [Encryption Module](readmes/module-encryption.md)
-* [Storage DataStore Module](readmes/module-datastore.md)
+* [Storage - DataStore Module](readmes/module-datastore.md)
+* [Storage - Key-Value Module](readmes/module-key-value.md)

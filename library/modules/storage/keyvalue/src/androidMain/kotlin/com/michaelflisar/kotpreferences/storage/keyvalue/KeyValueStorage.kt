@@ -8,7 +8,7 @@ fun KeyValueStorage.Companion.create(
     fileName: String = "settings.txt",
     delimiter: String = "=",
     encryption: StorageEncryption? = null,
-    cache: Boolean = true,
+    cache: Boolean = true
 ) = KeyValueStorage(
     SettingSetup.context.filesDir.resolve(fileName).absolutePath.toPath(),
     delimiter,
