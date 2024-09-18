@@ -20,7 +20,7 @@ val artifactId = "encryption-aes"
 
 // Library
 val libraryName = "KotPreferences"
-val libraryDescription = "$artifactId module"
+val libraryDescription = "KotPreferences - $artifactId module"
 val groupID = "io.github.mflisar.kotpreferences"
 val release = 2021
 val github = "https://github.com/MFlisar/KotPreferences"
