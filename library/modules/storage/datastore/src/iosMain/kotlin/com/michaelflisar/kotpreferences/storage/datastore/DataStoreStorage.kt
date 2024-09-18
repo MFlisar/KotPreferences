@@ -8,6 +8,7 @@ import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 import okio.Path.Companion.toPath
 
+@OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
 fun DataStoreStorage.Companion.create(
     name: String = "settings",
     cache: Boolean = true,

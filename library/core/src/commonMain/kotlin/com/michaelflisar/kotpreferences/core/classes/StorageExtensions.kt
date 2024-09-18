@@ -4,6 +4,7 @@ import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+@Suppress("UNCHECKED_CAST")
 internal fun <T : Any?> Storage.get(type: SettingsDataType, key: String, defaultValue: T): Flow<T> {
     return when (type) {
         SettingsDataType.String -> get(StorageDataType.String, key, defaultValue)
@@ -26,6 +27,7 @@ internal fun <T : Any?> Storage.get(type: SettingsDataType, key: String, default
     } as Flow<T>
 }
 
+@Suppress("UNCHECKED_CAST")
 internal suspend fun <T : Any?> Storage.set(type: SettingsDataType, key: String, value: T) {
     when (type) {
         SettingsDataType.String -> set(StorageDataType.String, key, value)

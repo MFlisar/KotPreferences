@@ -93,6 +93,7 @@ class StorageEncryptionAES(
         return Base64.encodeToString(bytes, Base64.DEFAULT)
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun <T : Serializable> decryptSealedObject(
         data: String
     ): T {
@@ -109,6 +110,7 @@ class StorageEncryptionAES(
     // Interface implementations
     // -------------------------
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T> encrypt(value: T, type: StorageDataType.NotNullable) = when (type) {
         StorageDataType.Boolean -> encrypt(value.toString())
         StorageDataType.Double -> encrypt(value.toString())
@@ -119,6 +121,7 @@ class StorageEncryptionAES(
         StorageDataType.StringSet -> encryptSealedObject(LinkedHashSet(value as Set<String>))
     }
 
+    @Suppress("UNCHECKED_CAST")
     override fun <T> decrypt(data: String, type: StorageDataType.NotNullable) = when (type) {
         StorageDataType.Boolean -> decrypt(data).toBoolean()
         StorageDataType.Double -> decrypt(data).toDouble()

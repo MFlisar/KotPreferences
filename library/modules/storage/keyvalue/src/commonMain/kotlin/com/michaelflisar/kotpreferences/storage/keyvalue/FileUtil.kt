@@ -1,5 +1,6 @@
 package com.michaelflisar.kotpreferences.storage.keyvalue
 
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.IO
@@ -38,6 +39,7 @@ object FileUtil {
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun saveAsync(
         data: Map<String, String>,
         filePath: Path,

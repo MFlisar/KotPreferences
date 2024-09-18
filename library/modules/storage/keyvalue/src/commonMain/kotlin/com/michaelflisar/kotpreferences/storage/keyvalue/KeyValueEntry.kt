@@ -3,12 +3,13 @@ package com.michaelflisar.kotpreferences.storage.keyvalue
 import com.michaelflisar.kotpreferences.core.classes.StorageDataType
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
 
-class KeyValueEntry<T : Any?>(
+internal class KeyValueEntry<T : Any?>(
     val entry: T,
     val type: StorageDataType
 ) {
     companion object {
 
+        @Suppress("UNCHECKED_CAST")
         fun <T : Any?> create(
             line: String,
             type: StorageDataType,
@@ -39,7 +40,7 @@ class KeyValueEntry<T : Any?>(
         return if (encryption != null) {
             encryption.encrypt(entry, type.base)
         } else {
-            val s = when (type.base) {
+            val data: Any = when (type.base) {
                 is StorageDataType.String -> entry as String
                 is StorageDataType.Boolean -> entry as Boolean
                 is StorageDataType.Int -> entry as Int
@@ -48,7 +49,7 @@ class KeyValueEntry<T : Any?>(
                 is StorageDataType.Double -> entry as Double
                 is StorageDataType.StringSet -> entry // TODO: make it save...???
             }
-            return s.toString()
+            data.toString()
         }
     }
 }
