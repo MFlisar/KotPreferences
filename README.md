@@ -36,12 +36,15 @@ val kotpreferences = "<LATEST-VERSION>"
 // core
 implementation("io.github.mflisar.kotpreferences:core:$kotpreferences")
 
-// storage module
-implementation("io.github.mflisar.kotpreferences:datastore:$kotpreferences")
+// storage modules
+implementation("io.github.mflisar.kotpreferences:storage-datastore:$kotpreferences")
+implementation("io.github.mflisar.kotpreferences:storage-keyvalue:$kotpreferences")
 
-// extension module
+// encryption modules
 implementation("io.github.mflisar.kotpreferences:encryption-aes:$kotpreferences")
-implementation("io.github.mflisar.kotpreferences:compose:$kotpreferences")
+
+// extension modules
+implementation("io.github.mflisar.kotpreferences:extension-compose:$kotpreferences")
 ```
 
 ## :zap: Modules
