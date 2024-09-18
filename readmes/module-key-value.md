@@ -7,7 +7,7 @@ key1=value1
 key2=value2
 ```
 
-This module is placed inside the `storage-keyvalue` artifact and can simple be used like following:
+This module is placed inside the `storage-keyvalue` artifact and can simply be used like following:
 
 #### Android Implementation
 
@@ -32,8 +32,8 @@ object SettingsModel : SettingsModel(
         folder = File(System.getProperty("user.dir")),
         fileName = "data.txt",
         delimiter: String = "=",
-        cache: Boolean = true,
-        encryption: StorageEncryption? = null
+        encryption: StorageEncryption? = null,
+        cache: Boolean = true
     )
 ) {
     // ...

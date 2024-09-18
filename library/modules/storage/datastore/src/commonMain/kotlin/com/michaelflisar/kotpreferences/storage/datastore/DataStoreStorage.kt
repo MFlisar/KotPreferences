@@ -27,7 +27,6 @@ class DataStoreStorage(
 ) : BaseStorage() {
 
     companion object {
-
     }
 
     override suspend fun clear() {

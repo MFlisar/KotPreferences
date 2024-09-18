@@ -6,6 +6,7 @@ import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
+import okio.Path.Companion.toPath
 
 fun DataStoreStorage.Companion.create(
     name: String = "settings",
@@ -14,14 +15,15 @@ fun DataStoreStorage.Companion.create(
 ) = DataStoreStorage(
     dataStore = PreferenceDataStoreFactory.createWithPath(
         produceFile = {
-            val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
+            NSFileManager.defaultManager.URLForDirectory(
                 directory = NSDocumentDirectory,
                 inDomain = NSUserDomainMask,
                 appropriateForURL = null,
                 create = false,
                 error = null,
-            )
-            requireNotNull(documentDirectory).path + "/$name.preferences_pb"
+            ).let {
+                requireNotNull(it).path + name + ".preferences_pb"
+            }.toPath()
         }
     ),
     encryption = encryption,

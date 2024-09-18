@@ -49,13 +49,13 @@ implementation("io.github.mflisar.kotpreferences:extension-compose:$kotpreferenc
 
 ## :zap: Modules
 
-| Module              | Info     | Description                                                                                                                                        | Maven Link                                                                                                             |
-|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------| 
-| `core`              |          | the core module - must always be included                                                                                                          | [core](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core/overview)                           |
-| `storage-datastore` |          | the default datastore based storage module - you probably want that as well if you do not want to provide a custom storage implementation yourself | [storage-datastore](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/storage-datastore/overview) |
-| `storage-keyvalue`  |          | an alternative storage module that simply saves your data in a plain key-value based text file                                                     | [storage-keyvalue](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/storage-keyvalue/overview)   |
-| `encryption-aes`    | optional | provides an encryption implementation                                                                                                              | [encryption-aes](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/encryption-aes/overview)       |
-| `extension-compose` | optional | provides convenient extensions that can be used inside compose                                                                                     | [extension-compose](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/extension-compose/overview) |
+| Module              | Info     | Description                                                                                                                                        |
+|---------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `core`              |          | the core module - must always be included                                                                                                          |
+| `storage-datastore` |          | the default datastore based storage module - you probably want that as well if you do not want to provide a custom storage implementation yourself |
+| `storage-keyvalue`  |          | an alternative storage module that simply saves your data in a plain key-value based text file                                                     |
+| `encryption-aes`    | optional | provides an encryption implementation                                                                                                              |
+| `extension-compose` | optional | provides convenient extensions that can be used inside compose                                                                                     |
 
 ## </> Basic Usage
 
@@ -65,8 +65,7 @@ implementation("io.github.mflisar.kotpreferences:extension-compose:$kotpreferenc
 ```kotlin
 // Depending on the platform:
 // jvm: DataStoreStorage.create(folder = File(System.getProperty("user.dir")), name = "settings")
-// android: DataStoreStorage.create(name = "preferences")
-// iOS: DataStoreStorage contructor - pull request with fitting create function would be appreciated
+// android/iOS: DataStoreStorage.create(name = "preferences")
 object Preferences : SettingsModel(DataStoreStorage.create(name = "preferences")) {
 
     // main data types
