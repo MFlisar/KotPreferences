@@ -13,9 +13,9 @@ kotlinx-serialization-property = "1.7.2"
 kotlinx-coroutines-test =       "1.9.0"
 
 androidx-core = 		        "1.13.1"
-androidx-lifecycle = 	        "2.8.5"
+androidx-lifecycle = 	        "2.8.6"
 androidx-datastoreprefs =       "1.1.1"
-androidx-startup =              "1.1.1"
+androidx-startup =              "1.2.0"
 androidx-activity = 		    "1.9.2"
 
 okio =                          "3.9.1"

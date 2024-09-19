@@ -1,8 +1,5 @@
 package com.michaelflisar.kotpreferences.demo.settings
 
-import com.michaelflisar.composedemobaseactivity.classes.DemoTheme
-import com.michaelflisar.composethemer.ComposeTheme
-import com.michaelflisar.composethemer.themes.themes.ThemeGreens
 import com.michaelflisar.kotpreferences.core.SettingsModel
 import com.michaelflisar.kotpreferences.core.enumPref
 import com.michaelflisar.kotpreferences.core.initialisation.SettingSetup
@@ -16,11 +13,6 @@ object DemoSettingsModel : SettingsModel(
         //encryption = DemoStorageEncryption
     )
 ) {
-
-    // app settings
-    val baseTheme by enumPref(ComposeTheme.BaseTheme.System)
-    val theme by stringPref(ThemeGreens.KEY)
-    val dynamicTheme by boolPref(false)
 
     // simple types
     val testString by stringPref("initial value")

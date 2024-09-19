@@ -1,6 +1,5 @@
 package com.michaelflisar.kotpreferences.demo
 
-
 import com.michaelflisar.kotpreferences.core.SettingsModel
 import com.michaelflisar.kotpreferences.storage.datastore.DataStoreStorage
 import com.michaelflisar.kotpreferences.storage.datastore.create
