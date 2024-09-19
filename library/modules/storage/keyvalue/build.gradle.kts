@@ -65,7 +65,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines)
 
             // I/O
-            api(libs.okio)
+            implementation(libs.okio)
 
             // Library
             implementation(project(":KotPreferences:Core"))

@@ -12,7 +12,7 @@ import kotlinx.coroutines.withContext
 import okio.Path
 
 @Suppress("UNCHECKED_CAST")
-class KeyValueStorage(
+class KeyValueStorage internal constructor(
     private val filePath: Path,
     private val delimiter: String = "=",
     private val encryption: StorageEncryption? = null,
