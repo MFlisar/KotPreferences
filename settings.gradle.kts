@@ -43,7 +43,7 @@ project(":KotPreferences:Modules:Storage:Datastore").projectDir = file("library/
 include(":KotPreferences:Modules:Storage:KeyValue")
 project(":KotPreferences:Modules:Storage:KeyValue").projectDir = file("library/modules/storage/keyvalue")
 
-// Android + JVM + iOS + js (iOS untested)
+// Android + JVM + iOS (iOS untested)
 include(":KotPreferences:Modules:Compose")
 project(":KotPreferences:Modules:Compose").projectDir = file("library/modules/compose")
 
