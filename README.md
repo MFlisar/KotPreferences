@@ -179,6 +179,11 @@ val name = Preferences.someString.collectAsState()
 val name = Preferences.someString.collectAsStateWithLifecycle()
 
 // simply use the state inside your composables, the state will change whenever the setting behind it will change
+
+val name = Preferences.someString.asMutableState()
+
+// simple use and even update the state now
+
 ```
 
 </details>
