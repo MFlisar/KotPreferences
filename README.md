@@ -22,7 +22,9 @@ Additionally there's also an extension to easily integrate this library into you
 
 ## :link: Dependencies
 
-This library does not have any custom dependencies!
+|      Dependency       | Version |                     Infos                      |
+|:---------------------:|:-------:|:----------------------------------------------:|
+| Compose Multiplatform | `1.7.0` | based on compose `1.7.1` and material3 `1.3.0` |
 
 ## :elephant: Gradle
 
