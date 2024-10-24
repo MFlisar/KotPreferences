@@ -16,10 +16,6 @@ Additionally there's also an extension to easily integrate this library into you
 
 **All features are splitted into separate modules, just include the modules you want to use!**
 
-## :camera: Screenshots
-
---
-
 ## :link: Dependencies
 
 |      Dependency       | Version |                     Infos                      |

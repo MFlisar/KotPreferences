@@ -17,6 +17,7 @@ plugins {
 
 // Module
 val artifactId = "core"
+val androidNamespace = "com.michaelflisar.kotpreferences.core"
 
 // Library
 val libraryName = "KotPreferences"
@@ -78,7 +79,7 @@ kotlin {
 }
 
 android {
-    namespace = "com.michaelflisar.kotpreferences.core"
+    namespace = androidNamespace
 
     compileSdk = app.versions.compileSdk.get().toInt()
 
