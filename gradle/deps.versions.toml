@@ -1,0 +1,7 @@
+[versions]
+
+okio =      "3.9.1"
+
+[libraries]
+
+okio =       { module = "com.squareup.okio:okio",        version.ref = "okio" }

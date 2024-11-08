@@ -1,68 +1,36 @@
 [versions]
 
-gradle = 				        "8.6.1"
+gradle = 				        "8.7.2"
 kotlin = 				        "2.0.21"
-compose =                       "1.7.0"
 dokka =                         "1.9.20"
-gradle-maven-publish-plugin =   "0.29.0"
-
-kotlinx-coroutines = 	        "1.9.0"
-kotlinx-json = 			        "1.7.1"
-kotlinx-io-core =               "0.5.3"
-kotlinx-serialization-property = "1.7.2"
-kotlinx-coroutines-test =       "1.9.0"
-
-androidx-core = 		        "1.13.1"
-androidx-lifecycle = 	        "2.8.6"
-androidx-datastoreprefs =       "1.1.1"
-androidx-startup =              "1.2.0"
-androidx-activity = 		    "1.9.3"
-
-okio =                          "3.9.1"
+gradle-maven-publish-plugin =   "0.30.0"
+compose =                       "1.7.0"
 
 [plugins]
 
-android-application = 			    { id = "com.android.application",                   version.ref = "gradle" }
+# android
+android-application = 			    { id = "com.android.application", 	                version.ref = "gradle" }
 android-library = 			        { id = "com.android.library", 	                    version.ref = "gradle" }
 
+# kotlin
 kotlin-android = 				    { id = "org.jetbrains.kotlin.android", 			    version.ref = "kotlin" }
-kotlin-multiplatform = 			    { id = "org.jetbrains.kotlin.multiplatform", 	    version.ref = "kotlin" }
 kotlin-parcelize =                  { id = "org.jetbrains.kotlin.plugin.parcelize",     version.ref = "kotlin"  }
+kotlin-multiplatform = 			    { id = "org.jetbrains.kotlin.multiplatform", 	    version.ref = "kotlin" }
 kotlin-compose = 				    { id = "org.jetbrains.kotlin.plugin.compose", 	    version.ref = "kotlin" }
 kotlin-serialization = 			    { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
-compose =                           { id = "org.jetbrains.compose",                     version.ref = "compose" }
+# github release (dokka + maven)
 dokka =                             { id = "org.jetbrains.dokka",                       version.ref = "dokka" }
-
 gradle-maven-publish-plugin =       { id = "com.vanniktech.maven.publish.base",         version.ref = "gradle-maven-publish-plugin" }
+
+# compose
+compose =                           { id = "org.jetbrains.compose",                     version.ref = "compose" }
 
 [libraries]
 
-gradle =						    { module = "com.android.tools.build:gradle", 					version.ref = "gradle" }
-
-kotlin =						    { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", 			version.ref = "kotlin" }
-kotlin-gradle-plugin =			    { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", 		version.ref = "kotlin" }
-kotlin-serialization =			    { module = "org.jetbrains.kotlin:kotlin-serialization", 		version.ref = "kotlin" }
-kotlin-test = 			            { module = "org.jetbrains.kotlin:kotlin-test",                  version.ref = "kotlin" }
-
-kotlinx-coroutines =			    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", 	        version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-android =	    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", 	        version.ref = "kotlinx-coroutines" }
-kotlinx-coroutines-swing =		    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swing", 	        version.ref = "kotlinx-coroutines" }
-kotlinx-serialization-json =	    { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", 	        version.ref = "kotlinx-json" }
-kotlinx-io-core =			        { module = "org.jetbrains.kotlinx:kotlinx-io-core", 		            version.ref = "kotlinx-io-core" }
-kotlinx-serialization-property = 	{ module = "org.jetbrains.kotlinx:kotlinx-serialization-properties",    version.ref = "kotlinx-serialization-property" }
-kotlinx-coroutines-test = 	        { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test",             version.ref = "kotlinx-coroutines-test" }
+kotlin-test = 			            { module = "org.jetbrains.kotlin:kotlin-test",                          version.ref = "kotlin" }
 
 compose-runtime =                   { module = "org.jetbrains.compose.runtime:runtime",                     version.ref = "compose" }
 compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:material-icons-core",        version.ref = "compose" }
 compose-material-icons-extended = 	{ module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "compose" }
 compose-material3 =                 { module = "org.jetbrains.compose.material3:material3",                 version.ref = "compose" }
-
-androidx-core = 				    { module = "androidx.core:core-ktx", 						version.ref = "androidx-core" }
-androidx-lifecycle = 		        { module = "androidx.lifecycle:lifecycle-runtime-ktx", 		version.ref = "androidx-lifecycle" }
-androidx-lifecycle-compose =        { module = "androidx.lifecycle:lifecycle-runtime-compose", 	version.ref = "androidx-lifecycle" }
-androidx-datastore-preferences = 	{ module = "androidx.datastore:datastore-preferences", 	    version.ref = "androidx-datastoreprefs" }
-androidx-startup = 		            { module = "androidx.startup:startup-runtime", 	            version.ref = "androidx-startup" }
-androidx-activity-compose =         { module = "androidx.activity:activity-compose", 			version.ref = "androidx-activity" }
-
-okio =                              { module = "com.squareup.okio:okio",                            version.ref = "okio" }

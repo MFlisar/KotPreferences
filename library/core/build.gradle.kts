@@ -62,18 +62,17 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
+            implementation(kotlinx.coroutines)
 
         }
 
         androidMain.dependencies {
-            implementation(libs.kotlinx.coroutines.android)
-            implementation(libs.androidx.startup)
+            implementation(kotlinx.coroutines.android)
+            implementation(androidx.startup)
         }
 
         jvmMain.dependencies {
-            implementation(libs.kotlinx.coroutines.swing)
+            implementation(kotlinx.coroutines.swing)
         }
     }
 }

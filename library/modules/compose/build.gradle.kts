@@ -62,8 +62,7 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
+            implementation(kotlinx.coroutines)
 
             // AndroidX / Google
             implementation(libs.compose.runtime)
@@ -73,7 +72,7 @@ kotlin {
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.lifecycle.compose)
+            implementation(androidx.lifecycle.compose)
         }
     }
 }

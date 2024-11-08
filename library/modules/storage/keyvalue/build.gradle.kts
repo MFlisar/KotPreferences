@@ -61,18 +61,17 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlin)
-            implementation(libs.kotlinx.coroutines)
+            implementation(kotlinx.coroutines)
 
             // I/O
-            implementation(libs.okio)
+            implementation(deps.okio)
 
             // Library
             implementation(project(":KotPreferences:Core"))
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.startup)
+            implementation(androidx.startup)
         }
     }
 }

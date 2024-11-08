@@ -46,15 +46,14 @@ dependencies {
     // Kotlin
     // ------------------------
 
-    implementation(libs.kotlin)
-    implementation(libs.kotlinx.serialization.json)
+    implementation(kotlinx.serialization.json)
 
     // ------------------------
     // AndroidX/Compose
     // ------------------------
 
-    implementation(libs.androidx.core)
-    implementation(libs.androidx.lifecycle)
+    implementation(androidx.core)
+    implementation(androidx.lifecycle)
 
     // Compose
     //implementation(platform(libs.compose.bom))
@@ -62,7 +61,7 @@ dependencies {
     implementation(libs.compose.material.icons.core)
     implementation(libs.compose.material.icons.extended)
 
-    implementation(libs.androidx.activity.compose)
+    implementation(androidx.activity.compose)
 
     // ------------------------
     // Libraries

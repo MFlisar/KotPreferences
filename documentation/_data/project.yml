@@ -1,0 +1,97 @@
+# -------
+# Library
+# -------
+
+library:
+  name: KotPreferences
+  api: 21
+  github: MFlisar/KotPreferences
+  maven: io.github.mflisar.kotpreferences
+  maven-main-library: core
+  multiplatform: true
+  screenshots: []
+  branch: main
+  demo: true
+
+# ------------
+# Dependencies
+# ------------
+
+# optional
+dependencies:
+  compose:
+    cmp: 1.7.0
+    compose: 1.7.1
+    material3: 1.3.0
+    experimantal: true
+
+# -------------
+# Module
+# -------------
+
+modules:
+  - name: "core"
+    group: "core"
+    description: "the core module - must always be included"
+    optional: false
+    platforms:
+      android: true
+      ios: true
+      jvm: true
+      info:
+    #dependencies:         # optionales Array
+  - name: "storage-datastore"
+    group: "storage"
+    description: "the default datastore based storage module - you probably want that as well if you do not want to provide a custom storage implementation yourself"
+    optional: false
+    platforms:
+      android: true
+      ios: true
+      jvm: true
+      info:
+    #dependencies:         # optionales Array
+  - name: "storage-keyvalue"
+    group: "storage"
+    description: "an alternative storage module that simply saves your data in a plain key-value based text file"
+    optional: false
+    platforms:
+      android: true
+      ios: true
+      jvm: true
+      info:
+    #dependencies:         # optionales Array
+  - name: "encryption-aes"
+    group: "encryption"
+    description: "provides an encryption implementation"
+    optional: true
+    platforms:
+      android: true
+      ios: false
+      jvm: false
+      info: "(1)"
+    #dependencies:         # optionales Array
+  - name: "extension-compose"
+    group: "ext"
+    description: "provides convenient extensions that can be used inside compose"
+    optional: true
+    platforms:
+      android: true
+      ios: true
+      jvm: true
+      info:
+    #dependencies:         # optionales Array
+
+# GRUPPEN - optional: nur bei mehreren Modulen benötigt!
+groups:
+  - name: core
+    label: Core
+    gradle-comment: "core module"
+  - name: storage
+    label: Storage
+    gradle-comment: "select a storage implementation"
+  - name: ext
+    label: Extensions
+    gradle-comment: "optional extensions"
+  - name: encryption
+    label: Encryption
+    gradle-comment: "optionally add additional encryption"

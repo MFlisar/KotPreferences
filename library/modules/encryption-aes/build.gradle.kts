@@ -60,9 +60,6 @@ kotlin {
 
         commonMain.dependencies {
 
-            // Kotlin
-            implementation(libs.kotlin)
-
             // Library
             implementation(project(":KotPreferences:Core"))
         }
