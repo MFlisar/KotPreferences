@@ -18,9 +18,9 @@ dependencyResolutionManagement {
     }
 
     versionCatalogs {
-        create("plugins") {
-            from(files("gradle/libs.versions.toml"))
-        }
+        //create("plugins") {
+        //    from(files("gradle/libs.versions.toml"))
+        //}
         create("app") {
             from(files("gradle/app.versions.toml"))
         }
@@ -52,8 +52,8 @@ project(":KotPreferences:Core").projectDir = file("library/core")
 // Android + JVM + iOS (iOS untested)
 include(":KotPreferences:Modules:Storage:Datastore")
 project(":KotPreferences:Modules:Storage:Datastore").projectDir = file("library/modules/storage/datastore")
-include(":KotPreferences:Modules:Storage:KeyValue")
-project(":KotPreferences:Modules:Storage:KeyValue").projectDir = file("library/modules/storage/keyvalue")
+include(":KotPreferences:Modules:Storage:Keyvalue")
+project(":KotPreferences:Modules:Storage:Keyvalue").projectDir = file("library/modules/storage/keyvalue")
 
 // Android + JVM + iOS (iOS untested)
 include(":KotPreferences:Modules:Compose")
