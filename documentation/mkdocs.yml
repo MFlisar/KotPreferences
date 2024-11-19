@@ -121,6 +121,8 @@ nav:
     - Storage - DataStore: modules/datastore.md
     - Storage - Key-Value: modules/key-value.md
     - Encryption: modules/encryption.md
+  - Migration:
+      - Version 0.7: migration/v0.7.md
   - More:
     - Other Libraries: other-libraries.md
     - About Me: me.md
