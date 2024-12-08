@@ -28,7 +28,6 @@ fun <T> StorageSetting<T>.collectAsStateNotNull(
 
 @Composable
 fun <T> StorageSetting<T>.asMutableState(): MutableState<T> {
-    val scope = rememberCoroutineScope()
     val state = remember { mutableStateOf(value) }
     LaunchedEffect(Unit) {
         snapshotFlow {
@@ -38,7 +37,9 @@ fun <T> StorageSetting<T>.asMutableState(): MutableState<T> {
                 update(it)
             }
         }
-        observe(scope) {
+    }
+    LaunchedEffect(Unit) {
+        flow.collect {
             state.value = it
         }
     }
