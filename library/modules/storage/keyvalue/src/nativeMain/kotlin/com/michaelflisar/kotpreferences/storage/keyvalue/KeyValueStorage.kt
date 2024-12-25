@@ -1,11 +1,11 @@
 package com.michaelflisar.kotpreferences.storage.keyvalue
 
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
+import kotlinx.io.files.Path
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
 import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
-import okio.Path.Companion.toPath
 
 @OptIn(kotlinx.cinterop.ExperimentalForeignApi::class)
 fun KeyValueStorage.Companion.create(
@@ -22,7 +22,7 @@ fun KeyValueStorage.Companion.create(
         error = null
     ).let {
         requireNotNull(it).path + "/$fileName"
-    }.toPath(),
+    }.let { Path(it) },
     delimiter,
     encryption,
     cache,

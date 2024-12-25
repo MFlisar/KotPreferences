@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-import okio.Path
+import kotlinx.io.files.Path
 
 @Suppress("UNCHECKED_CAST")
 class KeyValueStorage internal constructor(

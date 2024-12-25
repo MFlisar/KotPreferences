@@ -6,16 +6,16 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import okio.FileSystem
-import okio.IOException
-import okio.Path
-import okio.SYSTEM
-import okio.buffer
-import okio.use
+import kotlinx.io.IOException
+import kotlinx.io.buffered
+import kotlinx.io.files.Path
+import kotlinx.io.files.SystemFileSystem
+import kotlinx.io.readLine
+import kotlinx.io.writeString
 
 object FileUtil {
 
-    fun exists(filePath: Path) = FileSystem.SYSTEM.exists(filePath)
+    fun exists(filePath: Path) = SystemFileSystem.exists(filePath)
 
     fun read(
         filePath: Path,
@@ -56,13 +56,13 @@ object FileUtil {
         data: Map<String, String>,
         delimiter: String
     ) {
-        FileSystem.SYSTEM.sink(filePath).use { fileSink ->
-            fileSink.buffer().use { bufferedSink ->
+        SystemFileSystem.sink(filePath).buffered().use { fileSink ->
+            fileSink.use { bufferedSink ->
                 for (d in data) {
-                    bufferedSink.writeUtf8(d.key)
-                    bufferedSink.writeUtf8(delimiter)
-                    bufferedSink.writeUtf8(d.value)
-                    bufferedSink.writeUtf8("\n")
+                    bufferedSink.writeString(d.key)
+                    bufferedSink.writeString(delimiter)
+                    bufferedSink.writeString(d.value)
+                    bufferedSink.writeString("\n")
                 }
             }
         }
@@ -73,10 +73,10 @@ object FileUtil {
         filePath: Path
     ): List<String> {
         val lines = ArrayList<String>()
-        if (FileSystem.SYSTEM.exists(filePath)) {
-            FileSystem.SYSTEM.read(filePath) {
+        if (SystemFileSystem.exists(filePath)) {
+            SystemFileSystem.source(filePath).buffered().use { bufferedSource ->
                 while (true) {
-                    val line = readUtf8Line() ?: break
+                    val line = bufferedSource.readLine() ?: break
                     lines += line
                 }
             }

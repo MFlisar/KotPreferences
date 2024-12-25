@@ -67,8 +67,8 @@ dependencies {
     // Libraries
     // ------------------------
 
-    implementation(project(":KotPreferences:Core"))
-    implementation(project(":KotPreferences:Modules:Storage:Datastore"))
-    implementation(project(":KotPreferences:Modules:Compose"))
-    implementation(project(":KotPreferences:Modules:Encryption:Aes"))
+    implementation(project(":kotpreferences:core"))
+    implementation(project(":kotpreferences:modules:storage:datastore"))
+    implementation(project(":kotpreferences:modules:compose"))
+    implementation(project(":kotpreferences:modules:encryption:aes"))
 }

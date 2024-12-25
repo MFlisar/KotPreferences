@@ -18,10 +18,10 @@ kotlin {
 
                 implementation(compose.desktop.currentOs)
 
-                implementation(project(":KotPreferences:Core"))
-                implementation(project(":KotPreferences:Modules:Storage:Datastore"))
-                implementation(project(":KotPreferences:Modules:Storage:Keyvalue"))
-                implementation(project(":KotPreferences:Modules:Compose"))
+                implementation(project(":kotpreferences:core"))
+                implementation(project(":kotpreferences:modules:storage:datastore"))
+                implementation(project(":kotpreferences:modules:storage:keyvalue"))
+                implementation(project(":kotpreferences:modules:compose"))
             }
         }
     }

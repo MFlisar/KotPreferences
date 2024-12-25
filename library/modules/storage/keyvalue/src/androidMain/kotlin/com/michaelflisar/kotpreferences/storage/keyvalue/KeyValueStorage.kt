@@ -2,7 +2,7 @@ package com.michaelflisar.kotpreferences.storage.keyvalue
 
 import com.michaelflisar.kotpreferences.core.initialisation.SettingSetup
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
-import okio.Path.Companion.toPath
+import kotlinx.io.files.Path
 
 fun KeyValueStorage.Companion.create(
     fileName: String = "settings.txt",
@@ -10,7 +10,7 @@ fun KeyValueStorage.Companion.create(
     encryption: StorageEncryption? = null,
     cache: Boolean = true
 ) = KeyValueStorage(
-    SettingSetup.context.filesDir.resolve(fileName).absolutePath.toPath(),
+    Path(SettingSetup.context.filesDir.resolve(fileName).absolutePath),
     delimiter,
     encryption,
     cache,

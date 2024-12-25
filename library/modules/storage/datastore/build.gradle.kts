@@ -61,13 +61,13 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(kotlinx.coroutines)
+            implementation(kotlinx.coroutines.core)
 
             // AndroidX / Google
             implementation(androidx.datastore.preferences)
 
             // Library
-            implementation(project(":KotPreferences:Core"))
+            implementation(project(":kotpreferences:core"))
         }
     }
 }

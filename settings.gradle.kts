@@ -42,26 +42,26 @@ dependencyResolutionManagement {
 // --------------
 
 // Android + JVM + iOS
-include(":KotPreferences:Core")
-project(":KotPreferences:Core").projectDir = file("library/core")
+include(":kotpreferences:core")
+project(":kotpreferences:core").projectDir = file("library/core")
 
 // --------------
 // Modules
 // --------------
 
 // Android + JVM + iOS (iOS untested)
-include(":KotPreferences:Modules:Storage:Datastore")
-project(":KotPreferences:Modules:Storage:Datastore").projectDir = file("library/modules/storage/datastore")
-include(":KotPreferences:Modules:Storage:Keyvalue")
-project(":KotPreferences:Modules:Storage:Keyvalue").projectDir = file("library/modules/storage/keyvalue")
+include(":kotpreferences:modules:storage:datastore")
+project(":kotpreferences:modules:storage:datastore").projectDir = file("library/modules/storage/datastore")
+include(":kotpreferences:modules:storage:keyvalue")
+project(":kotpreferences:modules:storage:keyvalue").projectDir = file("library/modules/storage/keyvalue")
 
 // Android + JVM + iOS (iOS untested)
-include(":KotPreferences:Modules:Compose")
-project(":KotPreferences:Modules:Compose").projectDir = file("library/modules/compose")
+include(":kotpreferences:modules:compose")
+project(":kotpreferences:modules:compose").projectDir = file("library/modules/compose")
 
 // Android
-include(":KotPreferences:Modules:Encryption:Aes")
-project(":KotPreferences:Modules:Encryption:Aes").projectDir = file("library/modules/encryption-aes")
+include(":kotpreferences:modules:encryption:aes")
+project(":kotpreferences:modules:encryption:aes").projectDir = file("library/modules/encryption-aes")
 
 // --------------
 // App
