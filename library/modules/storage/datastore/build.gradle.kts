@@ -15,17 +15,30 @@ plugins {
 // Informations
 // -------------------
 
+val description = "provides a storage implementation based on jetpack datastore"
+
 // Module
 val artifactId = "storage-datastore"
 
 // Library
 val libraryName = "KotPreferences"
-val libraryDescription = "KotPreferences - $artifactId module"
+val libraryDescription = "KotPreferences - $artifactId module - $description"
 val groupID = "io.github.mflisar.kotpreferences"
 val release = 2021
 val github = "https://github.com/MFlisar/KotPreferences"
 val license = "Apache License 2.0"
 val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Variables for Documentation Generator
+// -------------------
+
+// # DEP is an optional arrays!
+
+// OPTIONAL = "true"                // defines if this module is optional or not
+// GROUP_ID = "storage"             // defines the "grouping" in the documentation this module belongs to
+// #DEP = "deps.kotbilling|KotBilling|https://github.com/MFlisar/Kotbilling"
+// PLATFORM_INFO = ""               // defines a comment that will be shown in the documentation for this modules platform support
 
 // -------------------
 // Setup

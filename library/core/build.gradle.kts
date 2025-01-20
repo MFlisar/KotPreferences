@@ -14,18 +14,38 @@ plugins {
 // Informations
 // -------------------
 
+val description = "provides delegate based preferences"
+
 // Module
 val artifactId = "core"
 val androidNamespace = "com.michaelflisar.kotpreferences.core"
 
 // Library
 val libraryName = "KotPreferences"
-val libraryDescription = "KotPreferences - $artifactId module"
+val libraryDescription = "KotPreferences - $artifactId module - $description"
 val groupID = "io.github.mflisar.kotpreferences"
 val release = 2021
 val github = "https://github.com/MFlisar/KotPreferences"
 val license = "Apache License 2.0"
 val licenseUrl = "$github/blob/main/LICENSE"
+
+// -------------------
+// Variables for Documentation Generator
+// -------------------
+
+// # DEP + GROUP are optional arrays!
+
+// OPTIONAL = "false"               // defines if this module is optional or not
+// GROUP_ID = "core"                // defines the "grouping" in the documentation this module belongs to
+// #DEP = "deps.composables.core|Compose Unstyled (core)|https://github.com/composablehorizons/compose-unstyled/"
+// PLATFORM_INFO = ""               // defines a comment that will be shown in the documentation for this modules platform support
+
+// GLOBAL DATA
+// BRANCH = "master"        // defines the branch on github (master/main)
+// GROUP = "core|Core|core"
+// GROUP = "storage|Storage|select a storage implementation"
+// GROUP = "extensions|Extensions|optional extensions"
+// GROUP = "encryptions|Encryption|optionally add additional encryption"
 
 // -------------------
 // Setup
