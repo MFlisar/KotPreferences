@@ -6,7 +6,7 @@
 {%- endif -%}
 [![License](https://img.shields.io/github/license/{{ project["library"]["github"] }}?style=for-the-badge)](https://github.com/{{ project["library"]["github"] }}/blob/{{ project["library"]["branch"] }}/LICENSE){:target="_blank"}
 
-<h1 align="center"><b>{{ project["library"]["name"] }}</b></h1>
+
 
 <center>
 
