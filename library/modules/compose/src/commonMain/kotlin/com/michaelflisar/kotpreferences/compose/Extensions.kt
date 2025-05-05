@@ -16,7 +16,9 @@ import kotlinx.coroutines.withContext
 
 /* --8<-- [start: collectAsState1] */
 @Composable
-fun <T> StorageSetting<T>.collectAsState(initialValue: T? = getCached()): State<T?>
+fun <T> StorageSetting<T>.collectAsState(
+    initialValue: T? = getCached()
+): State<T?>
 /* --8<-- [end: collectAsState1] */
 {
     return flow.collectAsState(initial = initialValue)
