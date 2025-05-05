@@ -8,8 +8,9 @@
 
 <h1 align="center"><b>{{ project["library"]["name"] }}</b></h1>
 
-<center>
 ![KMP](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&label=Kotlin)
+
+<center>
 ![PLATFORMS](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge){:class=exclude-glightbox }
 {% if "jvm" in project["library"]["platforms"] -%}
 ![JVM](https://img.shields.io/badge/JVM-grey?style=for-the-badge){:class=exclude-glightbox }
