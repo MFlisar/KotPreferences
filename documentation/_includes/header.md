@@ -6,11 +6,10 @@
 {%- endif -%}
 [![License](https://img.shields.io/github/license/{{ project["library"]["github"] }}?style=for-the-badge)](https://github.com/{{ project["library"]["github"] }}/blob/{{ project["library"]["branch"] }}/LICENSE){:target="_blank"}
 
-
+<h1 align="center"><b>{{ project["library"]["name"] }}</b></h1>
 
 <center>
-
-![PLATFORMS](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge){:class=exclude-glightbox }
+![PLATFORMS](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge)
 {% if "jvm" in project["library"]["platforms"] -%}
 ![JVM](https://img.shields.io/badge/JVM-grey?style=for-the-badge){:class=exclude-glightbox }
 {% endif -%}
@@ -29,5 +28,4 @@
 {% if "linux" in project["library"]["platforms"] -%}
 ![LINUX](https://img.shields.io/badge/linux-yellow?style=for-the-badge){:class=exclude-glightbox }
 {% endif -%}
-
 </center>
