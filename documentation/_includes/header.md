@@ -12,6 +12,8 @@
 
 ![KMP](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&label=Kotlin){: class="exclude-glightbox" }
 
+![KMP](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&label=Kotlin){:class=exclude-glightbox }
+
 
 
 <center>
