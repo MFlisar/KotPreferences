@@ -14,4 +14,6 @@ object DemoSettingsModel : SettingsModel(
 
     val counter by intPref(0)
 
+    val color by longPref(0xFF000000)
+
 }

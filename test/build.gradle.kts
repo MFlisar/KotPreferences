@@ -6,7 +6,6 @@ kotlin {
 
     // Java
     jvm {
-        withJava()
     }
 
     // Android
