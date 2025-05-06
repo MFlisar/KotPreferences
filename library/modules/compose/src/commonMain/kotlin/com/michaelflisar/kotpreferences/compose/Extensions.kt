@@ -24,7 +24,6 @@ fun <T> StorageSetting<T>.collectAsState(
     return flow.collectAsState(initial = initialValue)
 }
 
-
 /* --8<-- [start: collectAsState2] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsState(
@@ -36,7 +35,6 @@ fun <T, X> StorageSetting<T>.collectAsState(
     return flow.map { mapper(it) }.collectAsState(initial = initialValue?.let { mapper(it) })
 }
 
-
 /* --8<-- [start: collectAsStateNotNull1] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateNotNull(
@@ -46,7 +44,6 @@ fun <T> StorageSetting<T>.collectAsStateNotNull(
 {
     return flow.collectAsState(initial = initialValue)
 }
-
 
 /* --8<-- [start: collectAsStateNotNull2] */
 @Composable
