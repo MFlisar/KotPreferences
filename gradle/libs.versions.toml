@@ -1,6 +1,6 @@
 [versions]
 
-gradle = 				        "8.9.2"
+gradle = 				        "8.9.3"
 kotlin = 				        "2.1.21"
 dokka =                         "1.9.20"
 gradle-maven-publish-plugin =   "0.32.0"
