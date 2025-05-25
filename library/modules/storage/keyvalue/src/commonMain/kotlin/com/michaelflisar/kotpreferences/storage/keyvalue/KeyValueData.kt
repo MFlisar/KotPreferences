@@ -15,6 +15,8 @@ internal class KeyValueData {
 
     fun hasKey(key: String) = lines.containsKey(key) || data.containsKey(key)
 
+    fun getAllKeys() = (lines.keys + data.keys).toSet()
+
     fun getAllLines(encryption: StorageEncryption?): Map<String, String> {
         return lines + data.mapNotNull { d ->
             val line = d.value.entryAsString(encryption)
@@ -39,5 +41,10 @@ internal class KeyValueData {
     fun <T> addEntry(key: String, entry: KeyValueEntry<T>) {
         lines.remove(key)
         data[key] = entry
+    }
+
+    fun removeEntry(key: String) {
+        lines.remove(key)
+        data.remove(key)
     }
 }

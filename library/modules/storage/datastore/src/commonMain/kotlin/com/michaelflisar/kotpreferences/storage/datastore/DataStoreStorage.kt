@@ -1,6 +1,7 @@
 package com.michaelflisar.kotpreferences.storage.datastore
 
 import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.MutablePreferences
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.doublePreferencesKey
@@ -12,6 +13,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
 import com.michaelflisar.kotpreferences.core.classes.BaseStorage
 import com.michaelflisar.kotpreferences.core.classes.StorageDataType
+import com.michaelflisar.kotpreferences.core.classes.StorageKey
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
@@ -21,7 +23,7 @@ import kotlinx.coroutines.flow.map
 class DataStoreStorage(
     private val dataStore: DataStore<Preferences>,
     private val encryption: StorageEncryption? = null,
-    override val cache: Boolean = true
+    override val cache: Boolean = true,
 ) : BaseStorage() {
 
     companion object {
@@ -31,43 +33,177 @@ class DataStoreStorage(
         dataStore.edit { it.clear() }
     }
 
+    override suspend fun clearDeprecatedKeys(keysToKeep: List<StorageKey<*>>) {
+        val keys = keysToKeep.map { it.getPreferenceKeyGeneric() }
+        dataStore.edit { settings ->
+            settings.asMap().keys.forEach { key ->
+                val isKeyToKeep = keys.contains(key)
+                if (!isKeyToKeep) {
+                    settings.remove(key)
+                }
+            }
+        }
+    }
+
     // -----------------
     // Getter / Setter
     // -----------------
 
-    override fun <T> get(type: StorageDataType, key: String, defaultValue: T): Flow<T> {
-        return when (type) {
-            StorageDataType.String -> get(key, ::stringPreferencesKey, defaultValue as String, type.base)
-            StorageDataType.Boolean -> get(key, ::booleanPreferencesKey, defaultValue as Boolean, type.base)
-            StorageDataType.Int -> get(key, ::intPreferencesKey, defaultValue as Int, type.base)
-            StorageDataType.Long ->get(key, ::longPreferencesKey, defaultValue as Long, type.base)
-            StorageDataType.Float -> get(key, ::floatPreferencesKey, defaultValue as Float, type.base)
-            StorageDataType.Double -> get(key, ::doublePreferencesKey, defaultValue as Double, type.base)
-            StorageDataType.StringSet -> get(key, ::stringSetPreferencesKey, defaultValue as Set<String>, type.base)
-            StorageDataType.NullableString -> get(key, ::stringPreferencesKey, defaultValue as String?, type.base)
-            StorageDataType.NullableBoolean -> get(key, ::booleanPreferencesKey, defaultValue as Boolean?, type.base)
-            StorageDataType.NullableInt -> get(key, ::intPreferencesKey, defaultValue as Int?, type.base)
-            StorageDataType.NullableLong -> get(key, ::longPreferencesKey, defaultValue as Long?, type.base)
-            StorageDataType.NullableFloat -> get(key, ::floatPreferencesKey, defaultValue as Float?, type.base)
-            StorageDataType.NullableDouble -> get(key, ::doublePreferencesKey, defaultValue as Double?, type.base)
+    override fun <T> get(key: StorageKey<*>, defaultValue: T): Flow<T> {
+        return when (key.type) {
+            StorageDataType.String -> getX(
+                key,
+                defaultValue as String
+            )
+
+            StorageDataType.Boolean -> getX(
+                key,
+                defaultValue as Boolean
+            )
+
+            StorageDataType.Int -> getX(
+                key,
+                defaultValue as Int
+            )
+
+            StorageDataType.Long -> getX(
+                key,
+                defaultValue as Long
+            )
+
+            StorageDataType.Float -> getX(
+                key,
+                defaultValue as Float
+            )
+
+            StorageDataType.Double -> getX(
+                key,
+                defaultValue as Double
+            )
+
+            StorageDataType.StringSet -> getX(
+                key,
+                defaultValue as Set<String>
+            )
+
+            StorageDataType.NullableString -> getX(
+                key,
+                defaultValue as String?
+            )
+
+            StorageDataType.NullableBoolean -> getX(
+                key,
+                defaultValue as Boolean?
+            )
+
+            StorageDataType.NullableInt -> getX(
+                key,
+                defaultValue as Int?
+            )
+
+            StorageDataType.NullableLong -> getX(
+                key,
+                defaultValue as Long?
+            )
+
+            StorageDataType.NullableFloat -> getX(
+                key,
+                defaultValue as Float?
+            )
+
+            StorageDataType.NullableDouble -> getX(
+                key,
+                defaultValue as Double?
+            )
         } as Flow<T>
     }
 
-    override suspend fun <T> set(type: StorageDataType, key: String, value: T) {
-        return when (type) {
-            StorageDataType.String -> set(key, ::stringPreferencesKey, value as String, type.base)
-            StorageDataType.Boolean -> set(key, ::booleanPreferencesKey, value as Boolean, type.base)
-            StorageDataType.Int -> set(key, ::intPreferencesKey, value as Int, type.base)
-            StorageDataType.Long ->set(key, ::longPreferencesKey, value as Long, type.base)
-            StorageDataType.Float -> set(key, ::floatPreferencesKey, value as Float, type.base)
-            StorageDataType.Double -> set(key, ::doublePreferencesKey, value as Double, type.base)
-            StorageDataType.StringSet -> set(key, ::stringSetPreferencesKey, value as Set<String>, type.base)
-            StorageDataType.NullableString -> set(key, ::stringPreferencesKey, value as String?, type.base)
-            StorageDataType.NullableBoolean -> set(key, ::booleanPreferencesKey, value as Boolean?, type.base)
-            StorageDataType.NullableInt -> set(key, ::intPreferencesKey, value as Int?, type.base)
-            StorageDataType.NullableLong -> set(key, ::longPreferencesKey, value as Long?, type.base)
-            StorageDataType.NullableFloat -> set(key, ::floatPreferencesKey, value as Float?, type.base)
-            StorageDataType.NullableDouble -> set(key, ::doublePreferencesKey, value as Double?, type.base)
+    override suspend fun <T> set(key: StorageKey<*>, value: T) {
+        return when (key.type) {
+            StorageDataType.String -> setX(
+                key,
+                value as String
+            )
+
+            StorageDataType.Boolean -> setX(
+                key,
+                value as Boolean
+            )
+
+            StorageDataType.Int -> setX(
+                key,
+                value as Int
+            )
+
+            StorageDataType.Long -> setX(
+                key,
+                value as Long
+            )
+
+            StorageDataType.Float -> setX(
+                key,
+                value as Float
+            )
+
+            StorageDataType.Double -> setX(
+                key,
+                value as Double
+            )
+
+            StorageDataType.StringSet -> setX(
+                key,
+                value as Set<String>
+            )
+
+            StorageDataType.NullableString -> setX(
+                key,
+                value as String?
+            )
+
+            StorageDataType.NullableBoolean -> setX(
+                key,
+                value as Boolean?
+            )
+
+            StorageDataType.NullableInt -> setX(
+                key,
+                value as Int?
+            )
+
+            StorageDataType.NullableLong -> setX(
+                key,
+                value as Long?
+            )
+
+            StorageDataType.NullableFloat -> setX(
+                key,
+                value as Float?
+            )
+
+            StorageDataType.NullableDouble -> setX(
+                key,
+                value as Double?
+            )
+        }
+    }
+
+    override suspend fun clear(key: StorageKey<*>) {
+        dataStore.edit { settings ->
+            when (key.type) {
+                StorageDataType.String -> settings.clear<String>(key)
+                StorageDataType.Boolean -> settings.clear<Boolean>(key)
+                StorageDataType.Int -> settings.clear<Int>(key)
+                StorageDataType.Long -> settings.clear<Long>(key)
+                StorageDataType.Float -> settings.clear<Float>(key)
+                StorageDataType.Double -> settings.clear<Double>(key)
+                StorageDataType.StringSet -> settings.clear<Set<String>>(key)
+                StorageDataType.NullableString -> settings.clear<String>(key)
+                StorageDataType.NullableBoolean -> settings.clear<Boolean>(key)
+                StorageDataType.NullableInt -> settings.clear<Int>(key)
+                StorageDataType.NullableLong -> settings.clear<Long>(key)
+                StorageDataType.NullableFloat -> settings.clear<Float>(key)
+                StorageDataType.NullableDouble -> settings.clear<Double>(key)
+            }
         }
     }
 
@@ -75,36 +211,78 @@ class DataStoreStorage(
     // Helper functions
     // --------------
 
-    private fun <T2 : Any, T : T2?> get(
-        key: String,
-        keyCreator: (String) -> Preferences.Key<T2>,
+    private fun <T > getX(
+        key: StorageKey<*>,
         defaultValue: T,
-        type: StorageDataType.NotNullable
     ): Flow<T> {
         return dataStore.data.map { settings ->
             if (encryption != null) {
-                settings[stringPreferencesKey(key)]?.let { encryption.decrypt(it, type) }
+                settings[stringPreferencesKey(key.key)]?.let {
+                    encryption.decrypt(
+                        it,
+                        key.type.base
+                    )
+                }
             } else {
-                settings[keyCreator(key)]
+                settings[key.getPreferenceKey<T & Any>()]
             } ?: defaultValue
-        }.map { it as T }.distinctUntilChanged()
+        }.map { it }.distinctUntilChanged()
     }
 
-    private suspend fun <T2 : Any, T : T2?> set(
-        key: String,
-        keyCreator: (String) -> Preferences.Key<T2>,
+    private suspend fun <T> setX(
+        key: StorageKey<*>,
         value: T,
-        type: StorageDataType.NotNullable
     ) {
         dataStore.edit { settings ->
             value?.let {
                 if (encryption != null) {
-                    settings[stringPreferencesKey(key)] = encryption.encrypt(it, type)
+                    settings[stringPreferencesKey(key.key)] = encryption.encrypt(it, key.type.base)
                 } else {
-                    settings[keyCreator(key)] = it
+                    settings[key.getPreferenceKey()] = it
                 }
-            }
-                ?: settings.remove(booleanPreferencesKey(key))
+            } ?: settings.clear<T & Any>(key)
+        }
+    }
+
+    private fun <T : Any> MutablePreferences.clear(
+        key: StorageKey<*>
+    ) {
+        remove(key.getPreferenceKey<T>())
+    }
+
+    private fun <T : Any> StorageKey<*>.getPreferenceKey(): Preferences.Key<T> {
+        return when (type) {
+            StorageDataType.String -> stringPreferencesKey(key)
+            StorageDataType.Boolean -> booleanPreferencesKey(key)
+            StorageDataType.Int -> intPreferencesKey(key)
+            StorageDataType.Long -> longPreferencesKey(key)
+            StorageDataType.Float -> floatPreferencesKey(key)
+            StorageDataType.Double -> doublePreferencesKey(key)
+            StorageDataType.StringSet -> stringSetPreferencesKey(key)
+            StorageDataType.NullableString -> stringPreferencesKey(key)
+            StorageDataType.NullableBoolean -> booleanPreferencesKey(key)
+            StorageDataType.NullableInt -> intPreferencesKey(key)
+            StorageDataType.NullableLong -> longPreferencesKey(key)
+            StorageDataType.NullableFloat -> floatPreferencesKey(key)
+            StorageDataType.NullableDouble -> doublePreferencesKey(key)
+        } as Preferences.Key<T>
+    }
+
+    private fun StorageKey<*>.getPreferenceKeyGeneric(): Preferences.Key<*> {
+        return when (type) {
+            StorageDataType.String -> stringPreferencesKey(key)
+            StorageDataType.Boolean -> booleanPreferencesKey(key)
+            StorageDataType.Int -> intPreferencesKey(key)
+            StorageDataType.Long -> longPreferencesKey(key)
+            StorageDataType.Float -> floatPreferencesKey(key)
+            StorageDataType.Double -> doublePreferencesKey(key)
+            StorageDataType.StringSet -> stringSetPreferencesKey(key)
+            StorageDataType.NullableString -> stringPreferencesKey(key)
+            StorageDataType.NullableBoolean -> booleanPreferencesKey(key)
+            StorageDataType.NullableInt -> intPreferencesKey(key)
+            StorageDataType.NullableLong -> longPreferencesKey(key)
+            StorageDataType.NullableFloat -> floatPreferencesKey(key)
+            StorageDataType.NullableDouble -> doublePreferencesKey(key)
         }
     }
 }

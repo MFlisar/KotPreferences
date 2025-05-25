@@ -2,6 +2,7 @@ package com.michaelflisar.kotpreferences.storage.keyvalue
 
 import com.michaelflisar.kotpreferences.core.classes.BaseStorage
 import com.michaelflisar.kotpreferences.core.classes.StorageDataType
+import com.michaelflisar.kotpreferences.core.classes.StorageKey
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -43,34 +44,50 @@ class KeyValueStorage internal constructor(
     // Getter / Setter
     // -----------------
 
-    override fun <T> get(type: StorageDataType, key: String, defaultValue: T): Flow<T> {
-        return when (type) {
+    override fun <T> get(key: StorageKey<*>, defaultValue: T): Flow<T> {
+        return when (key.type) {
             is StorageDataType.Nullable -> {
-                getX<T>(type, key, defaultValue, null as T)
+                getX<T>(key, defaultValue, null as T)
             }
 
             is StorageDataType.NotNullable -> {
-                getX<T>(type, key, defaultValue, defaultValue)
+                getX<T>(key, defaultValue, defaultValue)
             }
         }.map { it.entry }
     }
 
-    override suspend fun <T> set(type: StorageDataType, key: String, value: T) {
-        when (type) {
-            StorageDataType.String -> setX(type, key, value as String)
-            StorageDataType.Boolean -> setX(type, key, value as Boolean)
-            StorageDataType.Int -> setX(type, key, value as Int)
-            StorageDataType.Long -> setX(type, key, value as Long)
-            StorageDataType.Float -> setX(type, key, value as Float)
-            StorageDataType.Double -> setX(type, key, value as Double)
-            StorageDataType.StringSet -> setX(type, key, value as Set<String>)
-            StorageDataType.NullableString -> setX(type, key, value as String?)
-            StorageDataType.NullableBoolean -> setX(type, key, value as Boolean?)
-            StorageDataType.NullableInt -> setX(type, key, value as Int?)
-            StorageDataType.NullableLong -> setX(type, key, value as Long?)
-            StorageDataType.NullableFloat -> setX(type, key, value as Float?)
-            StorageDataType.NullableDouble -> setX(type, key, value as String)
+    override suspend fun <T> set(key: StorageKey<*>, value: T) {
+        when (key.type) {
+            StorageDataType.String -> setX(key, value as String)
+            StorageDataType.Boolean -> setX(key, value as Boolean)
+            StorageDataType.Int -> setX(key, value as Int)
+            StorageDataType.Long -> setX(key, value as Long)
+            StorageDataType.Float -> setX(key, value as Float)
+            StorageDataType.Double -> setX(key, value as Double)
+            StorageDataType.StringSet -> setX(key, value as Set<String>)
+            StorageDataType.NullableString -> setX(key, value as String?)
+            StorageDataType.NullableBoolean -> setX(key, value as Boolean?)
+            StorageDataType.NullableInt -> setX(key, value as Int?)
+            StorageDataType.NullableLong -> setX(key, value as Long?)
+            StorageDataType.NullableFloat -> setX(key, value as Float?)
+            StorageDataType.NullableDouble -> setX(key, value as String)
         }
+    }
+
+    override suspend fun clear(key: StorageKey<*>) {
+        clearX(key)
+    }
+
+    override suspend fun clearDeprecatedKeys(keysToKeep: List<StorageKey<*>>) {
+        val existingKeys = data.getAllKeys()
+        val keysToKeep = keysToKeep.map { it.key }.toSet()
+        val keysToRemove = existingKeys - keysToKeep
+        if (keysToRemove.isEmpty())
+            return
+        for (key in keysToRemove) {
+            data.removeEntry(key)
+        }
+        FileUtil.saveAsync(data.getAllLines(encryption), filePath, delimiter)
     }
 
     // --------------
@@ -78,40 +95,45 @@ class KeyValueStorage internal constructor(
     // --------------
 
     private fun <T> getX(
-        type: StorageDataType,
-        key: String,
+        key: StorageKey<*>,
         defaultValue: T,
         empty: T
     ): Flow<KeyValueEntry<T>> {
-        val flow = flows[key]
+        val flow = flows[key.key]
         if (flow != null) {
             return flow as Flow<KeyValueEntry<T>>
         }
-        val entry = data.getEntry<T>(key, type, encryption) ?: run {
+        val entry = data.getEntry<T>(key.key, key.type, encryption) ?: run {
             if (fileExisted) {
-                KeyValueEntry(empty, type)
+                KeyValueEntry(empty, key.type)
             } else {
-                KeyValueEntry(defaultValue, type)
+                KeyValueEntry(defaultValue, key.type)
             }
         }
         val flow2 = MutableStateFlow(entry)
-        flows[key] = flow2 as Flow<KeyValueEntry<*>>
-        data.addEntry(key, entry)
+        flows[key.key] = flow2 as Flow<KeyValueEntry<*>>
+        data.addEntry(key.key, entry)
         return flow2
     }
 
     private suspend fun <T> setX(
-        type: StorageDataType,
-        key: String,
+        key: StorageKey<*>,
         value: T
     ) {
-        val d = KeyValueEntry(value, type)
-        flows[key]?.let { it as MutableStateFlow<KeyValueEntry<T>> }?.also {
+        val d = KeyValueEntry(value, key.type)
+        flows[key.key]?.let { it as MutableStateFlow<KeyValueEntry<T>> }?.also {
             it.emit(d)
         } ?: MutableStateFlow(d).also {
-            flows[key] = it as MutableStateFlow<KeyValueEntry<*>>
+            flows[key.key] = it as MutableStateFlow<KeyValueEntry<*>>
         }
-        data.addEntry(key, d)
+        data.addEntry(key.key, d)
+        FileUtil.saveAsync(data.getAllLines(encryption), filePath, delimiter)
+    }
+
+    private fun clearX(
+        key: StorageKey<*>
+    ) {
+        data.removeEntry(key.key)
         FileUtil.saveAsync(data.getAllLines(encryption), filePath, delimiter)
     }
 }

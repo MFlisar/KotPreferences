@@ -1,6 +1,7 @@
 package com.michaelflisar.kotpreferences.core
 
 import com.michaelflisar.kotpreferences.core.classes.EnumConverter
+import com.michaelflisar.kotpreferences.core.classes.StorageKey
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.settings.AnyIntSetting
 import com.michaelflisar.kotpreferences.core.settings.AnyStringSetting
@@ -42,6 +43,11 @@ abstract class SettingsModel(
 
     fun onCreate(setting: StorageSetting<*>) {
         //internalSettings.add(setting)
+    }
+
+    suspend fun removeDeprecatedKeysFromFile() {
+        val validKeys = internalProperties.map { StorageKey(it.value.storageDataType, it.key) }
+        storage.clearDeprecatedKeys(validKeys)
     }
 
     /**
