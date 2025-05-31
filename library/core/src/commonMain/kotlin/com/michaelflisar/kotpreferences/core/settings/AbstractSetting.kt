@@ -5,11 +5,8 @@ import com.michaelflisar.kotpreferences.core.classes.StorageDataType
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 abstract class AbstractSetting<T : Any?> : StorageSetting<T> {
@@ -40,15 +37,6 @@ abstract class AbstractSetting<T : Any?> : StorageSetting<T> {
         }
     }
 
-    override val value: T
-        get() {
-            val c = cached
-            return if (c != null)
-                c.data
-            else
-                runBlocking(Dispatchers.IO) { flow.first() }
-        }
-
     private suspend fun onValueChanged(value: T) {
         storage.onValueChanged(this, value)
     }
@@ -57,19 +45,16 @@ abstract class AbstractSetting<T : Any?> : StorageSetting<T> {
     // caching
     // ---------
 
-    private var cached: Cached<T>? = null
+    private var cachedData: StorageSetting.Cache<T>? = null
 
     private fun updateCached(value: T) {
         if (storage.cache && cache) {
-            cached = Cached(value)
+            cachedData = StorageSetting.Cache(value)
         }
     }
 
-    override fun getCached() = cached?.data
+    override fun getCachedValue() = cachedData?.data
 
-    // ---------
-    // classes
-    // ---------
+    override fun getCache() = cachedData
 
-    private class Cached<T : Any?>(val data: T)
 }

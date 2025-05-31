@@ -1,7 +1,6 @@
 package com.michaelflisar.kotpreferences.core.interfaces
 
 import com.michaelflisar.kotpreferences.core.SettingsModel
-import com.michaelflisar.kotpreferences.core.classes.SettingsDataType
 import com.michaelflisar.kotpreferences.core.classes.StorageDataType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -18,11 +17,6 @@ interface StorageSetting<T : Any?> : ReadOnlyProperty<SettingsModel, StorageSett
     val flow: Flow<T>
 
     val storageDataType: StorageDataType
-
-    /*
-     * returns a cached value or retrieves the value in a blocking way
-     */
-    val value: T
 
     suspend fun update(value: T)
     suspend fun read(): T = flow.first()
@@ -58,11 +52,15 @@ interface StorageSetting<T : Any?> : ReadOnlyProperty<SettingsModel, StorageSett
         .launchIn(scope)
 
     suspend fun reset(): Boolean {
-        return if (value != defaultValue) {
+        return if (read() != defaultValue) {
             update(defaultValue)
             true
         } else false
     }
 
-    fun getCached(): T?
+    fun getCachedValue(): T?
+
+    fun getCache(): Cache<T>?
+
+    class Cache<T : Any?>(val data: T)
 }

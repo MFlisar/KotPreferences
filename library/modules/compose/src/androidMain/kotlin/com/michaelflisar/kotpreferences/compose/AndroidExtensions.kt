@@ -15,7 +15,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T? = getCached()
+    initialValue: T? = getCachedValue()
 ): State<T?> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
@@ -30,7 +30,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T? = getCached()
+    initialValue: T? = getCachedValue()
 ): State<T?> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
@@ -45,7 +45,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getCached() ?: value
+    initialValue: T = getCachedValue() ?: value
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
@@ -60,7 +60,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getCached() ?: value
+    initialValue: T = getCachedValue() ?: value
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,

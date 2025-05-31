@@ -5,9 +5,9 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 class SettingsGroup<T>(
-    private vararg val settings: StorageSetting<*>,
+    internal vararg val settings: StorageSetting<*>,
     private val distinctUntilChanged: Boolean = true,
-    private val converter: (List<Any?>) -> T
+    internal val converter: (List<Any?>) -> T
 ) {
     val flow by lazy {
         val f = combine(settings.map { it.flow }) {
@@ -18,9 +18,6 @@ class SettingsGroup<T>(
         else
             f
     }
-
-    val value: T
-        get() = converter(settings.map { it.value })
 
     suspend fun reset(): List<StorageSetting<*>> {
         val settingsToReset = ArrayList<StorageSetting<*>>()

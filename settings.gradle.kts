@@ -69,4 +69,5 @@ project(":kotpreferences:modules:encryption:aes").projectDir = file("library/mod
 
 include(":test")
 include(":demo:android")
-include(":demo:desktop")
+include(":demo:windows")
+include(":demo:web")

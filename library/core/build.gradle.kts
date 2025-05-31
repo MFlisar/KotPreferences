@@ -1,6 +1,7 @@
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.SonatypeHost
+import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -53,8 +54,9 @@ val licenseUrl = "$github/blob/main/LICENSE"
 
 kotlin {
 
-    // Java
-    jvm()
+    //-------------
+    // Mobile
+    //-------------
 
     // Android
     androidTarget {
@@ -65,11 +67,41 @@ kotlin {
     }
 
     // iOS
+    iosX64()
+    iosArm64()
+    iosSimulatorArm64()
+
+    //-------------
+    // Desktop
+    //-------------
+
+    // Windows
+    jvm()
+
+    // macOS
     macosX64()
     macosArm64()
-    iosArm64()
-    iosX64()
-    iosSimulatorArm64()
+
+    // Linux
+    // linuxX64()
+    // linuxArm64()
+
+    //-------------
+    // Web
+    //-------------
+
+    // WASM
+    @OptIn(ExperimentalWasmDsl::class)
+    wasmJs {
+        nodejs()
+    }
+
+    //-------------
+    // JavaScript
+    //-------------
+
+    // js()
+    // js(IR)
 
     // -------
     // Sources
@@ -77,10 +109,39 @@ kotlin {
 
     sourceSets {
 
+        // ---------------------
+        // custom shared sources
+        // ---------------------
+
+        // all targets but wasm
+        val featureBlocking by creating {
+            dependsOn(commonMain.get())
+        }
+
+        // wasm only
+        val featureNonBlocking by creating {
+            dependsOn(commonMain.get())
+        }
+
+        // ---------------------
+        // target sources
+        // ---------------------
+
+        androidMain { dependsOn(featureBlocking) }
+        iosMain { dependsOn(featureBlocking) }
+        jvmMain { dependsOn(featureBlocking) }
+        macosMain { dependsOn(featureBlocking) }
+        wasmJsMain { dependsOn(featureNonBlocking) }
+
+        // ---------------------
+        // dependencies
+        // ---------------------
+
         commonMain.dependencies {
 
             // Kotlin
             implementation(kotlinx.coroutines.core)
+            implementation(kotlinx.io.core)
 
         }
 
@@ -92,6 +153,8 @@ kotlin {
         jvmMain.dependencies {
             implementation(kotlinx.coroutines.swing)
         }
+
+
     }
 }
 

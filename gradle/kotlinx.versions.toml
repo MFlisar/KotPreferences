@@ -1,9 +1,10 @@
 [versions]
 
-coroutines = 	            "1.10.1"
+coroutines = 	            "1.10.2"
 json = 			            "1.7.3"
 io-core =                   "0.6.0"
 coroutines-test =           "1.10.1"
+browser =                   "0.3"
 
 [libraries]
 
@@ -13,3 +14,4 @@ coroutines-swing =		    { module = "org.jetbrains.kotlinx:kotlinx-coroutines-swi
 serialization-json =	    { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", 	        version.ref = "json" }
 io-core =			        { module = "org.jetbrains.kotlinx:kotlinx-io-core", 		            version.ref = "io-core" }
 coroutines-test = 	        { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test",             version.ref = "coroutines-test" }
+browser = 	                { module = "org.jetbrains.kotlinx:kotlinx-browser",                     version.ref = "browser" }

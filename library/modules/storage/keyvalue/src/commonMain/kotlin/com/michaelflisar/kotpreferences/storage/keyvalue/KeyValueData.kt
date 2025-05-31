@@ -17,10 +17,10 @@ internal class KeyValueData {
 
     fun getAllKeys() = (lines.keys + data.keys).toSet()
 
-    fun getAllLines(encryption: StorageEncryption?): Map<String, String> {
-        return lines + data.mapNotNull { d ->
+    fun getAllLines(encryption: StorageEncryption?): List<KeyValue> {
+        return lines.map { KeyValue(it.key, it.value) } + data.mapNotNull { d ->
             val line = d.value.entryAsString(encryption)
-            line?.let { Pair(d.key, it) }
+            line?.let { KeyValue(d.key, it) }
         }
     }
 
@@ -34,8 +34,8 @@ internal class KeyValueData {
         return entry as KeyValueEntry<T>?
     }
 
-    fun addLines(lines: Map<String, String>) {
-        this.lines += lines
+    fun addLines(lines: List<KeyValue>) {
+        this.lines += lines.map { it.key to it.value }
     }
 
     fun <T> addEntry(key: String, entry: KeyValueEntry<T>) {

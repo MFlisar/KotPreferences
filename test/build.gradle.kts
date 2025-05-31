@@ -36,6 +36,7 @@ kotlin {
 
             implementation(libs.kotlin.test)
             implementation(kotlinx.coroutines.test)
+            implementation(kotlinx.io.core)
 
             implementation(project(":kotpreferences:core"))
             implementation(project(":kotpreferences:modules:storage:datastore"))
