@@ -11,3 +11,12 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.kotlin.serialization) apply false
 }
+
+// exclude all demo projects from CI builds
+subprojects {
+    if (project.path.contains(":demo:", ignoreCase = true) && System.getenv("CI") == "true") {
+        tasks.configureEach {
+            enabled = false
+        }
+    }
+}
