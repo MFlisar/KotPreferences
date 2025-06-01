@@ -16,7 +16,8 @@ val <T : Any?> StorageSetting<T>.value: T
         return if (c != null)
             c.data
         else
-            runBlocking(Dispatchers.IO) { flow.first() }
+            @OptIn(InternalApi::class)
+            runBlocking(StorageContext) { flow.first() }
     }
 
 val <T> SettingsGroup<T>.value

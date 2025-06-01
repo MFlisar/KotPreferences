@@ -121,10 +121,15 @@ kotlin {
         // ---------------------
 
         androidMain { dependsOn(featureFile) }
-        iosMain { dependsOn(featureFile) }
+        //iosMain { dependsOn(featureFile) }
+        iosX64Main { dependsOn(featureFile) }
+        iosArm64Main { dependsOn(featureFile) }
+        iosSimulatorArm64Main { dependsOn(featureFile) }
         jvmMain { dependsOn(featureFile) }
-        macosMain { dependsOn(featureFile) }
-        //wasmJsMain { dependsOn(featureNoFile) }
+        //macosMain { dependsOn(featureFile) }
+        macosX64Main { dependsOn(featureFile) }
+        macosArm64Main { dependsOn(featureFile) }
+        //wasmJsMain { dependsOn(featureFile) }
 
         // ---------------------
         // dependencies

@@ -116,9 +116,14 @@ kotlin {
         // ---------------------
 
         androidMain { dependsOn(featureBlocking) }
-        iosMain { dependsOn(featureBlocking) }
+        //iosMain { dependsOn(featureBlocking) }
+        iosX64Main { dependsOn(featureBlocking) }
+        iosArm64Main { dependsOn(featureBlocking) }
+        iosSimulatorArm64Main { dependsOn(featureBlocking) }
         jvmMain { dependsOn(featureBlocking) }
-        macosMain { dependsOn(featureBlocking) }
+        //macosMain { dependsOn(featureBlocking) }
+        macosX64Main { dependsOn(featureBlocking) }
+        macosArm64Main { dependsOn(featureBlocking) }
         //wasmJsMain { dependsOn(featureNoBlocking) }
 
         // ---------------------
