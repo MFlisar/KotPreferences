@@ -6,6 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.michaelflisar.kotpreferences.core.getValueNotNull
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
@@ -45,7 +46,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getCachedValue() ?: value
+    initialValue: T = getCachedValue() ?: getValueNotNull()
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
@@ -60,7 +61,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getCachedValue() ?: value
+    initialValue: T = getCachedValue() ?: getValueNotNull()
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
