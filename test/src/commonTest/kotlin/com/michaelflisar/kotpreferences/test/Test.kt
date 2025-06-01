@@ -13,12 +13,14 @@ import kotlin.test.assertEquals
 
 class Test {
 
+    val appFolder = File(System.getProperty("user.dir"))
+
     private val dataStoreStorage = DataStoreStorage.create(
-        folder = File(System.getProperty("user.dir")),
+        folder = appFolder,
         name = "test"
     )
     private val keyValueStorage = KeyValueStorage.create(
-        folder = File(System.getProperty("user.dir")),
+        folder = appFolder,
         fileName = "test.txt"
     )
 
