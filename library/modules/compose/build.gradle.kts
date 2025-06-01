@@ -115,16 +115,27 @@ kotlin {
         // target sources
         // ---------------------
 
-        androidMain { dependsOn(featureBlocking) }
-        //iosMain { dependsOn(featureBlocking) }
-        iosX64Main { dependsOn(featureBlocking) }
-        iosArm64Main { dependsOn(featureBlocking) }
-        iosSimulatorArm64Main { dependsOn(featureBlocking) }
-        jvmMain { dependsOn(featureBlocking) }
-        //macosMain { dependsOn(featureBlocking) }
-        macosX64Main { dependsOn(featureBlocking) }
-        macosArm64Main { dependsOn(featureBlocking) }
-        //wasmJsMain { dependsOn(featureNoBlocking) }
+        val groupedTargets = mapOf(
+            "android" to listOf("android"),
+            "ios" to listOf("iosX64", "iosArm64", "iosSimulatorArm64"),
+            "jvm" to listOf("jvm"),
+            "macos" to listOf("macosX64", "macosArm64"),
+            "wasm" to listOf("wasmJs")
+        )
+
+        groupedTargets.forEach { group, targets ->
+            val groupMain = sourceSets.maybeCreate("${group}Main")
+
+            when (group) {
+                "android", "jvm", "ios", "macos" -> {
+                    groupMain.dependsOn(featureBlocking)
+                }
+                "wasm" -> {
+                    // -
+                }
+            }
+        }
+
 
         // ---------------------
         // dependencies

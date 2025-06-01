@@ -137,39 +137,34 @@ kotlin {
         // target sources
         // ---------------------
 
-        androidMain {
-            dependsOn(featureIO)
-            dependsOn(featureBlocking)
-        }
-        //iosMain { dependsOn(...) }
-        iosX64Main {
-            dependsOn(featureNoIO)
-            dependsOn(featureBlocking)
-        }
-        iosArm64Main {
-            dependsOn(featureNoIO)
-            dependsOn(featureBlocking)
-        }
-        iosSimulatorArm64Main {
-            dependsOn(featureNoIO)
-            dependsOn(featureBlocking)
-        }
-        jvmMain {
-            dependsOn(featureIO)
-            dependsOn(featureBlocking)
-        }
-        //iosMain { dependsOn(...) }
-        macosX64Main {
-            dependsOn(featureNoIO)
-            dependsOn(featureBlocking)
-        }
-        macosArm64Main {
-            dependsOn(featureNoIO)
-            dependsOn(featureBlocking)
-        }
-        wasmJsMain {
-            dependsOn(featureNoIO)
-            dependsOn(featureNoBlocking)
+        val groupedTargets = mapOf(
+            "android" to listOf("android"),
+            "ios" to listOf("iosX64", "iosArm64", "iosSimulatorArm64"),
+            "jvm" to listOf("jvm"),
+            "macos" to listOf("macosX64", "macosArm64"),
+            "wasm" to listOf("wasmJs")
+        )
+
+        groupedTargets.forEach { group, targets ->
+            val groupMain = sourceSets.maybeCreate("${group}Main")
+            when (group) {
+                "android", "jvm" -> {
+                    groupMain.dependsOn(featureIO)
+                    groupMain.dependsOn(featureBlocking)
+                }
+                "ios", "macos" -> {
+                    groupMain.dependsOn(featureNoIO)
+                    groupMain.dependsOn(featureBlocking)
+                }
+                "wasm" -> {
+                    groupMain.dependsOn(featureNoIO)
+                    groupMain.dependsOn(featureNoBlocking)
+                }
+            }
+
+            targets.forEach { target ->
+                sourceSets.getByName("${target}Main").dependsOn(groupMain)
+            }
         }
 
         // ---------------------

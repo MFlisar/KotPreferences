@@ -120,16 +120,26 @@ kotlin {
         // target sources
         // ---------------------
 
-        androidMain { dependsOn(featureFile) }
-        //iosMain { dependsOn(featureFile) }
-        iosX64Main { dependsOn(featureFile) }
-        iosArm64Main { dependsOn(featureFile) }
-        iosSimulatorArm64Main { dependsOn(featureFile) }
-        jvmMain { dependsOn(featureFile) }
-        //macosMain { dependsOn(featureFile) }
-        macosX64Main { dependsOn(featureFile) }
-        macosArm64Main { dependsOn(featureFile) }
-        //wasmJsMain { dependsOn(featureFile) }
+        val groupedTargets = mapOf(
+            "android" to listOf("android"),
+            "ios" to listOf("iosX64", "iosArm64", "iosSimulatorArm64"),
+            "jvm" to listOf("jvm"),
+            "macos" to listOf("macosX64", "macosArm64"),
+            "wasm" to listOf("wasmJs")
+        )
+
+        groupedTargets.forEach { group, targets ->
+            val groupMain = sourceSets.maybeCreate("${group}Main")
+
+            when (group) {
+                "android", "jvm", "ios", "macos" -> {
+                    groupMain.dependsOn(featureFile)
+                }
+                "wasm" -> {
+                    // -
+                }
+            }
+        }
 
         // ---------------------
         // dependencies
