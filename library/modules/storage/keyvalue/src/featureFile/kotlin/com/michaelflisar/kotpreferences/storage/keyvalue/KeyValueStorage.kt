@@ -14,7 +14,7 @@ fun KeyValueStorage.Companion.create(
     exists = { FileUtil.exists(filePath) },
     read = {
         val content = FileUtil.readFile(filePath)
-        converter.readFromString(content)
+         converter.readFromString(content)
     },
     write = {
         val content = converter.writeToString(it)
