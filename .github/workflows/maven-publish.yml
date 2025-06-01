@@ -22,7 +22,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+          cache: 'gradle'
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -30,12 +30,15 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
+      - name: Build Library
+        run: ./gradlew build --no-daemon
+
       - name: Publish Library
         run: |
           echo "TAG: $TAG"
           echo "Publishing library 🚀"
           echo ""
-          ./gradlew publish --no-daemon --no-parallel
+          ./gradlew publish -x build --no-daemon --no-parallel
           echo "Published✅"
 
         env:
