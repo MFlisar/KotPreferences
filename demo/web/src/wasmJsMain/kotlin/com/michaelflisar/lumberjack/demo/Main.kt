@@ -9,24 +9,19 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.CanvasBasedWindow
-import com.michaelflisar.kotpreferences.compose.asMutableState
 import com.michaelflisar.kotpreferences.compose.asMutableStateNotNull
 import com.michaelflisar.kotpreferences.core.SettingsModel
-import com.michaelflisar.kotpreferences.storage.keyvalue.KeyValueStorage
-import com.michaelflisar.kotpreferences.storage.keyvalue.create
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
+import com.michaelflisar.kotpreferences.storage.keyvalue.LocalStorageKeyValueStorage
 
+/*
+ * LocalStorageKeyValueStorage will save the settings in the browser's local storage
+ */
 object Prefs : SettingsModel(
-    KeyValueStorage.create(
+    LocalStorageKeyValueStorage.create(
         key = "prefs"
     )
 ) {
@@ -37,7 +32,7 @@ object Prefs : SettingsModel(
 suspend fun main() {
 
     CanvasBasedWindow("Demo", canvasElementId = "ComposeTarget") {
-        val counter  = Prefs.counter.asMutableStateNotNull()
+        val counter = Prefs.counter.asMutableStateNotNull()
 
         MaterialTheme {
             Scaffold(
