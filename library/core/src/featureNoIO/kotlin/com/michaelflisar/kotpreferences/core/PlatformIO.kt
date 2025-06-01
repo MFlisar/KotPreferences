@@ -1,6 +1,5 @@
 package com.michaelflisar.kotpreferences.core
 
-import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
