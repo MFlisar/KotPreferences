@@ -14,27 +14,27 @@ jobs:
 
     steps:
 
-      - name: '1/6: Checkout repository'
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: '2/6: Set up JDK 17'
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: '3/6: Setup Gradle'
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: '4/6: Make gradlew executable'
+      - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: '5/6: Build Library'
+      - name: Build Library
         run: ./gradlew build --no-daemon
 
       # -x build... is used to skip the build task
-      - name: '6/6: Publish Library'
+      - name: Publish Library
         run: |
           echo "TAG: $TAG"
           echo "Publishing library 🚀"
