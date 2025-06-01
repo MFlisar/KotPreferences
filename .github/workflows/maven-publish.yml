@@ -30,16 +30,12 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build Library
-        run: ./gradlew build --no-daemon
-
-      # -x build... is used to skip the build task
       - name: Publish Library
         run: |
           echo "TAG: $TAG"
           echo "Publishing library 🚀"
           echo ""
-          ./gradlew publish -x build --no-daemon --no-parallel
+          ./gradlew publish --no-daemon --no-parallel
           echo "Published✅"
 
         env:

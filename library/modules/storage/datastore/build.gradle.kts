@@ -140,7 +140,8 @@ mavenPublishing {
     }
 
     // Configure publishing to Maven Central
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, true)
+    val autoReleaseOnMavenCentral = providers.gradleProperty("autoReleaseOnMavenCentral").get().toBoolean()
+    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
 
     // Enable GPG signing for all publications
     signAllPublications()
