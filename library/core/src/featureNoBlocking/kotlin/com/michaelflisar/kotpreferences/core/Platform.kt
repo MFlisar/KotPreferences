@@ -6,5 +6,3 @@ import kotlin.coroutines.CoroutineContext
 
 actual fun <T: Any?> StorageSetting<T>.getValueNotNull() : T = getCachedValue() ?: defaultValue
 actual fun <T: Any?> StorageSetting<T>.tryGetValueNotNull() : T? = getCachedValue()
-
-actual val StorageContext: CoroutineContext = Dispatchers.Default

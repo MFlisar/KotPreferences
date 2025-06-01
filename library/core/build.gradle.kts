@@ -119,7 +119,17 @@ kotlin {
         }
 
         // wasm only
-        val featureNonBlocking by creating {
+        val featureNoBlocking by creating {
+            dependsOn(commonMain.get())
+        }
+
+        // all targets but ios + wasm
+        val featureIO by creating {
+            dependsOn(commonMain.get())
+        }
+
+        // ios + wasm only
+        val featureNoIO by creating {
             dependsOn(commonMain.get())
         }
 
@@ -127,13 +137,40 @@ kotlin {
         // target sources
         // ---------------------
 
-        androidMain { dependsOn(featureBlocking) }
-        iosX64Main { dependsOn(featureBlocking) }
-        iosArm64Main { dependsOn(featureBlocking) }
-        iosSimulatorArm64Main { dependsOn(featureBlocking) }
-        jvmMain { dependsOn(featureBlocking) }
-        macosMain { dependsOn(featureBlocking) }
-        wasmJsMain { dependsOn(featureNonBlocking) }
+        androidMain {
+            dependsOn(featureIO)
+            dependsOn(featureBlocking)
+        }
+        //iosMain { dependsOn(...) }
+        iosX64Main {
+            dependsOn(featureNoIO)
+            dependsOn(featureBlocking)
+        }
+        iosArm64Main {
+            dependsOn(featureNoIO)
+            dependsOn(featureBlocking)
+        }
+        iosSimulatorArm64Main {
+            dependsOn(featureNoIO)
+            dependsOn(featureBlocking)
+        }
+        jvmMain {
+            dependsOn(featureIO)
+            dependsOn(featureBlocking)
+        }
+        //iosMain { dependsOn(...) }
+        macosX64Main {
+            dependsOn(featureNoIO)
+            dependsOn(featureBlocking)
+        }
+        macosArm64Main {
+            dependsOn(featureNoIO)
+            dependsOn(featureBlocking)
+        }
+        wasmJsMain {
+            dependsOn(featureNoIO)
+            dependsOn(featureNoBlocking)
+        }
 
         // ---------------------
         // dependencies
