@@ -1,8 +1,8 @@
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.michaelflisar.buildlogic.BuildLogicPlugin
+import com.michaelflisar.buildlogic.classes.LibraryMetaData
+import com.michaelflisar.buildlogic.classes.ModuleMetaData
+import com.michaelflisar.buildlogic.classes.Target
+import com.michaelflisar.buildlogic.classes.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -10,25 +10,33 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.kotlin.serialization)
+    id("com.michaelflisar.buildlogic")
 }
+
+// get build logic plugin
+val buildLogicPlugin = project.plugins.getPlugin(BuildLogicPlugin::class.java)
 
 // -------------------
 // Informations
 // -------------------
 
-val description = "provides a storage implementation based on a simple key-value text file"
+val library = LibraryMetaData.fromGradleProperties(project)
+val module = ModuleMetaData(
+    artifactId = "storage-keyvalue",
+    androidNamespace = "com.michaelflisar.kotpreferences.keyvalue",
+    description = "provides a storage implementation based on a simple key-value text file"
+)
 
-// Module
-val artifactId = "storage-keyvalue"
-
-// Library
-val libraryName = "KotPreferences"
-val libraryDescription = "KotPreferences - $artifactId module - $description"
-val groupID = "io.github.mflisar.kotpreferences"
-val release = 2021
-val github = "https://github.com/MFlisar/KotPreferences"
-val license = "Apache License 2.0"
-val licenseUrl = "$github/blob/main/LICENSE"
+val buildTargets = Targets(
+    // mobile
+    android = true,
+    iOS = true,
+    // desktop
+    windows = true,
+    macOS = true,
+    // web
+    wasm = true
+)
 
 // -------------------
 // Variables for Documentation Generator
@@ -48,53 +56,10 @@ val licenseUrl = "$github/blob/main/LICENSE"
 kotlin {
 
     //-------------
-    // Mobile
+    // Targets
     //-------------
 
-    // Android
-    androidTarget {
-        publishLibraryVariants("release")
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-
-    // iOS
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    //-------------
-    // Desktop
-    //-------------
-
-    // Windows
-    jvm()
-
-    // macOS
-    macosX64()
-    macosArm64()
-
-    // Linux
-    // linuxX64()
-    // linuxArm64()
-
-    //-------------
-    // Web
-    //-------------
-
-    // WASM
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        nodejs()
-    }
-
-    //-------------
-    // JavaScript
-    //-------------
-
-    // js()
-    // js(IR)
+    buildLogicPlugin.setupTargets(buildTargets)
 
     // -------
     // Sources
@@ -120,23 +85,23 @@ kotlin {
         // target sources
         // ---------------------
 
-        val groupedTargets = mapOf(
-            "android" to listOf("android"),
-            "ios" to listOf("iosX64", "iosArm64", "iosSimulatorArm64"),
-            "jvm" to listOf("jvm"),
-            "macos" to listOf("macosX64", "macosArm64"),
-            "wasm" to listOf("wasmJs")
-        )
+        // ---------------------
+        // target sources
+        // ---------------------
 
-        groupedTargets.forEach { group, targets ->
-            val groupMain = sourceSets.maybeCreate("${group}Main")
-
-            when (group) {
-                "android", "jvm", "ios", "macos" -> {
+        buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
+            when (target) {
+                Target.ANDROID, Target.JVM, Target.IOS, Target.MACOS -> {
                     groupMain.dependsOn(featureFile)
                 }
-                "wasm" -> {
+
+                Target.WASM_JS -> {
                     // -
+                }
+
+                Target.LINUX,
+                Target.JS -> {
+                    // not enabled
                 }
             }
         }
@@ -166,66 +131,14 @@ kotlin {
     }
 }
 
+// -------------------
+// Configurations
+// -------------------
+
+// android configuration
 android {
-    namespace = "com.michaelflisar.kotpreferences.keyvalue"
-
-    compileSdk = app.versions.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = app.versions.minSdk.get().toInt()
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
+    buildLogicPlugin.setupAndroid(module, app.versions.compileSdk, app.versions.minSdk)
 }
 
-mavenPublishing {
-
-    configure(
-        KotlinMultiplatform(
-            javadocJar = JavadocJar.Dokka("dokkaHtml"),
-            sourcesJar = true
-        )
-    )
-
-    coordinates(
-        groupId = groupID,
-        artifactId = artifactId,
-        version = System.getenv("TAG")
-    )
-
-    pom {
-        name.set(libraryName)
-        description.set(libraryDescription)
-        inceptionYear.set("$release")
-        url.set(github)
-
-        licenses {
-            license {
-                name.set(license)
-                url.set(licenseUrl)
-            }
-        }
-
-        developers {
-            developer {
-                id.set("mflisar")
-                name.set("Michael Flisar")
-                email.set("mflisar.development@gmail.com")
-            }
-        }
-
-        scm {
-            url.set(github)
-        }
-    }
-
-    // Configure publishing to Maven Central
-    val autoReleaseOnMavenCentral = providers.gradleProperty("autoReleaseOnMavenCentral").get().toBoolean()
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
-
-    // Enable GPG signing for all publications
-    signAllPublications()
-}
+// maven publish configuration
+buildLogicPlugin.setupMavenPublish(library, module)

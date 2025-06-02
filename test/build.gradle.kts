@@ -5,23 +5,7 @@ plugins {
 kotlin {
 
     // Java
-    jvm {
-    }
-
-    // Android
-    //androidTarget {
-    //    @OptIn(ExperimentalKotlinGradlePluginApi::class)
-    //    compilerOptions {
-    //        jvmTarget.set(JvmTarget.JVM_17)
-    //    }
-    //}
-
-    // iOS
-    //macosX64()
-    //macosArm64()
-    //iosArm64()
-    //iosX64()
-    //iosSimulatorArm64()
+    jvm()
 
     // -------
     // Sources
@@ -41,7 +25,6 @@ kotlin {
             implementation(project(":kotpreferences:core"))
             implementation(project(":kotpreferences:modules:storage:datastore"))
             implementation(project(":kotpreferences:modules:storage:keyvalue"))
-            //implementation(project(":KotPreferences:Modules:Compose"))
 
         }
     }

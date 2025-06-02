@@ -20,9 +20,9 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 ): State<T?> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
-        lifecycle,
-        minActiveState,
-        context
+        lifecycle = lifecycle,
+        minActiveState = minActiveState,
+        context = context
     )
 }
 
@@ -35,9 +35,9 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 ): State<T?> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
-        lifecycleOwner,
-        minActiveState,
-        context
+        lifecycleOwner = lifecycleOwner,
+        minActiveState = minActiveState,
+        context = context
     )
 }
 
@@ -50,9 +50,9 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
-        lifecycle,
-        minActiveState,
-        context
+        lifecycle = lifecycle,
+        minActiveState = minActiveState,
+        context = context
     )
 }
 
@@ -65,8 +65,8 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 ): State<T> {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
-        lifecycleOwner,
-        minActiveState,
-        context
+        lifecycleOwner = lifecycleOwner,
+        minActiveState = minActiveState,
+        context = context
     )
 }

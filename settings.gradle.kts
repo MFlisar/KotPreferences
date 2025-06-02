@@ -5,6 +5,8 @@ pluginManagement {
         mavenCentral()
         google()
     }
+
+    includeBuild("build-logic")
 }
 
 dependencyResolutionManagement {
@@ -68,6 +70,8 @@ project(":kotpreferences:modules:encryption:aes").projectDir = file("library/mod
 // --------------
 
 include(":test")
-include(":demo:android")
-include(":demo:windows")
-include(":demo:web")
+
+include(":demo:shared")
+include(":demo:app:android")
+include(":demo:app:windows")
+include(":demo:app:web")
