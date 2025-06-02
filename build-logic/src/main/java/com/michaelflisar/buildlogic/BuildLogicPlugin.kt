@@ -41,7 +41,7 @@ class BuildLogicPlugin : Plugin<Project> {
                 )
             )
             coordinates(
-                groupId = library.groupID,
+                groupId = library.groupId,
                 artifactId = module.artifactId,
                 version = System.getenv("TAG")
             )
@@ -79,7 +79,9 @@ class BuildLogicPlugin : Plugin<Project> {
             publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
 
             // Enable GPG signing for all publications
-            signAllPublications()
+            if (System.getenv("CI")?.toBoolean() == true) {
+                signAllPublications()
+            }
         }
     }
 
