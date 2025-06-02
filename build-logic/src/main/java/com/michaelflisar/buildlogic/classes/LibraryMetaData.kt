@@ -8,7 +8,7 @@ class LibraryMetaData(
     val release: Int,
     val github: String,
     val license: String,
-) {
+) { 
     companion object {
         fun fromGradleProperties(
             project: Project
