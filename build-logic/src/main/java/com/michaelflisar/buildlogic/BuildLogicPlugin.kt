@@ -1,89 +1,23 @@
 package com.michaelflisar.buildlogic
 
 import com.android.build.gradle.LibraryExtension
+import com.michaelflisar.buildlogic.classes.LibraryMetaData
+import com.michaelflisar.buildlogic.classes.ModuleMetaData
+import com.michaelflisar.buildlogic.classes.Targets
 import com.vanniktech.maven.publish.JavadocJar
 import com.vanniktech.maven.publish.KotlinMultiplatform
 import com.vanniktech.maven.publish.MavenPublishBaseExtension
 import com.vanniktech.maven.publish.SonatypeHost
 import org.gradle.api.JavaVersion
-import org.gradle.api.NamedDomainObjectContainer
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
-import org.jetbrains.kotlin.gradle.plugin.KotlinSourceSet
 
-class ModuleMetaData(
-    // module
-    val artifactId: String,
-    val androidNamespace: String,
-    // module
-    val library: String,
-    val description: String,
-    val groupID: String,
-    val release: Int,
-    val github: String,
-    val license: String,
-) {
-    val libraryDescription = "$library - $artifactId module - $description"
-    val licenseUrl = "$github/blob/main/LICENSE"
-}
-
-enum class Target(
-    val targetName: String,
-    val targets: List<String>,
-) {
-    ANDROID("android", listOf("android")),
-    IOS("ios", listOf("iosX64", "iosArm64", "iosSimulatorArm64")),
-    JVM("jvm", listOf("jvm")),
-    MACOS("macos", listOf("macosX64", "macosArm64")),
-    LINUX("linux", listOf("linuxX64", "linuxArm64")),
-    WASM_JS("wasmJs", listOf("wasmJs")),
-    JS("js", listOf("js", "js(IR)"))
-    ;
-
-    val nameMain = "${targetName}Main"
-}
-
-class Targets(
-    val android: Boolean = false,
-    val iOS: Boolean = false,
-    val windows: Boolean = false,
-    val linux: Boolean = false,
-    val macOS: Boolean = false,
-    val wasm: Boolean = false,
-    val js: Boolean = false,
-) {
-    val enabledTargets = Target.values()
-        .filter {
-            when (it) {
-                Target.ANDROID -> android
-                Target.IOS -> iOS
-                Target.JVM -> windows
-                Target.MACOS -> macOS
-                Target.LINUX -> linux
-                Target.WASM_JS -> wasm
-                Target.JS -> js
-            }
-        }
-
-    fun updateSourceSetDependencies(
-        sourceSets: NamedDomainObjectContainer<KotlinSourceSet>,
-        apply: (groupMain: KotlinSourceSet, target: Target) -> Unit,
-    ) {
-        enabledTargets
-            .forEach { target ->
-                val groupMain = sourceSets.maybeCreate(target.nameMain)
-                apply(groupMain, target)
-                target.targets.forEach {
-                    sourceSets.getByName("${it}Main").dependsOn(groupMain)
-                }
-            }
-    }
-}
-
+private val JAVA_VERSION = JavaVersion.VERSION_17
+private val JAVA_TARGET = JvmTarget.JVM_17
 
 class BuildLogicPlugin : Plugin<Project> {
 
@@ -91,10 +25,14 @@ class BuildLogicPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         this.project = project
-        project.plugins.apply("com.vanniktech.maven.publish.base")
+        //project.plugins.apply("com.vanniktech.maven.publish.base")
     }
 
-    fun setupMavenPublish(meta: ModuleMetaData, autoPublishReleases: Boolean = true) {
+    fun setupMavenPublish(
+        library: LibraryMetaData,
+        module: ModuleMetaData,
+        autoPublishReleases: Boolean = true
+    ) {
         project.extensions.configure(MavenPublishBaseExtension::class.java) {
             configure(
                 KotlinMultiplatform(
@@ -103,21 +41,21 @@ class BuildLogicPlugin : Plugin<Project> {
                 )
             )
             coordinates(
-                groupId = meta.groupID,
-                artifactId = meta.artifactId,
+                groupId = library.groupId,
+                artifactId = module.artifactId,
                 version = System.getenv("TAG")
             )
 
             pom {
-                name.set(meta.library)
-                description.set(meta.libraryDescription)
-                inceptionYear.set("${meta.release}")
-                url.set(meta.github)
+                name.set(library.library)
+                description.set(module.libraryDescription(library))
+                inceptionYear.set("${library.release}")
+                url.set(library.github)
 
                 licenses {
                     license {
-                        name.set(meta.license)
-                        url.set(meta.licenseUrl)
+                        name.set(library.license)
+                        url.set(module.licenseUrl(library))
                     }
                 }
 
@@ -130,7 +68,7 @@ class BuildLogicPlugin : Plugin<Project> {
                 }
 
                 scm {
-                    url.set(meta.github)
+                    url.set(library.github)
                 }
             }
 
@@ -141,7 +79,9 @@ class BuildLogicPlugin : Plugin<Project> {
             publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
 
             // Enable GPG signing for all publications
-            signAllPublications()
+            if (System.getenv("CI")?.toBoolean() == true) {
+                signAllPublications()
+            }
         }
     }
 
@@ -155,7 +95,7 @@ class BuildLogicPlugin : Plugin<Project> {
                 androidTarget {
                     publishLibraryVariants("release")
                     compilerOptions {
-                        jvmTarget.set(JvmTarget.JVM_17)
+                        jvmTarget.set(JAVA_TARGET)
                     }
                 }
             }
@@ -201,8 +141,16 @@ class BuildLogicPlugin : Plugin<Project> {
     }
 
     fun setupAndroid(meta: ModuleMetaData, compileSdk: Provider<String>, minSdk: Provider<String>) {
+        setupAndroid(meta.androidNamespace, compileSdk, minSdk)
+    }
+
+    fun setupAndroid(
+        androidNamespace: String,
+        compileSdk: Provider<String>,
+        minSdk: Provider<String>
+    ) {
         project.extensions.configure(LibraryExtension::class.java) {
-            namespace = meta.androidNamespace
+            namespace = androidNamespace
 
             this.compileSdk = compileSdk.get().toInt()
 
@@ -211,8 +159,8 @@ class BuildLogicPlugin : Plugin<Project> {
             }
 
             compileOptions {
-                sourceCompatibility = JavaVersion.VERSION_17
-                targetCompatibility = JavaVersion.VERSION_17
+                sourceCompatibility = JAVA_VERSION
+                targetCompatibility = JAVA_VERSION
             }
         }
     }

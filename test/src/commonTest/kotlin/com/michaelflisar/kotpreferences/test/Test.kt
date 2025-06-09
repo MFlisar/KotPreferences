@@ -39,6 +39,8 @@ class Test {
         val prefsDataStore = TestPreferences(dataStoreStorage)
         val prefsKeyValue = TestPreferences(keyValueStorage)
 
+        println("appFolder = $appFolder")
+
         listOf(prefsDataStore, prefsKeyValue).forEach { prefs ->
 
             prefs.int.update(2)

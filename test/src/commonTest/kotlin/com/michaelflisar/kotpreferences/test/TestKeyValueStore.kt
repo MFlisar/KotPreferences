@@ -105,7 +105,7 @@ class TestKeyValueStore {
         separator: String = "=",
     ): KeyValueStorage {
         val folder = File(System.getProperty("user.dir"))
-        val fileName = "test.txt"
+        val fileName = "test-key-value-store.txt"
         val file = File(folder, fileName)
         if (file.exists())
             file.delete()

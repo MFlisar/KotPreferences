@@ -1,7 +1,8 @@
 import com.michaelflisar.buildlogic.BuildLogicPlugin
-import com.michaelflisar.buildlogic.ModuleMetaData
-import com.michaelflisar.buildlogic.Target
-import com.michaelflisar.buildlogic.Targets
+import com.michaelflisar.buildlogic.classes.LibraryMetaData
+import com.michaelflisar.buildlogic.classes.ModuleMetaData
+import com.michaelflisar.buildlogic.classes.Target
+import com.michaelflisar.buildlogic.classes.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -18,17 +19,11 @@ val buildLogicPlugin = project.plugins.getPlugin(BuildLogicPlugin::class.java)
 // Informations
 // -------------------
 
-val meta = ModuleMetaData(
-    // module
+val library = LibraryMetaData.fromGradleProperties(project)
+val module = ModuleMetaData(
     artifactId = "core",
     androidNamespace = "com.michaelflisar.kotpreferences.core",
-    // library
-    library = "KotPreferences",
     description = "provides delegate based preferences",
-    groupID = "io.github.mflisar.kotpreferences",
-    release = 2021,
-    github = "https://github.com/MFlisar/KotPreferences",
-    license = "Apache License 2.0"
 )
 
 val buildTargets = Targets(
@@ -159,8 +154,8 @@ kotlin {
 
 // android configuration
 android {
-    buildLogicPlugin.setupAndroid(meta, app.versions.compileSdk, app.versions.minSdk)
+    buildLogicPlugin.setupAndroid(module, app.versions.compileSdk, app.versions.minSdk)
 }
 
 // maven publish configuration
-buildLogicPlugin.setupMavenPublish(meta = meta)
+buildLogicPlugin.setupMavenPublish(library, module)

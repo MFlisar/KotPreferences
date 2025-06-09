@@ -1,2 +1,6 @@
-username=admin
 theme=dark
+username=admin
+intSet=[]
+nullableInt=5
+stringSet=[]
+int=5

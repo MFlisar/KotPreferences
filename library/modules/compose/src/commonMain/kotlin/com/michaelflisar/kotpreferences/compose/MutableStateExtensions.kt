@@ -55,11 +55,11 @@ inline fun <reified T, reified X> StorageSetting<T>.asMutableState(
             state.value
         }.drop(1).collect {
             @OptIn(InternalApi::class)
-            withContext(StorageContext) {
+            (withContext(StorageContext) {
                 if (it is X) {
                     update(unmapper(it))
                 }
-            }
+            })
         }
     }
     LaunchedEffect(Unit) {
@@ -71,10 +71,10 @@ inline fun <reified T, reified X> StorageSetting<T>.asMutableState(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableState3] */
+/* --8<-- [start: asMutableStateNotNull1] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
-        /* --8<-- [end: asMutableState3] */ {
+        /* --8<-- [end: asMutableStateNotNull1] */ {
     val state = remember { mutableStateOf(getValueNotNull()) }
     LaunchedEffect(Unit) {
         snapshotFlow {
@@ -96,22 +96,22 @@ fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableState4] */
+/* --8<-- [start: asMutableStateNotNull2] */
 @Composable
 fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X>
-        /* --8<-- [end: asMutableState4] */ {
+        /* --8<-- [end: asMutableStateNotNull2] */ {
     val state = remember { mutableStateOf(mapper(getValueNotNull())) }
     LaunchedEffect(Unit) {
         snapshotFlow {
             state.value
         }.drop(1).collect {
             @OptIn(InternalApi::class)
-            withContext(StorageContext) {
+            (withContext(StorageContext) {
                 update(unmapper(it))
-            }
+            })
         }
     }
     LaunchedEffect(Unit) {

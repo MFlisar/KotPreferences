@@ -1,32 +1,40 @@
-import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.JavadocJar
+import com.michaelflisar.buildlogic.BuildLogicPlugin
+import com.michaelflisar.buildlogic.classes.LibraryMetaData
+import com.michaelflisar.buildlogic.classes.ModuleMetaData
+import com.michaelflisar.buildlogic.classes.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
+    id("com.michaelflisar.buildlogic")
 }
+
+// get build logic plugin
+val buildLogicPlugin = project.plugins.getPlugin(BuildLogicPlugin::class.java)
 
 // -------------------
 // Informations
 // -------------------
 
-val description = "provides AES based encryption"
+val library = LibraryMetaData.fromGradleProperties(project)
+val module = ModuleMetaData(
+    artifactId = "encryption-aes",
+    androidNamespace = "com.michaelflisar.kotpreferences.encryption.aes",
+    description = "provides AES based encryption"
+)
 
-// Module
-val artifactId = "encryption-aes"
-
-// Library
-val libraryName = "KotPreferences"
-val libraryDescription = "KotPreferences - $artifactId module - $description"
-val groupID = "io.github.mflisar.kotpreferences"
-val release = 2021
-val github = "https://github.com/MFlisar/KotPreferences"
-val license = "Apache License 2.0"
-val licenseUrl = "$github/blob/main/LICENSE"
+val buildTargets = Targets(
+    // mobile
+    android = true,
+    //iOS = true,
+    // desktop
+    //windows = true,
+    //macOS = true,
+    // web
+    //wasm = true
+)
 
 // -------------------
 // Variables for Documentation Generator
@@ -45,23 +53,11 @@ val licenseUrl = "$github/blob/main/LICENSE"
 
 kotlin {
 
-    // Java
-    // jvm()
+    //-------------
+    // Targets
+    //-------------
 
-    // Android
-    androidTarget {
-        publishLibraryVariants("release")
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-
-    // iOS
-    // macosX64()
-    // macosArm64()
-    // iosArm64()
-    // iosX64()
-    // iosSimulatorArm64()
+    buildLogicPlugin.setupTargets(buildTargets)
 
     // -------
     // Sources
@@ -77,67 +73,14 @@ kotlin {
     }
 }
 
+// -------------------
+// Configurations
+// -------------------
+
+// android configuration
 android {
-    namespace = "com.michaelflisar.kotpreferences.encryption.aes"
-
-    compileSdk = app.versions.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = app.versions.minSdk.get().toInt()
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
+    buildLogicPlugin.setupAndroid(module, app.versions.compileSdk, app.versions.minSdk)
 }
 
-mavenPublishing {
-
-    configure(
-        KotlinMultiplatform(
-            javadocJar = JavadocJar.Dokka("dokkaHtml"),
-            sourcesJar = true
-        )
-    )
-
-    coordinates(
-        groupId = groupID,
-        artifactId = artifactId,
-        version = System.getenv("TAG")
-    )
-
-    pom {
-        name.set(libraryName)
-        description.set(libraryDescription)
-        inceptionYear.set("$release")
-        url.set(github)
-
-        licenses {
-            license {
-                name.set(license)
-                url.set(licenseUrl)
-            }
-        }
-
-        developers {
-            developer {
-                id.set("mflisar")
-                name.set("Michael Flisar")
-                email.set("mflisar.development@gmail.com")
-            }
-        }
-
-        scm {
-            url.set(github)
-        }
-    }
-
-    // Configure publishing to Maven Central
-    val tag = System.getenv("TAG").orEmpty() // is set by the github action workflow
-    val autoReleaseOnMavenCentral = tag.contains("-") // debug, alpha and test builds end like "-debug", "-alpha", "-test" and should not be released automatically
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
-
-    // Enable GPG signing for all publications
-    signAllPublications()
-}
+// maven publish configuration
+buildLogicPlugin.setupMavenPublish(library, module)

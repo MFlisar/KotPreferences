@@ -2,29 +2,29 @@
 icon: material/puzzle
 ---
 
-This module is placed inside the `extension-compose` and offers some helpful compose extensions for the `Storage` class.
+This module is placed inside the `extension-compose` artifact and offers some helpful compose extensions for the `Storage` class.
 
-#### `collectAsState`
+#### `collectAsState*` functions
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsState1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsState2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState2"
 ```
 
 #### `collectAsStateNotNull`
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsStateNotNull1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsStateNotNull1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsStateNotNull2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsStateNotNull2"
 ```
 
-#### `asMutableState`
+#### `asMutableState*` functions
 
 ```kotlin
 --8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState1"
@@ -35,19 +35,27 @@ This module is placed inside the `extension-compose` and offers some helpful com
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState3"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableStateNotNull1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState4"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableStateNotNull2"
 ```
 
-#### `asStateFlow`
+#### `asStateFlow*` functions
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateFlowExtensions.kt:asStateFlow1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlow1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateFlowExtensions.kt:asStateFlow2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlow1"
+```
+
+```kotlin
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlowNotNull1"
+```
+
+```kotlin
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlowNotNull2"
 ```
