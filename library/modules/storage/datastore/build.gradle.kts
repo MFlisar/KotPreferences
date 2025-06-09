@@ -140,7 +140,8 @@ mavenPublishing {
     }
 
     // Configure publishing to Maven Central
-    val autoReleaseOnMavenCentral = providers.gradleProperty("autoReleaseOnMavenCentral").get().toBoolean()
+    val tag = System.getenv("TAG").orEmpty() // is set by the github action workflow
+    val autoReleaseOnMavenCentral = tag.contains("-") // debug, alpha and test builds end like "-debug", "-alpha", "-test" and should not be released automatically
     publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
 
     // Enable GPG signing for all publications

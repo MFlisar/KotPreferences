@@ -7,29 +7,47 @@ This module is placed inside the `extension-compose` and offers some helpful com
 #### `collectAsState`
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/Extensions.kt:collectAsState1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsState1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/Extensions.kt:collectAsState2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsState2"
 ```
 
 #### `collectAsStateNotNull`
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/Extensions.kt:collectAsStateNotNull1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsStateNotNull1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/Extensions.kt:collectAsStateNotNull2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateExtensions.kt:collectAsStateNotNull2"
 ```
 
 #### `asMutableState`
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/Extensions.kt:asMutableState1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/Extensions.kt:asMutableState2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState2"
+```
+
+```kotlin
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState3"
+```
+
+```kotlin
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState4"
+```
+
+#### `asStateFlow`
+
+```kotlin
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateFlowExtensions.kt:asStateFlow1"
+```
+
+```kotlin
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateFlowExtensions.kt:asStateFlow2"
 ```

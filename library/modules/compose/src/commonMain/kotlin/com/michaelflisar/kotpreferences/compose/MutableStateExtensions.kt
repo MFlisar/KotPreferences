@@ -3,8 +3,6 @@ package com.michaelflisar.kotpreferences.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
@@ -14,54 +12,13 @@ import com.michaelflisar.kotpreferences.core.getValueNotNull
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import com.michaelflisar.kotpreferences.core.tryGetValueNotNull
 import kotlinx.coroutines.flow.drop
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
-
-/* --8<-- [start: collectAsState1] */
-@Composable
-fun <T> StorageSetting<T>.collectAsState(
-    initialValue: T? = getCachedValue(),
-): State<T?>
-/* --8<-- [end: collectAsState1] */ {
-    return flow.collectAsState(initial = initialValue)
-}
-
-/* --8<-- [start: collectAsState2] */
-@Composable
-fun <T, X> StorageSetting<T>.collectAsState(
-    initialValue: T? = getCachedValue(),
-    mapper: (T) -> X,
-): State<X?>
-/* --8<-- [end: collectAsState2] */ {
-    return flow.map { mapper(it) }.collectAsState(initial = initialValue?.let { mapper(it) })
-}
-
-@OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateNotNull1] */
-@Composable
-fun <T> StorageSetting<T>.collectAsStateNotNull(
-    initialValue: T = getValueNotNull(),
-): State<T>
-/* --8<-- [end: collectAsStateNotNull1] */ {
-    return flow.collectAsState(initial = initialValue)
-}
-
-@OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateNotNull2] */
-@Composable
-fun <T, X> StorageSetting<T>.collectAsStateNotNull(
-    initialValue: T = getCachedValue() ?: getValueNotNull(),
-    mapper: (T) -> X,
-): State<X>
-/* --8<-- [end: collectAsStateNotNull2] */ {
-    return flow.map { mapper(it) }.collectAsState(initial = mapper(initialValue))
-}
 
 @OptIn(InternalApi::class)
 /* --8<-- [start: asMutableState1] */
 @Composable
 inline fun <reified T> StorageSetting<T>.asMutableState(): MutableState<T?>
-/* --8<-- [end: asMutableState1] */ {
+        /* --8<-- [end: asMutableState1] */ {
     val state = remember { mutableStateOf(tryGetValueNotNull()) }
     LaunchedEffect(Unit) {
         snapshotFlow {
@@ -91,7 +48,7 @@ inline fun <reified T, reified X> StorageSetting<T>.asMutableState(
     crossinline mapper: (T) -> X,
     crossinline unmapper: (X) -> T,
 ): MutableState<X?>
-/* --8<-- [end: asMutableState2] */ {
+        /* --8<-- [end: asMutableState2] */ {
     val state = remember { mutableStateOf(tryGetValueNotNull()?.let(mapper)) }
     LaunchedEffect(Unit) {
         snapshotFlow {
@@ -117,7 +74,7 @@ inline fun <reified T, reified X> StorageSetting<T>.asMutableState(
 /* --8<-- [start: asMutableState3] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
-/* --8<-- [end: asMutableState3] */ {
+        /* --8<-- [end: asMutableState3] */ {
     val state = remember { mutableStateOf(getValueNotNull()) }
     LaunchedEffect(Unit) {
         snapshotFlow {
@@ -145,7 +102,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X>
- /* --8<-- [end: asMutableState4] */ {
+        /* --8<-- [end: asMutableState4] */ {
     val state = remember { mutableStateOf(mapper(getValueNotNull())) }
     LaunchedEffect(Unit) {
         snapshotFlow {

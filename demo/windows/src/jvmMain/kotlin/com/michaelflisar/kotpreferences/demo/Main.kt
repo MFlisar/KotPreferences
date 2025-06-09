@@ -53,9 +53,11 @@ fun main() = application {
             }
 
             Spacer(modifier = Modifier.height(16.dp))
+            Text("DataStore Demo", style = MaterialTheme.typography.h3)
             DataStoreDemo()
 
             Spacer(modifier = Modifier.height(16.dp))
+            Text("KeyValue Demo", style = MaterialTheme.typography.h3)
             KeyValueDemo()
 
         }
