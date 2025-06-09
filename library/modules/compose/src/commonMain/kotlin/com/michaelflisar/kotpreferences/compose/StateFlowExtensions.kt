@@ -47,7 +47,7 @@ fun <T> StorageSetting<T>.asStateFlowNotNull(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000),
     apply: (flow: Flow<T>) -> Flow<T> = { it }
-): StateFlow<T?>
+): StateFlow<T>
         /* --8<-- [end: asStateFlowNotNull1] */ {
     return apply(flow).stateIn(
         scope = scope,

@@ -17,7 +17,7 @@ import kotlinx.coroutines.withContext
 @OptIn(InternalApi::class)
 /* --8<-- [start: asMutableState1] */
 @Composable
-inline fun <reified T> StorageSetting<T>.asMutableState(): MutableState<T?>
+fun <T> StorageSetting<T>.asMutableState(): MutableState<T?>
         /* --8<-- [end: asMutableState1] */ {
     val state = remember { mutableStateOf(tryGetValueNotNull()) }
     LaunchedEffect(Unit) {
@@ -27,9 +27,9 @@ inline fun <reified T> StorageSetting<T>.asMutableState(): MutableState<T?>
             .drop(1)
             .collect {
                 withContext(StorageContext) {
-                    if (it is T) {
-                        update(it)
-                    }
+                    //if (it is T) {
+                        update(it as T)
+                    //}
                 }
             }
     }
@@ -44,22 +44,24 @@ inline fun <reified T> StorageSetting<T>.asMutableState(): MutableState<T?>
 @OptIn(InternalApi::class)
 /* --8<-- [start: asMutableState2] */
 @Composable
-inline fun <reified T, reified X> StorageSetting<T>.asMutableState(
-    crossinline mapper: (T) -> X,
-    crossinline unmapper: (X) -> T,
+fun <T, X> StorageSetting<T>.asMutableState(
+    mapper: (T) -> X,
+    unmapper: (X) -> T,
 ): MutableState<X?>
         /* --8<-- [end: asMutableState2] */ {
     val state = remember { mutableStateOf(tryGetValueNotNull()?.let(mapper)) }
     LaunchedEffect(Unit) {
         snapshotFlow {
             state.value
-        }.drop(1).collect {
+        }
+            .drop(1)
+            .collect {
             @OptIn(InternalApi::class)
-            (withContext(StorageContext) {
-                if (it is X) {
-                    update(unmapper(it))
-                }
-            })
+            withContext(StorageContext) {
+                //if (it is X) {
+                    update(unmapper(it as X))
+                //}
+            }
         }
     }
     LaunchedEffect(Unit) {
@@ -109,9 +111,9 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
             state.value
         }.drop(1).collect {
             @OptIn(InternalApi::class)
-            (withContext(StorageContext) {
+            withContext(StorageContext) {
                 update(unmapper(it))
-            })
+            }
         }
     }
     LaunchedEffect(Unit) {

@@ -1,5 +1,11 @@
 package com.michaelflisar.kotpreferences.test
 
+import androidx.compose.foundation.text.BasicText
+import androidx.compose.ui.test.InternalTestApi
+import androidx.compose.ui.test.junit4.DesktopComposeTestRule
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithText
+import com.michaelflisar.kotpreferences.compose.asMutableState
 import com.michaelflisar.kotpreferences.core.SettingsModel
 import com.michaelflisar.kotpreferences.core.interfaces.Storage
 import com.michaelflisar.kotpreferences.storage.datastore.DataStoreStorage
@@ -7,6 +13,7 @@ import com.michaelflisar.kotpreferences.storage.datastore.create
 import com.michaelflisar.kotpreferences.storage.keyvalue.KeyValueStorage
 import com.michaelflisar.kotpreferences.storage.keyvalue.create
 import kotlinx.coroutines.test.runTest
+import org.junit.Rule
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -22,6 +29,10 @@ class Test {
     private val keyValueStorage = KeyValueStorage.create(
         folder = appFolder,
         fileName = "test.txt"
+    )
+    private val storageCompose = DataStoreStorage.create(
+        folder = appFolder,
+        name = "compose_test_storage"
     )
 
     class TestPreferences(storage: Storage) : SettingsModel(storage) {
@@ -67,6 +78,30 @@ class Test {
 
         }
 
+    }
+
+
+    @get:Rule
+    val composeTestRule = createComposeRule()
+
+    @Test
+    fun testGreetingComposable() = runTest {
+        val prefsDataStore = TestPreferences(storageCompose)
+        storageCompose.clear()
+
+        composeTestRule.setContent {
+            val int = prefsDataStore.int.asMutableState()
+            BasicText("int = ${int.value}")
+            val nullableInt = prefsDataStore.nullableInt.asMutableState()
+            BasicText("nullableInt = ${nullableInt.value}")
+        }
+
+        composeTestRule
+            .onNodeWithText("int = 0")
+            .assertExists()
+        composeTestRule
+            .onNodeWithText("nullableInt = null")
+            .assertExists()
     }
 
 }
