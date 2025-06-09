@@ -45,17 +45,17 @@ This module is placed inside the `extension-compose` artifact and offers some he
 #### `asStateFlow*` functions
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlow1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlow1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlow1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlow1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlowNotNull1"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlowNotNull1"
 ```
 
 ```kotlin
---8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:asStateFlowNotNull2"
+--8<-- "../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlowNotNull2"
 ```
