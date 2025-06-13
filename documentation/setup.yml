@@ -81,7 +81,7 @@ modules:
     dependencies: []
   - relativePath: library\modules\compose
     artifact-id: extension-compose
-    group: extension
+    group: extensions
     description: provides composable extensions
     optional: true
     platforms-info: ""
@@ -102,7 +102,7 @@ modules:
     dependencies: []
   - relativePath: library\modules\encryption-aes
     artifact-id: encryption-aes
-    group: encryption
+    group: encryptions
     description: provides AES based encryption
     optional: true
     platforms-info: "(1)"
