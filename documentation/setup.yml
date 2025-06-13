@@ -27,7 +27,7 @@ library:
     name: Apache License 2.0
     link: https://github.com/MFlisar/KotPreferences/blob/main/LICENSE
   screenshots: []
-  aboutMe: true # set to true if you want to show the about me section on the homepage
+  about-me: true # set to true if you want to show the about me section on the homepage
 
 maven:
   group-id: io.github.mflisar.kotpreferences
