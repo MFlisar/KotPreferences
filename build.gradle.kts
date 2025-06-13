@@ -38,7 +38,7 @@ tasks.register("buildDocs") {
         // read env from build-mkdocs.yml
         val generatedDocsDir = project.findProperty("generatedDocsDir") as String? ?: "gen/docs"
         com.michaelflisar.kmptemplate.scripts.buildDocs(
-            relativePathDocsCustom = "documentation2/custom",
+            relativePathDocsCustom = "documentation/custom",
             relativePathGeneratedDocsOutput = generatedDocsDir,
             relativeModulesPath = "library",
             relativeDemosPath = "demo",
