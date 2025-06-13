@@ -1,5 +1,3 @@
-This library has following features:
-
 * declare preferences via **kotlin delegates**
 * listen to updates from preferences via `kotlin flows`
 * update dependencies via `suspend` functions
