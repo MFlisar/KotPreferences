@@ -1,5 +1,5 @@
-import com.michaelflisar.buildlogic.BuildLogicPlugin
-import com.michaelflisar.buildlogic.classes.Targets
+import com.michaelflisar.kmptemplate.BuildFilePlugin
+import com.michaelflisar.kmptemplate.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -7,11 +7,11 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.serialization)
-    id("com.michaelflisar.buildlogic")
+    alias(deps.plugins.kmp.template.gradle.plugin)
 }
 
 // get build logic plugin
-val buildLogicPlugin = project.plugins.getPlugin(BuildLogicPlugin::class.java)
+val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
 
 // targets
 val buildTargets = Targets(
@@ -37,7 +37,7 @@ kotlin {
     // Targets
     //-------------
 
-    buildLogicPlugin.setupTargets(buildTargets)
+    buildFilePlugin.setupTargets(buildTargets)
 
     // -------
     // Sources
@@ -73,5 +73,5 @@ kotlin {
 
 // android configuration
 android {
-    buildLogicPlugin.setupAndroid(androidNamespace, app.versions.compileSdk, app.versions.minSdk)
+    buildFilePlugin.setupAndroid(androidNamespace, app.versions.compileSdk, app.versions.minSdk)
 }

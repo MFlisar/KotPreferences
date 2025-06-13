@@ -1,8 +1,5 @@
-import com.vanniktech.maven.publish.JavadocJar
-import com.vanniktech.maven.publish.KotlinMultiplatform
-import com.vanniktech.maven.publish.SonatypeHost
-import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import com.michaelflisar.kmptemplate.BuildFilePlugin
+import com.michaelflisar.kmptemplate.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -10,36 +7,28 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
+    alias(deps.plugins.kmp.template.gradle.plugin)
 }
+
+// get build file plugin
+val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
 
 // -------------------
 // Informations
 // -------------------
 
-val description = "provides composable extensions"
+val androidNamespace = "com.michaelflisar.kotpreferences.compose"
 
-// Module
-val artifactId = "extension-compose"
-
-// Library
-val libraryName = "KotPreferences"
-val libraryDescription = "KotPreferences - $artifactId module - $description"
-val groupID = "io.github.mflisar.kotpreferences"
-val release = 2021
-val github = "https://github.com/MFlisar/KotPreferences"
-val license = "Apache License 2.0"
-val licenseUrl = "$github/blob/main/LICENSE"
-
-// -------------------
-// Variables for Documentation Generator
-// -------------------
-
-// # DEP is an optional arrays!
-
-// OPTIONAL = "true"                // defines if this module is optional or not
-// GROUP_ID = "extensions"             // defines the "grouping" in the documentation this module belongs to
-// #DEP = "deps.kotbilling|KotBilling|https://github.com/MFlisar/Kotbilling"
-// PLATFORM_INFO = ""               // defines a comment that will be shown in the documentation for this modules platform support
+val buildTargets = Targets(
+    // mobile
+    android = true,
+    iOS = true,
+    // desktop
+    windows = true,
+    macOS = true,
+    // web
+    wasm = true
+)
 
 // -------------------
 // Setup
@@ -48,96 +37,16 @@ val licenseUrl = "$github/blob/main/LICENSE"
 kotlin {
 
     //-------------
-    // Mobile
+    // Targets
     //-------------
 
-    // Android
-    androidTarget {
-        publishLibraryVariants("release")
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_17)
-        }
-    }
-
-    // iOS
-    iosX64()
-    iosArm64()
-    iosSimulatorArm64()
-
-    //-------------
-    // Desktop
-    //-------------
-
-    // Windows
-    jvm()
-
-    // macOS
-    macosX64()
-    macosArm64()
-
-    // Linux
-    // linuxX64()
-    // linuxArm64()
-
-    //-------------
-    // Web
-    //-------------
-
-    // WASM
-    @OptIn(ExperimentalWasmDsl::class)
-    wasmJs {
-        nodejs()
-    }
-
-    //-------------
-    // JavaScript
-    //-------------
-
-    // js()
-    // js(IR)
+    buildFilePlugin.setupTargets(buildTargets)
 
     // -------
     // Sources
     // -------
 
     sourceSets {
-
-        // ---------------------
-        // custom shared sources
-        // ---------------------
-
-        // all targets but wasm
-        val featureBlocking by creating {
-            dependsOn(commonMain.get())
-        }
-
-        // ---------------------
-        // target sources
-        // ---------------------
-
-        val groupedTargets = mapOf(
-            "android" to listOf("android"),
-            "ios" to listOf("iosX64", "iosArm64", "iosSimulatorArm64"),
-            "jvm" to listOf("jvm"),
-            "macos" to listOf("macosX64", "macosArm64"),
-            "wasmJs" to listOf("wasmJs")
-        )
-
-        groupedTargets.forEach { group, targets ->
-            val groupMain = sourceSets.maybeCreate("${group}Main")
-            when (group) {
-                "android", "jvm", "ios", "macos" -> {
-                    groupMain.dependsOn(featureBlocking)
-                }
-                "wasmJs" -> {
-                    // -
-                }
-            }
-            targets.forEach { target ->
-                sourceSets.getByName("${target}Main").dependsOn(groupMain)
-            }
-        }
-
 
         // ---------------------
         // dependencies
@@ -161,67 +70,14 @@ kotlin {
     }
 }
 
+// -------------------
+// Configurations
+// -------------------
+
+// android configuration
 android {
-    namespace = "com.michaelflisar.kotpreferences.compose"
-
-    compileSdk = app.versions.compileSdk.get().toInt()
-
-    defaultConfig {
-        minSdk = app.versions.minSdk.get().toInt()
-    }
-
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
-    }
+    buildFilePlugin.setupAndroid(androidNamespace, app.versions.compileSdk, app.versions.minSdk)
 }
 
-mavenPublishing {
-
-    configure(
-        KotlinMultiplatform(
-            javadocJar = JavadocJar.Dokka("dokkaHtml"),
-            sourcesJar = true
-        )
-    )
-
-    coordinates(
-        groupId = groupID,
-        artifactId = artifactId,
-        version = System.getenv("TAG")
-    )
-
-    pom {
-        name.set(libraryName)
-        description.set(libraryDescription)
-        inceptionYear.set("$release")
-        url.set(github)
-
-        licenses {
-            license {
-                name.set(license)
-                url.set(licenseUrl)
-            }
-        }
-
-        developers {
-            developer {
-                id.set("mflisar")
-                name.set("Michael Flisar")
-                email.set("mflisar.development@gmail.com")
-            }
-        }
-
-        scm {
-            url.set(github)
-        }
-    }
-
-    // Configure publishing to Maven Central
-    val tag = System.getenv("TAG").orEmpty() // is set by the github action workflow
-    val autoReleaseOnMavenCentral = tag.contains("-") // debug, alpha and test builds end like "-debug", "-alpha", "-test" and should not be released automatically
-    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL, autoReleaseOnMavenCentral)
-
-    // Enable GPG signing for all publications
-    signAllPublications()
-}
+// maven publish configuration
+buildFilePlugin.setupMavenPublish()

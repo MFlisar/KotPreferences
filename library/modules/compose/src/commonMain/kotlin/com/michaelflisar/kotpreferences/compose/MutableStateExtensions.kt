@@ -1,17 +1,15 @@
 package com.michaelflisar.kotpreferences.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.State
+import androidx.compose.runtime.rememberCoroutineScope
 import com.michaelflisar.kotpreferences.core.InternalApi
 import com.michaelflisar.kotpreferences.core.StorageContext
 import com.michaelflisar.kotpreferences.core.getValueNotNull
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import com.michaelflisar.kotpreferences.core.tryGetValueNotNull
-import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 @OptIn(InternalApi::class)
@@ -19,26 +17,12 @@ import kotlinx.coroutines.withContext
 @Composable
 fun <T> StorageSetting<T>.asMutableState(): MutableState<T?>
         /* --8<-- [end: asMutableState1] */ {
-    val state = remember { mutableStateOf(tryGetValueNotNull()) }
-    LaunchedEffect(Unit) {
-        snapshotFlow {
-            state.value
-        }
-            .drop(1)
-            .collect {
-                withContext(StorageContext) {
-                    //if (it is T) {
-                        update(it as T)
-                    //}
-                }
-            }
-    }
-    LaunchedEffect(Unit) {
-        flow.collect {
-            state.value = it
+    val state = collectAsState(tryGetValueNotNull())
+    return state.asMutableState {
+        withContext(StorageContext) {
+            update(it as T)
         }
     }
-    return state
 }
 
 @OptIn(InternalApi::class)
@@ -49,27 +33,13 @@ fun <T, X> StorageSetting<T>.asMutableState(
     unmapper: (X) -> T,
 ): MutableState<X?>
         /* --8<-- [end: asMutableState2] */ {
-    val state = remember { mutableStateOf(tryGetValueNotNull()?.let(mapper)) }
-    LaunchedEffect(Unit) {
-        snapshotFlow {
-            state.value
-        }
-            .drop(1)
-            .collect {
-            @OptIn(InternalApi::class)
-            withContext(StorageContext) {
-                //if (it is X) {
-                    update(unmapper(it as X))
-                //}
-            }
+
+    val state = collectAsState(tryGetValueNotNull(), mapper)
+    return state.asMutableState {
+        withContext(StorageContext) {
+            update(unmapper(it as X))
         }
     }
-    LaunchedEffect(Unit) {
-        flow.collect {
-            state.value = mapper(it)
-        }
-    }
-    return state
 }
 
 @OptIn(InternalApi::class)
@@ -77,24 +47,12 @@ fun <T, X> StorageSetting<T>.asMutableState(
 @Composable
 fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
         /* --8<-- [end: asMutableStateNotNull1] */ {
-    val state = remember { mutableStateOf(getValueNotNull()) }
-    LaunchedEffect(Unit) {
-        snapshotFlow {
-            state.value
-        }
-            .drop(1)
-            .collect {
-                withContext(StorageContext) {
-                    update(it)
-                }
-            }
-    }
-    LaunchedEffect(Unit) {
-        flow.collect {
-            state.value = it
+    val state = collectAsStateNotNull(getValueNotNull())
+    return state.asMutableState {
+        withContext(StorageContext) {
+            update(it)
         }
     }
-    return state
 }
 
 @OptIn(InternalApi::class)
@@ -105,21 +63,28 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
     unmapper: (X) -> T,
 ): MutableState<X>
         /* --8<-- [end: asMutableStateNotNull2] */ {
-    val state = remember { mutableStateOf(mapper(getValueNotNull())) }
-    LaunchedEffect(Unit) {
-        snapshotFlow {
-            state.value
-        }.drop(1).collect {
-            @OptIn(InternalApi::class)
-            withContext(StorageContext) {
-                update(unmapper(it))
+    val state = collectAsStateNotNull(getValueNotNull(), mapper)
+    return state.asMutableState {
+        withContext(StorageContext) {
+            update(unmapper(it))
+        }
+    }
+}
+
+@Composable
+private fun <T> State<T>.asMutableState(update: suspend (T) -> Unit): MutableState<T> {
+    val state = this
+    val coroutineScope = rememberCoroutineScope()
+    return object : MutableState<T> {
+        override var value: T
+            get() = state.value
+            set(newValue) {
+                coroutineScope.launch {
+                    update(newValue)
+                }
             }
-        }
+
+        override fun component1() = value
+        override fun component2() = { v: T -> value = v }
     }
-    LaunchedEffect(Unit) {
-        flow.collect {
-            state.value = mapper(it)
-        }
-    }
-    return state
 }

@@ -1,29 +1,22 @@
-import com.michaelflisar.buildlogic.BuildLogicPlugin
-import com.michaelflisar.buildlogic.classes.LibraryMetaData
-import com.michaelflisar.buildlogic.classes.ModuleMetaData
-import com.michaelflisar.buildlogic.classes.Targets
+import com.michaelflisar.kmptemplate.BuildFilePlugin
+import com.michaelflisar.kmptemplate.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
-    id("com.michaelflisar.buildlogic")
+    alias(deps.plugins.kmp.template.gradle.plugin)
 }
 
-// get build logic plugin
-val buildLogicPlugin = project.plugins.getPlugin(BuildLogicPlugin::class.java)
+// get build file plugin
+val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
 
 // -------------------
 // Informations
 // -------------------
 
-val library = LibraryMetaData.fromGradleProperties(project)
-val module = ModuleMetaData(
-    artifactId = "storage-datastore",
-    androidNamespace = "com.michaelflisar.kotpreferences.datastore",
-    description = "provides a storage implementation based on jetpack datastore"
-)
+val androidNamespace = "com.michaelflisar.kotpreferences.datastore"
 
 val buildTargets = Targets(
     // mobile
@@ -37,17 +30,6 @@ val buildTargets = Targets(
 )
 
 // -------------------
-// Variables for Documentation Generator
-// -------------------
-
-// # DEP is an optional arrays!
-
-// OPTIONAL = "true"                // defines if this module is optional or not
-// GROUP_ID = "storage"             // defines the "grouping" in the documentation this module belongs to
-// #DEP = "deps.kotbilling|KotBilling|https://github.com/MFlisar/Kotbilling"
-// PLATFORM_INFO = ""               // defines a comment that will be shown in the documentation for this modules platform support
-
-// -------------------
 // Setup
 // -------------------
 
@@ -57,7 +39,7 @@ kotlin {
     // Targets
     //-------------
 
-    buildLogicPlugin.setupTargets(buildTargets)
+    buildFilePlugin.setupTargets(buildTargets)
 
     // -------
     // Sources
@@ -85,8 +67,8 @@ kotlin {
 
 // android configuration
 android {
-    buildLogicPlugin.setupAndroid(module, app.versions.compileSdk, app.versions.minSdk)
+    buildFilePlugin.setupAndroid(androidNamespace, app.versions.compileSdk, app.versions.minSdk)
 }
 
 // maven publish configuration
-buildLogicPlugin.setupMavenPublish(library, module)
+buildFilePlugin.setupMavenPublish()

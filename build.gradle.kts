@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.gradle.maven.publish.plugin) apply false
+    alias(deps.plugins.kmp.template.gradle.plugin) apply false
 }
 
 // exclude all demo projects from CI builds
@@ -19,5 +20,31 @@ subprojects {
         tasks.configureEach {
             enabled = false
         }
+    }
+}
+
+// ------------------------
+// Build mkdocs
+// ------------------------
+
+buildscript {
+    dependencies {
+        classpath(deps.kmp.template.scripts)
+    }
+}
+
+tasks.register("buildDocs") {
+    doLast {
+        // read env from build-mkdocs.yml
+        val generatedDocsDir = project.findProperty("generatedDocsDir") as String? ?: "gen/docs"
+        com.michaelflisar.kmptemplate.scripts.buildDocs(
+            relativePathDocsCustom = "documentation2/custom",
+            relativePathGeneratedDocsOutput = generatedDocsDir,
+            relativeModulesPath = "library",
+            relativeDemosPath = "demo",
+            customOtherProjectsYamlUrl = "https://raw.githubusercontent.com/MFlisar/kmp-template/refs/heads/main/data/other-projects.yml"
+        )
+
+        println("Docs have been build!")
     }
 }

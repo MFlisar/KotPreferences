@@ -37,8 +37,3 @@ compose-material-icons-core = 	    { module = "org.jetbrains.compose.material:ma
 compose-material-icons-extended = 	{ module = "org.jetbrains.compose.material:material-icons-extended",    version.ref = "compose-icons" }
 
 compose-ui-test =                   { module = "org.jetbrains.compose.ui:ui-test-junit4",                   version.ref = "compose" }
-
-# for build-logic only
-android-build-tools =               { module = "com.android.tools.build:gradle",                            version.ref = "gradle" }
-kotlin-multiplatform =              { module = "org.jetbrains.kotlin:kotlin-gradle-plugin",                 version.ref = "kotlin" }
-gradle-maven-publish-plugin =       { module = "com.vanniktech:gradle-maven-publish-plugin",                version.ref = "gradle-maven-publish-plugin" }

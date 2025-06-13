@@ -1,0 +1,109 @@
+# ------------
+# General Setup
+# ------------
+
+# Developer
+developer:
+  name: Michael Flisar
+  mail: mflisar.development@gmail.com
+  maven-id: mflisar
+  social-github: https://github.com/MFlisar
+
+# Java
+java-version: 17
+
+# -----------
+# Project
+# -----------
+
+library:
+  name: KotPreferences
+  release: 2021
+  link-docs: https://mflisar.github.io/KotPreferences/
+  link-repo: https://github.com/MFlisar/KotPreferences/
+  repo-name: mflisar/KotPreferences # the label of the repo link on the mkdocs homepage at the top right
+  # TODO: autom. detecten?
+  license:
+    name: Apache License 2.0
+    link: https://github.com/MFlisar/KotPreferences/blob/main/LICENSE
+  screenshots: []
+
+maven:
+  group-id: io.github.mflisar.kotpreferences
+  primary-artifact-id: core # used to detect latest release version of the library (dynamically on the published homepage)
+
+# -----------
+# Module Groups
+# -----------
+
+# optional - remove it if you do not want to group your modules
+# each group has following properties:
+# - id...  the id - only needed to reference this group below inside the modules sections
+# - label... the label of the group - used in the docs tables
+# - gradle-comment... the comment on the gradle setup docs page for this group
+groups:
+  - id: core
+    label: Core
+    gradle-comment: core
+  - id: storage
+    label: Storage
+    gradle-comment: select a storage implementation
+  - id: extensions
+    label: Extensions
+    gradle-comment: optional extensions
+  - id: encryptions
+    label: Encryption
+    gradle-comment: optionally add additional encryption
+
+# -----------
+# Modules
+# -----------
+
+# REQUIRED! each module must define its meta data here!
+# each module has following properties:
+# relativePath... the relative path to the project root folder
+# artifact-id... the maven artifact id
+# group... the id of the group this module belongs to (defined above) [OPTIONAL]
+# platforms-info... a string that is displayed inside the docs in the "supported platforms" table in the info column [OPTIONAL]
+#                   IDEE: reference this info inside the parts/platform_comments.md
+# dependencies... a list of dependencies this module has (see below for details) [OPTIONAL]
+#    ... name: the name of the dependency - used in the docs tables
+#    ... versions-file... the toml file to load the version from (e.g. deps.versions.toml, ...)
+#    ... versions-key... the key for the versions table in the toml file
+#    ... link: a link to the dependency - used in the docs tables
+modules:
+  - relativePath: library\core
+    artifact-id: core
+    group: core
+    description: this is the core module of the library
+    optional: false
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\compose
+    artifact-id: extension-compose
+    group: extension
+    description: provides composable extensions
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\storage\datastore
+    artifact-id: storage-datastore
+    group: storage
+    description: provides a storage implementation based on jetpack datastore
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\storage\keyvalue
+    artifact-id: storage-keyvalue
+    group: storage
+    description: provides a storage implementation based on a simple key-value text file
+    optional: true
+    platforms-info: ""
+    dependencies: []
+  - relativePath: library\modules\encryption-aes
+    artifact-id: encryption-aes
+    group: encryption
+    description: provides AES based encryption
+    optional: true
+    platforms-info: "(1)"
+    dependencies: []
