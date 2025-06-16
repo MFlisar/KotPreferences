@@ -67,7 +67,13 @@ kotlin {
 
 // android configuration
 android {
-    buildFilePlugin.setupAndroid(androidNamespace, app.versions.compileSdk, app.versions.minSdk)
+    buildFilePlugin.setupAndroid(
+        androidNamespace = androidNamespace,
+        compileSdk = app.versions.compileSdk,
+        minSdk = app.versions.minSdk,
+        compose = false,
+        buildConfig = false
+    )
 }
 
 // maven publish configuration

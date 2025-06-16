@@ -41,7 +41,7 @@ fun <T> StorageSetting<T>.collectAsStateNotNull(
 /* --8<-- [start: collectAsStateNotNull2] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateNotNull(
-    initialValue: T = getCachedValue() ?: getValueNotNull(),
+    initialValue: T = getValueNotNull(),
     mapper: (T) -> X,
 ): State<X>
         /* --8<-- [end: collectAsStateNotNull2] */ {

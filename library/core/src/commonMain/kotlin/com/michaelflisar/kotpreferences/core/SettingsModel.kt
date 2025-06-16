@@ -296,7 +296,7 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any> anyStringPref(
-        converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T, String>,
+        converter: SettingsConverter<T, String>,
         default: T,
         key: String? = null,
         cache: Boolean = storage.cache
@@ -310,7 +310,7 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any?> nullableAnyStringPref(
-        converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T?, String>,
+        converter: SettingsConverter<T?, String>,
         default: T?,
         key: String? = null,
         cache: Boolean = storage.cache
@@ -324,7 +324,7 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any> anyIntPref(
-        converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T, Int>,
+        converter: SettingsConverter<T, Int>,
         default: T,
         key: String? = null,
         cache: Boolean = storage.cache
@@ -338,7 +338,7 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any?> nullableAnyIntPref(
-        converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T?, Int>,
+        converter: SettingsConverter<T?, Int>,
         default: T?,
         key: String? = null,
         cache: Boolean = storage.cache
@@ -352,7 +352,7 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any> anyLongPref(
-        converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T, Long>,
+        converter: SettingsConverter<T, Long>,
         default: T,
         key: String? = null,
         cache: Boolean = storage.cache
@@ -366,7 +366,7 @@ abstract class SettingsModel(
      * @param cache enable caching for blocking reads (only used if storage has caching enabled as well)
      */
     protected fun <T : Any?> nullableAnyLongPref(
-        converter: com.michaelflisar.kotpreferences.core.SettingsConverter<T?, Long>,
+        converter: SettingsConverter<T?, Long>,
         default: T?,
         key: String? = null,
         cache: Boolean = storage.cache
