@@ -63,6 +63,8 @@ kotlin {
             implementation(project(":kotpreferences:modules:storage:keyvalue"))
             implementation(project(":kotpreferences:modules:compose"))
 
+            implementation(deps.kmp.template.open.source.demo)
+
         }
     }
 }

@@ -29,7 +29,7 @@ subprojects {
 
 buildscript {
     dependencies {
-        classpath(deps.kmp.template.scripts)
+        classpath(deps.kmp.template.docs)
     }
 }
 

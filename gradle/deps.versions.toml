@@ -1,6 +1,6 @@
 [versions]
 
-kmp-template = "1.1.1"
+kmp-template = "1.2.2" # docu only
 
 [plugins]
 
@@ -8,4 +8,5 @@ kmp-template-gradle-plugin =        { id = "io.github.mflisar.kmp-template.build
 
 [libraries]
 
-kmp-template-scripts =              { module = "io.github.mflisar.kmp-template:scripts",                version.ref = "kmp-template" }
+kmp-template-docs =              { module = "io.github.mflisar.kmp-template:docs",                      version.ref = "kmp-template" }
+kmp-template-open-source-demo =  { module = "io.github.mflisar.kmp-template:open-source-demo",          version.ref = "kmp-template" }
