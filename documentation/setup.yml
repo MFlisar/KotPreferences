@@ -66,7 +66,7 @@ groups:
 # artifact-id... the maven artifact id
 # group... the id of the group this module belongs to (defined above) [OPTIONAL]
 # platforms-info... a string that is displayed inside the docs in the "supported platforms" table in the info column [OPTIONAL]
-#                   IDEE: reference this info inside the parts/platform_comments.md
+#                   IDEE: reference this info inside the parts/index_platform_comments.md
 # dependencies... a list of dependencies this module has (see below for details) [OPTIONAL]
 #    ... name: the name of the dependency - used in the docs tables
 #    ... versions-file... the toml file to load the version from (e.g. deps.versions.toml, ...)

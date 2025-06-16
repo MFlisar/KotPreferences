@@ -1,6 +1,6 @@
 [versions]
 
-kmp-template = "1.0.7"
+kmp-template = "1.0.9"
 
 [plugins]
 
