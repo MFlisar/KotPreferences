@@ -67,10 +67,6 @@ kotlin {
         // target sources
         // ---------------------
 
-        // ---------------------
-        // target sources
-        // ---------------------
-
         buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
             when (target) {
                 Target.ANDROID, Target.WINDOWS, Target.IOS, Target.MACOS -> {
