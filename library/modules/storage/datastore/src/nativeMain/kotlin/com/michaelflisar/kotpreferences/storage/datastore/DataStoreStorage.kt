@@ -4,7 +4,6 @@ import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import com.michaelflisar.kotpreferences.core.interfaces.StorageEncryption
 import platform.Foundation.NSDocumentDirectory
 import platform.Foundation.NSFileManager
-import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 import okio.Path.Companion.toPath
 

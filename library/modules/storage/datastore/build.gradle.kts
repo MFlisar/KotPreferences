@@ -1,4 +1,5 @@
 import com.michaelflisar.kmptemplate.BuildFilePlugin
+import com.michaelflisar.kmptemplate.Target
 import com.michaelflisar.kmptemplate.Targets
 
 plugins {
@@ -47,12 +48,36 @@ kotlin {
 
     sourceSets {
 
-        val nativeMain by creating
-        val iosX64Main by getting { dependsOn(nativeMain) }
-        val iosArm64Main by getting { dependsOn(nativeMain) }
-        val iosSimulatorArm64Main by getting { dependsOn(nativeMain) }
-        val macosX64Main by getting { dependsOn(nativeMain) }
-        val macosArm64Main by getting { dependsOn(nativeMain) }
+        // ---------------------
+        // custom shared sources
+        // ---------------------
+
+        val nativeMain by creating {
+            dependsOn(commonMain.get())
+        }
+
+        // ---------------------
+        // target sources
+        // ---------------------
+
+        buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
+            when (target) {
+                Target.IOS, Target.MACOS -> {
+                    groupMain.dependsOn(nativeMain)
+                }
+                Target.ANDROID, Target.WINDOWS, Target.WASM -> {
+                    // --
+                }
+                Target.LINUX,
+                Target.JS -> {
+                    // not enabled
+                }
+            }
+        }
+
+        // ---------------------
+        // dependencies
+        // ---------------------
 
         commonMain.dependencies {
 
