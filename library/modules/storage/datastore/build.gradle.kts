@@ -47,6 +47,13 @@ kotlin {
 
     sourceSets {
 
+        val nativeMain by creating
+        val iosX64Main by getting { dependsOn(nativeMain) }
+        val iosArm64Main by getting { dependsOn(nativeMain) }
+        val iosSimulatorArm64Main by getting { dependsOn(nativeMain) }
+        val macosX64Main by getting { dependsOn(nativeMain) }
+        val macosArm64Main by getting { dependsOn(nativeMain) }
+
         commonMain.dependencies {
 
             // Kotlin
