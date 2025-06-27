@@ -5,9 +5,11 @@ icon: material/keyboard
 #### 1. Define a `SettingsModel`
 
 ```kotlin
+// commonMain defines a `createDataStoreStorage` function that creates a `DataStoreStorage` instance inside the default platform folder:
+//   val storage = createDataStoreStorage("preferences")
 // Depending on the platform:
-// jvm: DataStoreStorage.create(folder = File(System.getProperty("user.dir")), name = "settings")
-// android/iOS: DataStoreStorage.create(name = "preferences")
+//   - jvm: DataStoreStorage.create(folder = File(System.getProperty("user.dir")), name = "preferences")
+//   - android/iOS: DataStoreStorage.create(name = "preferences")
 object Preferences : SettingsModel(DataStoreStorage.create(name = "preferences")) {
 
     // main data types

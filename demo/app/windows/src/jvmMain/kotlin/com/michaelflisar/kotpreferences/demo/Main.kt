@@ -12,6 +12,7 @@ import com.michaelflisar.kotpreferences.demo.composables.TestColumn
 import com.michaelflisar.kotpreferences.demo.composables.TestRow
 import com.michaelflisar.kotpreferences.storage.datastore.DataStoreStorage
 import com.michaelflisar.kotpreferences.storage.datastore.create
+import com.michaelflisar.kotpreferences.storage.datastore.createDataStoreStorage
 import com.michaelflisar.kotpreferences.storage.keyvalue.KeyValueStorage
 import com.michaelflisar.kotpreferences.storage.keyvalue.create
 import kotlinx.coroutines.Dispatchers
@@ -19,13 +20,15 @@ import java.io.File
 
 fun main() = application {
 
+    // common function
+    //val storage2 = createDataStoreStorage("settings")
+
     val appFolder = File(System.getProperty("user.dir"))
-    val settingsModel = DemoSettingsModel(
-        DataStoreStorage.create(
-            folder = appFolder,
-            name = "settings"
-        )
+    val storage =  DataStoreStorage.create(
+        folder = appFolder,
+        name = "settings"
     )
+    val settingsModel = DemoSettingsModel(storage)
     val settingsModel2 = DemoSettingsModel(
         KeyValueStorage.create(
             folder = appFolder,
