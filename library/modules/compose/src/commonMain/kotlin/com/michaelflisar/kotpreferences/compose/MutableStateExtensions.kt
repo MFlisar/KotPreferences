@@ -20,6 +20,7 @@ fun <T> StorageSetting<T>.asMutableState(): MutableState<T?>
     val state = collectAsState(tryGetValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
+            @Suppress("UNCHECKED_CAST")
             update(it as T)
         }
     }
@@ -37,6 +38,7 @@ fun <T, X> StorageSetting<T>.asMutableState(
     val state = collectAsState(tryGetValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {
+            @Suppress("UNCHECKED_CAST")
             update(unmapper(it as X))
         }
     }

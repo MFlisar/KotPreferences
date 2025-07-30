@@ -1,0 +1,25 @@
+public final class com/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage : com/michaelflisar/kotpreferences/core/classes/BaseStorage {
+	public static final field Companion Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;
+	public fun <init> (Landroidx/datastore/core/DataStore;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)V
+	public synthetic fun <init> (Landroidx/datastore/core/DataStore;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun clear-RuW1HyI (Lkotlin/Pair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun clearDeprecatedKeys (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun get-RuW1HyI (Lkotlin/Pair;Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public fun getCache ()Z
+	public fun set-nW80quY (Lkotlin/Pair;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion {
+}
+
+public final class com/michaelflisar/kotpreferences/storage/datastore/DataStoreStorageKt {
+	public static final fun create (Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage;
+	public static synthetic fun create$default (Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/datastore/Platform_androidKt {
+	public static final fun createDataStoreStorage (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public static synthetic fun createDataStoreStorage$default (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+}
+

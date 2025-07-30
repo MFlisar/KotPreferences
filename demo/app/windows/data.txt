@@ -1,8 +1,8 @@
 intSet=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 string=Value
-color=-65536
 testString=3ucNbSOKlT
-counter=13
 testInt=15
 testClass={"id":16,"name":"VzhsJ"}
 testEnum=2
+color=-65536
+counter=15

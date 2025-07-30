@@ -1,0 +1,39 @@
+public final class com/michaelflisar/kotpreferences/compose/AndroidExtensionsKt {
+	public static final fun collectAsStateWithLifecycle (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Landroidx/lifecycle/Lifecycle;Landroidx/lifecycle/Lifecycle$State;Lkotlin/coroutines/CoroutineContext;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateWithLifecycle (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$State;Lkotlin/coroutines/CoroutineContext;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateWithLifecycleNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Landroidx/lifecycle/Lifecycle;Landroidx/lifecycle/Lifecycle$State;Lkotlin/coroutines/CoroutineContext;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateWithLifecycleNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Landroidx/lifecycle/LifecycleOwner;Landroidx/lifecycle/Lifecycle$State;Lkotlin/coroutines/CoroutineContext;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+}
+
+public final class com/michaelflisar/kotpreferences/compose/CollectAsStateExtensionsKt {
+	public static final fun collectAsState (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateMapped (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateMappedNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+}
+
+public final class com/michaelflisar/kotpreferences/compose/MutableStateExtensionsKt {
+	public static final fun asMutableState (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+	public static final fun asMutableState (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+	public static final fun asMutableStateNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+	public static final fun asMutableStateNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlin/jvm/functions/Function1;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;I)Landroidx/compose/runtime/MutableState;
+}
+
+public final class com/michaelflisar/kotpreferences/compose/StateExtensionsKt {
+	public static final fun collectAsState (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsState (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+	public static final fun collectAsStateNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/jvm/functions/Function1;Landroidx/compose/runtime/Composer;II)Landroidx/compose/runtime/State;
+}
+
+public final class com/michaelflisar/kotpreferences/compose/StateFlowExtensionsKt {
+	public static final fun asStateFlow (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;Lkotlinx/coroutines/flow/SharingStarted;)Lkotlinx/coroutines/flow/StateFlow;
+	public static final fun asStateFlow (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/SharingStarted;Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/StateFlow;
+	public static synthetic fun asStateFlow$default (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;Lkotlinx/coroutines/flow/SharingStarted;ILjava/lang/Object;)Lkotlinx/coroutines/flow/StateFlow;
+	public static synthetic fun asStateFlow$default (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/SharingStarted;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/flow/StateFlow;
+	public static final fun asStateFlowNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;Lkotlinx/coroutines/flow/SharingStarted;)Lkotlinx/coroutines/flow/StateFlow;
+	public static final fun asStateFlowNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/SharingStarted;Lkotlin/jvm/functions/Function1;)Lkotlinx/coroutines/flow/StateFlow;
+	public static synthetic fun asStateFlowNotNull$default (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlin/jvm/functions/Function1;Lkotlinx/coroutines/flow/SharingStarted;ILjava/lang/Object;)Lkotlinx/coroutines/flow/StateFlow;
+	public static synthetic fun asStateFlowNotNull$default (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlinx/coroutines/CoroutineScope;Lkotlinx/coroutines/flow/SharingStarted;Lkotlin/jvm/functions/Function1;ILjava/lang/Object;)Lkotlinx/coroutines/flow/StateFlow;
+}
+

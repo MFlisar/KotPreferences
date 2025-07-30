@@ -1,0 +1,380 @@
+public final class com/michaelflisar/kotpreferences/core/AbstractSettingExtensionKt {
+	public static final fun getValue (Lcom/michaelflisar/kotpreferences/core/classes/SettingsGroup;)Ljava/lang/Object;
+	public static final fun getValue (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;)Ljava/lang/Object;
+}
+
+public abstract interface annotation class com/michaelflisar/kotpreferences/core/InternalApi : java/lang/annotation/Annotation {
+}
+
+public final class com/michaelflisar/kotpreferences/core/PlatformIOKt {
+	public static final fun getStorageContext ()Lkotlin/coroutines/CoroutineContext;
+}
+
+public final class com/michaelflisar/kotpreferences/core/PlatformKt {
+	public static final fun getValueNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;)Ljava/lang/Object;
+	public static final fun tryGetValueNotNull (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/SettingsChangeEvent {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;)V
+	public final fun getSetting ()Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public final fun getValue ()Ljava/lang/Object;
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/SettingsConverter {
+	public abstract fun from (Ljava/lang/Object;)Ljava/lang/Object;
+	public abstract fun to (Ljava/lang/Object;)Ljava/lang/Object;
+}
+
+public abstract class com/michaelflisar/kotpreferences/core/SettingsModel {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;)V
+	protected final fun anyIntPref (Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun anyIntPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun anyLongPref (Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun anyLongPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun anyStringPref (Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun anyStringPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun boolPref (ZLjava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun boolPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;ZLjava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun doublePref (DLjava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun doublePref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;DLjava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun doubleSetPref (Ljava/util/Set;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun doubleSetPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/util/Set;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun floatPref (FLjava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun floatPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;FLjava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun floatSetPref (Ljava/util/Set;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun floatSetPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/util/Set;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public final fun getChanges ()Lkotlinx/coroutines/flow/Flow;
+	public final fun getSettings ()Ljava/util/List;
+	public final fun getStorage ()Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	protected final fun intPref (ILjava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun intPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;ILjava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun intSetPref (Ljava/util/Set;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun intSetPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/util/Set;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun longPref (JLjava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun longPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;JLjava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun longSetPref (Ljava/util/Set;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun longSetPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/util/Set;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableAnyIntPref (Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableAnyIntPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableAnyLongPref (Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableAnyLongPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableAnyStringPref (Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableAnyStringPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Ljava/lang/Object;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableBoolPref (Ljava/lang/Boolean;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableBoolPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Boolean;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableDoublePref (Ljava/lang/Double;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableDoublePref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Double;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableFloatPref (Ljava/lang/Float;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableFloatPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Float;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableIntPref (Ljava/lang/Integer;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableIntPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Integer;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableLongPref (Ljava/lang/Long;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableLongPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Long;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun nullableStringPref (Ljava/lang/String;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun nullableStringPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public final fun onCreate (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;)V
+	public final fun removeDeprecatedKeysFromFile (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	protected final fun stringPref (Ljava/lang/String;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun stringPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/String;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	protected final fun stringSetPref (Ljava/util/Set;Ljava/lang/String;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public static synthetic fun stringSetPref$default (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/util/Set;Ljava/lang/String;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+}
+
+public abstract class com/michaelflisar/kotpreferences/core/classes/BaseStorage : com/michaelflisar/kotpreferences/core/interfaces/Storage {
+	public fun <init> ()V
+	public fun getChangeFlow ()Lkotlinx/coroutines/flow/Flow;
+	public fun onValueChanged (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/EnumConverter : com/michaelflisar/kotpreferences/core/SettingsConverter {
+	public fun <init> (Ljava/util/List;)V
+	public fun from (I)Ljava/lang/Enum;
+	public synthetic fun from (Ljava/lang/Object;)Ljava/lang/Object;
+	public fun to (Ljava/lang/Enum;)Ljava/lang/Integer;
+	public synthetic fun to (Ljava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/SetConverter {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/SetConverter;
+	public final fun convertDoubleSetToStringSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertFloatSetToStringSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertIntSetToStringSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertLongSetToStringSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertStringToDoubleSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertStringToFloatSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertStringToIntSet (Ljava/util/Set;)Ljava/util/Set;
+	public final fun convertStringToLongSet (Ljava/util/Set;)Ljava/util/Set;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/SettingsDataType : java/lang/Enum {
+	public static final field Boolean Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field Double Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field DoubleSet Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field Float Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field FloatSet Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field Int Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field IntSet Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field Long Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field LongSet Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field NullableBoolean Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field NullableDouble Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field NullableFloat Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field NullableInt Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field NullableLong Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field NullableString Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field String Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static final field StringSet Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public final fun getStorageDataType ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType;
+	public static fun valueOf (Ljava/lang/String;)Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	public static fun values ()[Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/SettingsGroup {
+	public fun <init> ([Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;ZLkotlin/jvm/functions/Function1;)V
+	public synthetic fun <init> ([Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;ZLkotlin/jvm/functions/Function1;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun getFlow ()Lkotlinx/coroutines/flow/Flow;
+	public final fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/classes/StorageDataType {
+	public abstract fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$Boolean : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Boolean;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Boolean;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$Double : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Double;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Double;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$Float : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Float;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Float;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$Int : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Int;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Int;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$Long : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Long;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Long;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable : com/michaelflisar/kotpreferences/core/classes/StorageDataType {
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable : com/michaelflisar/kotpreferences/core/classes/StorageDataType {
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableBoolean : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableBoolean;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Boolean;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableDouble : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableDouble;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Double;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableFloat : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableFloat;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Float;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableInt : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableInt;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Int;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableLong : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableLong;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$Long;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableString : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$Nullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NullableString;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$String;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$String : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$String;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$String;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageDataType$StringSet : com/michaelflisar/kotpreferences/core/classes/StorageDataType, com/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$StringSet;
+	public synthetic fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;
+	public fun getBase ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$StringSet;
+}
+
+public final class com/michaelflisar/kotpreferences/core/classes/StorageKey {
+	public static final synthetic fun box-impl (Lkotlin/Pair;)Lcom/michaelflisar/kotpreferences/core/classes/StorageKey;
+	public static fun constructor-impl (Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType;Ljava/lang/String;)Lkotlin/Pair;
+	public static fun constructor-impl (Lkotlin/Pair;)Lkotlin/Pair;
+	public fun equals (Ljava/lang/Object;)Z
+	public static fun equals-impl (Lkotlin/Pair;Ljava/lang/Object;)Z
+	public static final fun equals-impl0 (Lkotlin/Pair;Lkotlin/Pair;)Z
+	public final fun getData ()Lkotlin/Pair;
+	public static final fun getKey-impl (Lkotlin/Pair;)Ljava/lang/String;
+	public static final fun getType-impl (Lkotlin/Pair;)Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType;
+	public fun hashCode ()I
+	public static fun hashCode-impl (Lkotlin/Pair;)I
+	public fun toString ()Ljava/lang/String;
+	public static fun toString-impl (Lkotlin/Pair;)Ljava/lang/String;
+	public final synthetic fun unbox-impl ()Lkotlin/Pair;
+}
+
+public final class com/michaelflisar/kotpreferences/core/initialisation/SettingInitialiser : androidx/startup/Initializer {
+	public fun <init> ()V
+	public fun create (Landroid/content/Context;)Lcom/michaelflisar/kotpreferences/core/initialisation/SettingSetup;
+	public synthetic fun create (Landroid/content/Context;)Ljava/lang/Object;
+	public fun dependencies ()Ljava/util/List;
+}
+
+public final class com/michaelflisar/kotpreferences/core/initialisation/SettingSetup {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/core/initialisation/SettingSetup;
+	public final fun getContext ()Landroid/content/Context;
+	public final fun getENABLE_CACHING ()Z
+	public final fun init (Landroid/content/Context;)V
+	public final fun setENABLE_CACHING (Z)V
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/interfaces/Storage {
+	public abstract fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun clear-RuW1HyI (Lkotlin/Pair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun clearDeprecatedKeys (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun get-RuW1HyI (Lkotlin/Pair;Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getCache ()Z
+	public abstract fun getChangeFlow ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun onValueChanged (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun set-nW80quY (Lkotlin/Pair;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/interfaces/StorageEncryption {
+	public abstract fun decrypt (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;)Ljava/lang/Object;
+	public abstract fun encrypt (Ljava/lang/Object;Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;)Ljava/lang/String;
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/core/interfaces/StorageSetting : kotlin/properties/ReadOnlyProperty {
+	public abstract fun getCache ()Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting$Cache;
+	public abstract fun getCachedValue ()Ljava/lang/Object;
+	public abstract fun getDefaultValue ()Ljava/lang/Object;
+	public abstract fun getFlow ()Lkotlinx/coroutines/flow/Flow;
+	public abstract fun getKey ()Ljava/lang/String;
+	public abstract fun getStorageDataType ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType;
+	public fun read (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun update (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/interfaces/StorageSetting$Cache {
+	public fun <init> (Ljava/lang/Object;)V
+	public final fun getData ()Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/interfaces/StorageSetting$DefaultImpls {
+	public static fun read (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static fun reset (Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/michaelflisar/kotpreferences/core/settings/AbstractSetting : com/michaelflisar/kotpreferences/core/interfaces/StorageSetting {
+	public fun <init> ()V
+	protected abstract fun createFlow ()Lkotlinx/coroutines/flow/Flow;
+	public fun getCache ()Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting$Cache;
+	protected abstract fun getCache ()Z
+	public fun getCachedValue ()Ljava/lang/Object;
+	public abstract fun getCustomKey ()Ljava/lang/String;
+	public final fun getFlow ()Lkotlinx/coroutines/flow/Flow;
+	protected abstract fun getSettingsDataType ()Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	protected abstract fun getStorage ()Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public final fun getStorageDataType ()Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType;
+	protected abstract fun persistValue (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun read (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun reset (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public final fun update (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/settings/AnyIntSetting : com/michaelflisar/kotpreferences/core/settings/BaseAnyIntSetting {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Object;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Z)V
+}
+
+public final class com/michaelflisar/kotpreferences/core/settings/AnyLongSetting : com/michaelflisar/kotpreferences/core/settings/BaseAnyLongSetting {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Object;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Z)V
+}
+
+public final class com/michaelflisar/kotpreferences/core/settings/AnyStringSetting : com/michaelflisar/kotpreferences/core/settings/BaseAnyStringSetting {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Object;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Z)V
+}
+
+public abstract class com/michaelflisar/kotpreferences/core/settings/BaseAnyIntSetting : com/michaelflisar/kotpreferences/core/settings/AbstractSetting {
+	protected fun createFlow ()Lkotlinx/coroutines/flow/Flow;
+	protected fun getCache ()Z
+	public final fun getConverter ()Lcom/michaelflisar/kotpreferences/core/SettingsConverter;
+	public fun getCustomKey ()Ljava/lang/String;
+	public fun getDefaultValue ()Ljava/lang/Object;
+	public fun getKey ()Ljava/lang/String;
+	protected fun getSettingsDataType ()Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	protected fun getStorage ()Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public fun getValue (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lkotlin/reflect/KProperty;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public synthetic fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	protected fun persistValue (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/michaelflisar/kotpreferences/core/settings/BaseAnyLongSetting : com/michaelflisar/kotpreferences/core/settings/AbstractSetting {
+	protected fun createFlow ()Lkotlinx/coroutines/flow/Flow;
+	protected fun getCache ()Z
+	public final fun getConverter ()Lcom/michaelflisar/kotpreferences/core/SettingsConverter;
+	public fun getCustomKey ()Ljava/lang/String;
+	public fun getDefaultValue ()Ljava/lang/Object;
+	public fun getKey ()Ljava/lang/String;
+	protected fun getSettingsDataType ()Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	protected fun getStorage ()Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public fun getValue (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lkotlin/reflect/KProperty;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public synthetic fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	protected fun persistValue (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public abstract class com/michaelflisar/kotpreferences/core/settings/BaseAnyStringSetting : com/michaelflisar/kotpreferences/core/settings/AbstractSetting {
+	protected fun createFlow ()Lkotlinx/coroutines/flow/Flow;
+	protected fun getCache ()Z
+	public fun getCustomKey ()Ljava/lang/String;
+	public fun getDefaultValue ()Ljava/lang/Object;
+	public fun getKey ()Ljava/lang/String;
+	protected fun getSettingsDataType ()Lcom/michaelflisar/kotpreferences/core/classes/SettingsDataType;
+	protected fun getStorage ()Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public fun getValue (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Lkotlin/reflect/KProperty;)Lcom/michaelflisar/kotpreferences/core/interfaces/StorageSetting;
+	public synthetic fun getValue (Ljava/lang/Object;Lkotlin/reflect/KProperty;)Ljava/lang/Object;
+	protected fun persistValue (Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/core/settings/NullableAnyIntSetting : com/michaelflisar/kotpreferences/core/settings/BaseAnyIntSetting {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Object;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Z)V
+}
+
+public final class com/michaelflisar/kotpreferences/core/settings/NullableAnyLongSetting : com/michaelflisar/kotpreferences/core/settings/BaseAnyLongSetting {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Object;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Z)V
+}
+
+public final class com/michaelflisar/kotpreferences/core/settings/NullableAnyStringSetting : com/michaelflisar/kotpreferences/core/settings/BaseAnyStringSetting {
+	public fun <init> (Lcom/michaelflisar/kotpreferences/core/SettingsModel;Ljava/lang/Object;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/SettingsConverter;Z)V
+}
+

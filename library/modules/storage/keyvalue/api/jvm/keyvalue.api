@@ -1,0 +1,86 @@
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/FileUtil {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/storage/keyvalue/FileUtil;
+	public final fun exists (Lkotlinx/io/files/Path;)Z
+	public final fun readFile (Lkotlinx/io/files/Path;)Ljava/lang/String;
+	public final fun writeFile (Lkotlinx/io/files/Path;Ljava/lang/String;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/KeyValue {
+	public fun <init> (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun component1 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun copy (Ljava/lang/String;Ljava/lang/String;)Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValue;
+	public static synthetic fun copy$default (Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValue;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValue;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKey ()Ljava/lang/String;
+	public final fun getValue ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage : com/michaelflisar/kotpreferences/core/classes/BaseStorage {
+	public static final field Companion Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage$Companion;
+	public fun <init> (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)V
+	public synthetic fun <init> (Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function2;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun clear (Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun clear-RuW1HyI (Lkotlin/Pair;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun clearDeprecatedKeys (Ljava/util/List;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun get-RuW1HyI (Lkotlin/Pair;Ljava/lang/Object;)Lkotlinx/coroutines/flow/Flow;
+	public fun getCache ()Z
+	public final fun getExists ()Lkotlin/jvm/functions/Function0;
+	public final fun getRead ()Lkotlin/jvm/functions/Function0;
+	public final fun getWrite ()Lkotlin/jvm/functions/Function2;
+	public fun set-nW80quY (Lkotlin/Pair;Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage$Companion {
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorageExtensionsKt {
+	public static final fun create (Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage$Companion;Ljava/io/File;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueConverter;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage;
+	public static synthetic fun create$default (Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage$Companion;Ljava/io/File;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueConverter;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorageKt {
+	public static final fun create (Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage$Companion;Lkotlinx/io/files/Path;Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueConverter;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage;
+	public static synthetic fun create$default (Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage$Companion;Lkotlinx/io/files/Path;Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueConverter;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/storage/keyvalue/KeyValueStorage;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueBlockInset : com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset {
+	public fun <init> ()V
+	public fun <init> (C)V
+	public synthetic fun <init> (CILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getInsetForKey (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueConverter {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset;)V
+	public synthetic fun <init> (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun readFromString (Ljava/lang/String;)Ljava/util/List;
+	public final fun writeToString (Ljava/util/List;)Ljava/lang/String;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueFixedInset : com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset {
+	public fun <init> ()V
+	public fun <init> (Ljava/lang/String;)V
+	public synthetic fun <init> (Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun getInsetForKey (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public abstract interface class com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset {
+	public abstract fun getInsetForKey (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueNoInset : com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueNoInset;
+	public fun getInsetForKey (Ljava/lang/String;)Ljava/lang/String;
+}
+
+public final class com/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueStorageDefaults {
+	public static final field INSTANCE Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueStorageDefaults;
+	public static final field SEPARATOR Ljava/lang/String;
+	public final fun getCONVERTER ()Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueConverter;
+	public final fun getINSET ()Lcom/michaelflisar/kotpreferences/storage/keyvalue/setup/KeyValueInset;
+}
+

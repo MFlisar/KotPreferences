@@ -1,5 +1,5 @@
-import com.michaelflisar.kmptemplate.BuildFilePlugin
-import com.michaelflisar.kmptemplate.Targets
+import com.michaelflisar.kmpgradletools.BuildFilePlugin
+import com.michaelflisar.kmpgradletools.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -7,7 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.serialization)
-    alias(deps.plugins.kmp.template.gradle.plugin)
+    alias(deps.plugins.kmp.gradle.tools.gradle.plugin)
 }
 
 // get build logic plugin
@@ -37,7 +37,7 @@ kotlin {
     // Targets
     //-------------
 
-    buildFilePlugin.setupTargets(buildTargets)
+    buildFilePlugin.setupTargetsLibrary(buildTargets)
 
     // -------
     // Sources
@@ -63,8 +63,6 @@ kotlin {
             implementation(project(":kotpreferences:modules:storage:keyvalue"))
             implementation(project(":kotpreferences:modules:compose"))
 
-            implementation(deps.kmp.template.open.source.demo)
-
         }
     }
 }
@@ -75,11 +73,10 @@ kotlin {
 
 // android configuration
 android {
-    buildFilePlugin.setupAndroid(
+    buildFilePlugin.setupAndroidLibrary(
         androidNamespace = androidNamespace,
         compileSdk = app.versions.compileSdk,
         minSdk = app.versions.minSdk,
-        compose = true,
         buildConfig = false
     )
 }

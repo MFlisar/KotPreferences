@@ -1,0 +1,17 @@
+public final class com/michaelflisar/kotpreferences/encryption/aes/StorageEncryptionAES : com/michaelflisar/kotpreferences/core/interfaces/StorageEncryption {
+	public static final field Companion Lcom/michaelflisar/kotpreferences/encryption/aes/StorageEncryptionAES$Companion;
+	public static final field DEFAULT_ALGORITHM Ljava/lang/String;
+	public static final field DEFAULT_KEY_ALGORITHM Ljava/lang/String;
+	public fun <init> (Ljava/lang/String;Ljavax/crypto/SecretKey;Ljavax/crypto/spec/IvParameterSpec;)V
+	public fun decrypt (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;)Ljava/lang/Object;
+	public fun encrypt (Ljava/lang/Object;Lcom/michaelflisar/kotpreferences/core/classes/StorageDataType$NotNullable;)Ljava/lang/String;
+}
+
+public final class com/michaelflisar/kotpreferences/encryption/aes/StorageEncryptionAES$Companion {
+	public final fun generateIv ()Ljavax/crypto/spec/IvParameterSpec;
+	public final fun generateKey (I)Ljavax/crypto/SecretKey;
+	public final fun getIv ([B)Ljavax/crypto/spec/IvParameterSpec;
+	public final fun getKeyFromPassword (Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)Ljavax/crypto/SecretKey;
+	public static synthetic fun getKeyFromPassword$default (Lcom/michaelflisar/kotpreferences/encryption/aes/StorageEncryptionAES$Companion;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IIILjava/lang/Object;)Ljavax/crypto/SecretKey;
+}
+
