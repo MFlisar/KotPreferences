@@ -19,6 +19,10 @@ public final class com/michaelflisar/kotpreferences/storage/datastore/DataStoreS
 }
 
 public final class com/michaelflisar/kotpreferences/storage/datastore/Platform_jvmKt {
+	public static final fun create (Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public static final fun create (Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;Ljava/lang/String;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public static synthetic fun create$default (Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
+	public static synthetic fun create$default (Lcom/michaelflisar/kotpreferences/storage/datastore/DataStoreStorage$Companion;Ljava/lang/String;Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
 	public static final fun createDataStoreStorage (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;Z)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
 	public static synthetic fun createDataStoreStorage$default (Ljava/lang/String;Lcom/michaelflisar/kotpreferences/core/interfaces/StorageEncryption;ZILjava/lang/Object;)Lcom/michaelflisar/kotpreferences/core/interfaces/Storage;
 }
