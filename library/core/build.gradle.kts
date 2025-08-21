@@ -1,6 +1,8 @@
-import com.michaelflisar.kmpgradletools.BuildFilePlugin
-import com.michaelflisar.kmpgradletools.Target
-import com.michaelflisar.kmpgradletools.Targets
+import com.michaelflisar.kmplibrary.BuildFilePlugin
+import com.michaelflisar.kmplibrary.dependencyOf
+import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.Target
+import com.michaelflisar.kmplibrary.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -8,7 +10,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.binary.compatibility.validator)
-    alias(deps.plugins.kmp.gradle.tools.gradle.plugin)
+    alias(deps.plugins.kmplibrary.buildplugin)
 }
 
 // get build file plugin
@@ -50,55 +52,27 @@ kotlin {
     sourceSets {
 
         // ---------------------
-        // custom shared sources
+        // custom source sets
         // ---------------------
 
-        // all targets but wasm
-        val featureBlocking by creating {
-            dependsOn(commonMain.get())
+        // --
+        // e.g.:
+        // val nativeMain by creating { dependsOn(commonMain.get()) }
+        // nativeMain.dependencyOf(sourceSets, buildTargets, listOf(Target.IOS, Target.MACOS))
+
+        val featureBlocking by creating { dependsOn(commonMain.get()) }
+        val featureNoBlocking by creating { dependsOn(commonMain.get()) }
+        listOf(Target.WASM).let {
+            featureBlocking.dependencyOfAll(sourceSets, buildTargets, exclusions = it)
+            featureNoBlocking.dependencyOf(sourceSets, buildTargets, it)
         }
 
-        // wasm only
-        val featureNoBlocking by creating {
-            dependsOn(commonMain.get())
-        }
 
-        // all targets but ios + wasm
-        val featureIO by creating {
-            dependsOn(commonMain.get())
-        }
-
-        // ios + wasm only
-        val featureNoIO by creating {
-            dependsOn(commonMain.get())
-        }
-
-        // ---------------------
-        // target sources
-        // ---------------------
-
-        buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
-            when (target) {
-                Target.ANDROID, Target.WINDOWS -> {
-                    groupMain.dependsOn(featureIO)
-                    groupMain.dependsOn(featureBlocking)
-                }
-
-                Target.IOS, Target.MACOS -> {
-                    groupMain.dependsOn(featureNoIO)
-                    groupMain.dependsOn(featureBlocking)
-                }
-
-                Target.WASM -> {
-                    groupMain.dependsOn(featureNoIO)
-                    groupMain.dependsOn(featureNoBlocking)
-                }
-
-                Target.LINUX,
-                Target.JS -> {
-                    // not enabled
-                }
-            }
+        val featureIO by creating { dependsOn(commonMain.get()) }
+        val featureNoIO by creating { dependsOn(commonMain.get()) }
+        listOf(Target.IOS, Target.MACOS, Target.WASM).let {
+            featureIO.dependencyOfAll(sourceSets, buildTargets, exclusions = it)
+            featureNoIO.dependencyOf(sourceSets, buildTargets, it)
         }
 
         // ---------------------
@@ -141,3 +115,4 @@ android {
 // maven publish configuration
 if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
     buildFilePlugin.setupMavenPublish()
+

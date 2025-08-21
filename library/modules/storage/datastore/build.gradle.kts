@@ -1,6 +1,8 @@
-import com.michaelflisar.kmpgradletools.BuildFilePlugin
-import com.michaelflisar.kmpgradletools.Target
-import com.michaelflisar.kmpgradletools.Targets
+import com.michaelflisar.kmplibrary.BuildFilePlugin
+import com.michaelflisar.kmplibrary.dependencyOf
+import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.Target
+import com.michaelflisar.kmplibrary.Targets
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -8,7 +10,7 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.binary.compatibility.validator)
-    alias(deps.plugins.kmp.gradle.tools.gradle.plugin)
+    alias(deps.plugins.kmplibrary.buildplugin)
 }
 
 // get build file plugin
@@ -50,31 +52,16 @@ kotlin {
     sourceSets {
 
         // ---------------------
-        // custom shared sources
+        // custom source sets
         // ---------------------
 
-        val nativeMain by creating {
-            dependsOn(commonMain.get())
-        }
+        // --
+        // e.g.:
+        // val nativeMain by creating { dependsOn(commonMain.get()) }
+        // nativeMain.dependencyOf(sourceSets, buildTargets, listOf(Target.IOS, Target.MACOS))
 
-        // ---------------------
-        // target sources
-        // ---------------------
-
-        buildTargets.updateSourceSetDependencies(sourceSets) { groupMain, target ->
-            when (target) {
-                Target.IOS, Target.MACOS -> {
-                    groupMain.dependsOn(nativeMain)
-                }
-                Target.ANDROID, Target.WINDOWS, Target.WASM -> {
-                    // --
-                }
-                Target.LINUX,
-                Target.JS -> {
-                    // not enabled
-                }
-            }
-        }
+        val nativeMain by creating { dependsOn(commonMain.get()) }
+        nativeMain.dependencyOf(sourceSets, buildTargets, listOf(Target.IOS, Target.MACOS))
 
         // ---------------------
         // dependencies
@@ -111,3 +98,4 @@ android {
 // maven publish configuration
 if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
     buildFilePlugin.setupMavenPublish()
+
