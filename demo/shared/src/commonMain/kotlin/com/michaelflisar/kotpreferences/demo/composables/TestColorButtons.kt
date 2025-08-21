@@ -2,6 +2,7 @@ package com.michaelflisar.kotpreferences.demo.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -29,9 +30,8 @@ fun TestSelectColorButtons(
         "White" to Color.White,
         "Black" to Color.Black,
     )
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(8.dp),
-        verticalAlignment = Alignment.CenterVertically
+    FlowRow(
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         colors.forEach { color ->
             Button(onClick = {
