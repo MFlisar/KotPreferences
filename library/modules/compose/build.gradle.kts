@@ -1,6 +1,5 @@
 import com.michaelflisar.kmplibrary.BuildFilePlugin
-import com.michaelflisar.kmplibrary.dependencyOf
-import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.setupDependencies
 import com.michaelflisar.kmplibrary.Target
 import com.michaelflisar.kmplibrary.Targets
 
@@ -53,6 +52,12 @@ kotlin {
     sourceSets {
 
         // ---------------------
+        // custom source sets
+        // ---------------------
+
+        // --
+
+        // ---------------------
         // dependencies
         // ---------------------
 
@@ -91,6 +96,9 @@ android {
 // maven publish configuration
 if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
     buildFilePlugin.setupMavenPublish()
+
+
+
 
 
 

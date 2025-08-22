@@ -1,6 +1,5 @@
 import com.michaelflisar.kmplibrary.BuildFilePlugin
-import com.michaelflisar.kmplibrary.dependencyOf
-import com.michaelflisar.kmplibrary.dependencyOfAll
+import com.michaelflisar.kmplibrary.setupDependencies
 import com.michaelflisar.kmplibrary.Target
 import com.michaelflisar.kmplibrary.Targets
 
@@ -55,25 +54,15 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        // --
-        // e.g.:
-        // val nativeMain by creating { dependsOn(commonMain.get()) }
-        // nativeMain.dependencyOf(sourceSets, buildTargets, listOf(Target.IOS, Target.MACOS))
-
         val featureBlocking by creating { dependsOn(commonMain.get()) }
         val featureNoBlocking by creating { dependsOn(commonMain.get()) }
-        listOf(Target.WASM).let {
-            featureBlocking.dependencyOfAll(sourceSets, buildTargets, exclusions = it)
-            featureNoBlocking.dependencyOf(sourceSets, buildTargets, it)
-        }
-
-
         val featureIO by creating { dependsOn(commonMain.get()) }
         val featureNoIO by creating { dependsOn(commonMain.get()) }
-        listOf(Target.IOS, Target.MACOS, Target.WASM).let {
-            featureIO.dependencyOfAll(sourceSets, buildTargets, exclusions = it)
-            featureNoIO.dependencyOf(sourceSets, buildTargets, it)
-        }
+
+        featureBlocking.setupDependencies(sourceSets, buildTargets,listOf(Target.WASM))
+        featureNoBlocking.setupDependencies(sourceSets, buildTargets, listOf(Target.WASM), targetsNotSupported = true)
+        featureIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT)
+        featureNoIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT, targetsNotSupported = true)
 
         // ---------------------
         // dependencies
@@ -115,4 +104,7 @@ android {
 // maven publish configuration
 if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
     buildFilePlugin.setupMavenPublish()
+
+
+
 
