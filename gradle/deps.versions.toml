@@ -1,6 +1,6 @@
 [versions]
 
-kmp-library =               "1.9.0"
+kmp-library =               "1.9.6"
 
 [plugins]
 
