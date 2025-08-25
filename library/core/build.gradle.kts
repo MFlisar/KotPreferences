@@ -61,8 +61,8 @@ kotlin {
 
         featureBlocking.setupDependencies(sourceSets, buildTargets,listOf(Target.WASM), targetsNotSupported = true)
         featureNoBlocking.setupDependencies(sourceSets, buildTargets, listOf(Target.WASM))
-        featureIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT, targetsNotSupported = true)
-        featureNoIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT)
+        featureIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT
+        featureNoIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT, targetsNotSupported = true)
 
         // ---------------------
         // dependencies
