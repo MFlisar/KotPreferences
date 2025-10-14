@@ -1,8 +1,11 @@
 package com.michaelflisar.kotpreferences.compose
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import com.michaelflisar.kotpreferences.core.InternalApi
 import com.michaelflisar.kotpreferences.core.StorageContext
@@ -75,12 +78,20 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
 
 @Composable
 private fun <T> State<T>.asMutableState(update: suspend (T) -> Unit): MutableState<T> {
-    val state = this
     val coroutineScope = rememberCoroutineScope()
+    // local state to be able to change the value IMMEDIATELY
+    val localState = remember { mutableStateOf(value) }
+    // synchronise local state in case the state changes from outside
+    LaunchedEffect(value) {
+        if (localState.value != value) {
+            localState.value = value
+        }
+    }
     return object : MutableState<T> {
         override var value: T
-            get() = state.value
+            get() = localState.value
             set(newValue) {
+                localState.value = newValue
                 coroutineScope.launch {
                     update(newValue)
                 }
