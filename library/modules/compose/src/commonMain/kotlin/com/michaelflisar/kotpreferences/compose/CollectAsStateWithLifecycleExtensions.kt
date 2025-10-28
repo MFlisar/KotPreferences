@@ -19,13 +19,15 @@ import kotlin.coroutines.EmptyCoroutineContext
 // ------------------------
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycle1] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T? = tryGetValueNotNull()
-): State<T?> {
+): State<T?>
+/* --8<-- [end: collectAsStateWithLifecycle1] */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycle = lifecycle,
@@ -35,6 +37,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycle2] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
@@ -42,7 +45,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T? = tryGetValueNotNull(),
     mapper: (T) -> X,
-): State<X?> {
+): State<X?>
+/* --8<-- [end: collectAsStateWithLifecycle2] */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = initialValue?.let { mapper(it) },
         lifecycle = lifecycle,
@@ -52,13 +56,15 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycle3] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T? = tryGetValueNotNull()
-): State<T?> {
+): State<T?>
+/* --8<-- [end: collectAsStateWithLifecycle3] */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycleOwner = lifecycleOwner,
@@ -68,6 +74,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycle4] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -75,7 +82,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T? = tryGetValueNotNull(),
     mapper: (T) -> X,
-): State<X?> {
+): State<X?>
+/* --8<-- [end: collectAsStateWithLifecycle4] */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = initialValue?.let { mapper(it) },
         lifecycleOwner = lifecycleOwner,
@@ -89,13 +97,15 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 // ------------------------
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycleNotNull1] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T = getValueNotNull()
-): State<T> {
+): State<T>
+/* --8<-- [end: collectAsStateWithLifecycleNotNull1] */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycle = lifecycle,
@@ -105,6 +115,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycleNotNull2] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
@@ -112,7 +123,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T = getValueNotNull(),
     mapper: (T) -> X,
-): State<X> {
+): State<X>
+/* --8<-- [end: collectAsStateWithLifecycleNotNull2] */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = mapper(initialValue),
         lifecycle = lifecycle,
@@ -122,13 +134,15 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycleNotNull3] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T = getValueNotNull()
-): State<T> {
+): State<T>
+/* --8<-- [end: collectAsStateWithLifecycleNotNull3] */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycleOwner = lifecycleOwner,
@@ -138,6 +152,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: collectAsStateWithLifecycleNotNull4] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -145,7 +160,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
     initialValue: T = getValueNotNull(),
     mapper: (T) -> X,
-): State<X> {
+): State<X>
+/* --8<-- [end: collectAsStateWithLifecycleNotNull4] */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = mapper(initialValue),
         lifecycleOwner = lifecycleOwner,
