@@ -15,11 +15,15 @@ import com.michaelflisar.kotpreferences.core.tryGetValueNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// ------------------------
+// nullable versions
+// ------------------------
+
 @OptIn(InternalApi::class)
 /* --8<-- [start: asMutableState1] */
 @Composable
 fun <T> StorageSetting<T>.asMutableState(): MutableState<T?>
-        /* --8<-- [end: asMutableState1] */ {
+/* --8<-- [end: asMutableState1] */ {
     val state = collectAsState(tryGetValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -36,7 +40,7 @@ fun <T, X> StorageSetting<T>.asMutableState(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X?>
-        /* --8<-- [end: asMutableState2] */ {
+/* --8<-- [end: asMutableState2] */ {
 
     val state = collectAsState(tryGetValueNotNull(), mapper)
     return state.asMutableState {
@@ -47,11 +51,15 @@ fun <T, X> StorageSetting<T>.asMutableState(
     }
 }
 
+// ------------------------
+// not nullable versions
+// ------------------------
+
 @OptIn(InternalApi::class)
 /* --8<-- [start: asMutableStateNotNull1] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
-        /* --8<-- [end: asMutableStateNotNull1] */ {
+/* --8<-- [end: asMutableStateNotNull1] */ {
     val state = collectAsStateNotNull(getValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -67,7 +75,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X>
-        /* --8<-- [end: asMutableStateNotNull2] */ {
+/* --8<-- [end: asMutableStateNotNull2] */ {
     val state = collectAsStateNotNull(getValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -76,8 +84,12 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
     }
 }
 
+// ------------------------
+// private implementation
+// ------------------------
+
 @Composable
-private fun <T> State<T>.asMutableState(update: suspend (T) -> Unit): MutableState<T> {
+internal fun <T> State<T>.asMutableState(update: suspend (T) -> Unit): MutableState<T> {
     val coroutineScope = rememberCoroutineScope()
     // local state to be able to change the value IMMEDIATELY
     val localState = remember { mutableStateOf(value) }

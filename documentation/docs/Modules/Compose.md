@@ -4,17 +4,32 @@ icon: material/puzzle
 
 This module is placed inside the `extension-compose` artifact and offers some helpful compose extensions for the `Storage` class.
 
-#### `collectAsState*` functions
+All extensions functions are on `StorageSetting<T>` and following are available:
 
-```kotlin
---8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState1"
-```
+Available extensions are following:
 
-```kotlin
---8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState2"
-```
+* `StorageSetting<T>.collectAsStateNotNull(...)`
+* `StorageSetting<T>.collectAsStateWithLifecycle(...)`
+* `StorageSetting<T>.asMutableState(...)`
+* `StorageSetting<T>.asMutableStateNotNull(...)`
+* `StorageSetting<T>.asMutableStateWithLifecycle(...)`
+* `StorageSetting<T>.asMutableStateNotNullWithLifecycle(...)`
+* `StorageSetting<T>.asStateFlow(...)`
+* `StorageSetting<T>.asStateFlowNotNull(...)`
 
-#### `collectAsStateNotNull`
+For more details check the signatures below:
+
+!!! code `collectAsState*` functions
+
+    ```kotlin
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState1"
+    ```
+
+    ```kotlin
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState2"
+    ```
+
+!!! code `collectAsStateNotNull*` functions
 
 ```kotlin
 --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsStateNotNull1"

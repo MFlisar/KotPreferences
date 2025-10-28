@@ -4,5 +4,5 @@ testString=3ucNbSOKlT
 testInt=15
 testClass={"id":16,"name":"VzhsJ"}
 testEnum=2
-color=-65536
-counter=15
+color=-16776961
+counter=18

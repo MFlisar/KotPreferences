@@ -26,7 +26,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.michaelflisar.kotpreferences.compose.asMutableStateNotNull
-import com.michaelflisar.kotpreferences.compose.collectAsStateMappedNotNull
 import com.michaelflisar.kotpreferences.compose.collectAsStateNotNull
 import com.michaelflisar.kotpreferences.demo.composables.TestColor
 import com.michaelflisar.kotpreferences.demo.composables.TestColumn
@@ -89,7 +88,7 @@ private fun Settings(
     val counter by settingsModel.counter.collectAsStateNotNull()
 
     val color by settingsModel.color.collectAsStateNotNull()
-    val colorMapped by settingsModel.color.collectAsStateMappedNotNull(mapper = { Color(it) })
+    val colorMapped by settingsModel.color.collectAsStateNotNull(mapper = { Color(it) })
     val stateColor by settingsModel.color.asMutableStateNotNull()
     var stateColorMapped by settingsModel.color.asMutableStateNotNull(
         mapper = { Color(it) },

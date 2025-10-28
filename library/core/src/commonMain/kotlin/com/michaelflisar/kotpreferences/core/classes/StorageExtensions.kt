@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.map
 internal fun <T : Any?> Storage.get(type: SettingsDataType, key: String, defaultValue: T): Flow<T> {
     return when (type) {
         SettingsDataType.String -> get(StorageKey(StorageDataType.String, key), defaultValue)
-       SettingsDataType.Boolean -> get(StorageKey(StorageDataType.Boolean, key), defaultValue)
+        SettingsDataType.Boolean -> get(StorageKey(StorageDataType.Boolean, key), defaultValue)
         SettingsDataType.Int -> get(StorageKey(StorageDataType.Int, key), defaultValue)
         SettingsDataType.Long -> get(StorageKey(StorageDataType.Long, key), defaultValue)
         SettingsDataType.Float -> get(StorageKey(StorageDataType.Float, key), defaultValue)
@@ -31,7 +31,7 @@ internal fun <T : Any?> Storage.get(type: SettingsDataType, key: String, default
 internal suspend fun <T : Any?> Storage.set(type: SettingsDataType, key: String, value: T) {
     when (type) {
         SettingsDataType.String -> set(StorageKey(StorageDataType.String, key), value)
-       SettingsDataType.Boolean -> set(StorageKey(StorageDataType.Boolean, key), value)
+        SettingsDataType.Boolean -> set(StorageKey(StorageDataType.Boolean, key), value)
         SettingsDataType.Int -> set(StorageKey(StorageDataType.Int, key), value)
         SettingsDataType.Long -> set(StorageKey(StorageDataType.Long, key), value)
         SettingsDataType.Float -> set(StorageKey(StorageDataType.Float, key), value)
