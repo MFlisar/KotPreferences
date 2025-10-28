@@ -120,7 +120,7 @@ Available extensions are listed below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycleNotNull4"
     ```
 
-??? code "`StorageSetting<T>.asMutableStateWithLifecycleNotNull(...)` functions"
+??? code "`StorageSetting<T>.asStateFlow(...)` functions"
     
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlow1"

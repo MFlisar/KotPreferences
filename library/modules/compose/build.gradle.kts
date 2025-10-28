@@ -68,7 +68,7 @@ kotlin {
 
             // AndroidX / Google
             implementation(libs.compose.runtime)
-            implementation(libs.compose.lifecycle)
+            api(libs.compose.lifecycle)
 
             // Library
             implementation(project(":kotpreferences:core"))
