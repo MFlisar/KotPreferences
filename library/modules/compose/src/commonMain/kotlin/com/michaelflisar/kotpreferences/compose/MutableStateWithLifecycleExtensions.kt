@@ -33,7 +33,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T?>
 /* --8<-- [end: asMutableStateWithLifecycle1] */ {
-    val state = collectAsStateWithLifecycle(lifecycle, minActiveState, context, tryGetValueNotNull())
+    val state = collectAsStateWithLifecycle(lifecycle, tryGetValueNotNull(), minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
             @Suppress("UNCHECKED_CAST")
@@ -51,7 +51,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T?>
 /* --8<-- [end: asMutableStateWithLifecycle2] */ {
-    val state = collectAsStateWithLifecycle(lifecycleOwner, minActiveState, context, tryGetValueNotNull())
+    val state = collectAsStateWithLifecycle(tryGetValueNotNull(), lifecycleOwner, minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
             @Suppress("UNCHECKED_CAST")
@@ -71,7 +71,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     unmapper: (X) -> T,
 ): MutableState<X?>
 /* --8<-- [end: asMutableStateWithLifecycle3] */ {
-    val state = collectAsStateWithLifecycle(lifecycle, minActiveState, context, tryGetValueNotNull(), mapper)
+    val state = collectAsStateWithLifecycle(lifecycle, tryGetValueNotNull(), minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
             @Suppress("UNCHECKED_CAST")
@@ -91,7 +91,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     unmapper: (X) -> T,
 ): MutableState<X?>
 /* --8<-- [end: asMutableStateWithLifecycle4] */ {
-    val state = collectAsStateWithLifecycle(lifecycleOwner, minActiveState, context, tryGetValueNotNull(), mapper)
+    val state = collectAsStateWithLifecycle(tryGetValueNotNull(), lifecycleOwner, minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
             @Suppress("UNCHECKED_CAST")
@@ -113,7 +113,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T>
 /* --8<-- [end: asMutableStateWithLifecycleNotNull1] */ {
-    val state = collectAsStateWithLifecycleNotNull(lifecycle, minActiveState, context, getValueNotNull())
+    val state = collectAsStateWithLifecycleNotNull(lifecycle, getValueNotNull(), minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
             update(it)
@@ -130,7 +130,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T>
 /* --8<-- [end: asMutableStateWithLifecycleNotNull2] */ {
-    val state = collectAsStateWithLifecycleNotNull(lifecycleOwner, minActiveState, context, getValueNotNull())
+    val state = collectAsStateWithLifecycleNotNull(getValueNotNull(), lifecycleOwner, minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
             update(it)
@@ -149,7 +149,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     unmapper: (X) -> T,
 ): MutableState<X>
 /* --8<-- [end: asMutableStateWithLifecycleNotNull3] */ {
-    val state = collectAsStateWithLifecycleNotNull(lifecycle, minActiveState, context, getValueNotNull(), mapper)
+    val state = collectAsStateWithLifecycleNotNull(lifecycle, getValueNotNull(), minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
             update(unmapper(it))
@@ -168,7 +168,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     unmapper: (X) -> T,
 ): MutableState<X>
 /* --8<-- [end: asMutableStateWithLifecycleNotNull4] */ {
-    val state = collectAsStateWithLifecycleNotNull(lifecycleOwner, minActiveState, context, getValueNotNull(), mapper)
+    val state = collectAsStateWithLifecycleNotNull(getValueNotNull(), lifecycleOwner, minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
             update(unmapper(it))

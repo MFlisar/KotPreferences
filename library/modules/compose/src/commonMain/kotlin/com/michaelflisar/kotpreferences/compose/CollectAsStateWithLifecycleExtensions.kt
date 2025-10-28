@@ -23,9 +23,9 @@ import kotlin.coroutines.EmptyCoroutineContext
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
+    initialValue: T? = tryGetValueNotNull(),
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T? = tryGetValueNotNull()
+    context: CoroutineContext = EmptyCoroutineContext
 ): State<T?>
 /* --8<-- [end: collectAsStateWithLifecycle1] */ {
     return flow.collectAsStateWithLifecycle(
@@ -41,9 +41,9 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
+    initialValue: T? = tryGetValueNotNull(),
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T? = tryGetValueNotNull(),
     mapper: (T) -> X,
 ): State<X?>
 /* --8<-- [end: collectAsStateWithLifecycle2] */ {
@@ -59,10 +59,10 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 /* --8<-- [start: collectAsStateWithLifecycle3] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
+    initialValue: T? = tryGetValueNotNull(),
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T? = tryGetValueNotNull()
+    context: CoroutineContext = EmptyCoroutineContext
 ): State<T?>
 /* --8<-- [end: collectAsStateWithLifecycle3] */ {
     return flow.collectAsStateWithLifecycle(
@@ -77,10 +77,10 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 /* --8<-- [start: collectAsStateWithLifecycle4] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
+    initialValue: T? = tryGetValueNotNull(),
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T? = tryGetValueNotNull(),
     mapper: (T) -> X,
 ): State<X?>
 /* --8<-- [end: collectAsStateWithLifecycle4] */ {
@@ -101,9 +101,9 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
+    initialValue: T = getValueNotNull(),
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getValueNotNull()
 ): State<T>
 /* --8<-- [end: collectAsStateWithLifecycleNotNull1] */ {
     return flow.collectAsStateWithLifecycle(
@@ -119,9 +119,9 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
+    initialValue: T = getValueNotNull(),
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getValueNotNull(),
     mapper: (T) -> X,
 ): State<X>
 /* --8<-- [end: collectAsStateWithLifecycleNotNull2] */ {
@@ -137,10 +137,10 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 /* --8<-- [start: collectAsStateWithLifecycleNotNull3] */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
+    initialValue: T = getValueNotNull(),
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
-    context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getValueNotNull()
+    context: CoroutineContext = EmptyCoroutineContext
 ): State<T>
 /* --8<-- [end: collectAsStateWithLifecycleNotNull3] */ {
     return flow.collectAsStateWithLifecycle(
@@ -155,10 +155,10 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 /* --8<-- [start: collectAsStateWithLifecycleNotNull4] */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
+    initialValue: T = getValueNotNull(),
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-    initialValue: T = getValueNotNull(),
     mapper: (T) -> X,
 ): State<X>
 /* --8<-- [end: collectAsStateWithLifecycleNotNull4] */ {
