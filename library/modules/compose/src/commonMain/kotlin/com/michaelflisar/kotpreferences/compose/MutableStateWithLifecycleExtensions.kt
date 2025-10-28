@@ -25,12 +25,14 @@ import kotlin.coroutines.EmptyCoroutineContext
 // ------------------------
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycle1] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-): MutableState<T?>  {
+): MutableState<T?>
+/* --8<-- [end: asMutableStateWithLifecycle1] */ {
     val state = collectAsStateWithLifecycle(lifecycle, minActiveState, context, tryGetValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -41,12 +43,14 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycle2] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-): MutableState<T?>  {
+): MutableState<T?>
+/* --8<-- [end: asMutableStateWithLifecycle2] */ {
     val state = collectAsStateWithLifecycle(lifecycleOwner, minActiveState, context, tryGetValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -57,6 +61,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycle3] */
 @Composable
 fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycle: Lifecycle,
@@ -64,7 +69,8 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
     unmapper: (X) -> T,
-): MutableState<X?>  {
+): MutableState<X?>
+/* --8<-- [end: asMutableStateWithLifecycle3] */ {
     val state = collectAsStateWithLifecycle(lifecycle, minActiveState, context, tryGetValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -75,6 +81,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycle4] */
 @Composable
 fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -82,7 +89,8 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
     unmapper: (X) -> T,
-): MutableState<X?>  {
+): MutableState<X?>
+/* --8<-- [end: asMutableStateWithLifecycle4] */ {
     val state = collectAsStateWithLifecycle(lifecycleOwner, minActiveState, context, tryGetValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -97,12 +105,14 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
 // ------------------------
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycleNotNull1] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-): MutableState<T> {
+): MutableState<T>
+/* --8<-- [end: asMutableStateWithLifecycleNotNull1] */ {
     val state = collectAsStateWithLifecycleNotNull(lifecycle, minActiveState, context, getValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -112,12 +122,14 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycleNotNull2] */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
-): MutableState<T> {
+): MutableState<T>
+/* --8<-- [end: asMutableStateWithLifecycleNotNull2] */ {
     val state = collectAsStateWithLifecycleNotNull(lifecycleOwner, minActiveState, context, getValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -127,6 +139,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycleNotNull3] */
 @Composable
 fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
@@ -134,7 +147,8 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
     unmapper: (X) -> T,
-): MutableState<X> {
+): MutableState<X>
+/* --8<-- [end: asMutableStateWithLifecycleNotNull3] */ {
     val state = collectAsStateWithLifecycleNotNull(lifecycle, minActiveState, context, getValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -144,6 +158,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
+/* --8<-- [start: asMutableStateWithLifecycleNotNull4] */
 @Composable
 fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -151,7 +166,8 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
     unmapper: (X) -> T,
-): MutableState<X> {
+): MutableState<X>
+/* --8<-- [end: asMutableStateWithLifecycleNotNull4] */ {
     val state = collectAsStateWithLifecycleNotNull(lifecycleOwner, minActiveState, context, getValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {

@@ -6,20 +6,9 @@ This module is placed inside the `extension-compose` artifact and offers some he
 
 All extensions functions are on `StorageSetting<T>` and following are available:
 
-Available extensions are following:
+Available extensions are listed below:
 
-* `StorageSetting<T>.collectAsStateNotNull(...)`
-* `StorageSetting<T>.collectAsStateWithLifecycle(...)`
-* `StorageSetting<T>.asMutableState(...)`
-* `StorageSetting<T>.asMutableStateNotNull(...)`
-* `StorageSetting<T>.asMutableStateWithLifecycle(...)`
-* `StorageSetting<T>.asMutableStateNotNullWithLifecycle(...)`
-* `StorageSetting<T>.asStateFlow(...)`
-* `StorageSetting<T>.asStateFlowNotNull(...)`
-
-For more details check the signatures below:
-
-??? code "`collectAsState*` functions"
+??? code "`StorageSetting<T>.collectAsState(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState1"
@@ -29,7 +18,7 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsState2"
     ```
 
-??? code "`collectAsStateNotNull*` functions"
+??? code "`StorageSetting<T>.collectAsStateNotNull(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsStateNotNull1"
@@ -39,43 +28,43 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateExtensions.kt:collectAsStateNotNull2"
     ```
 
-??? code "`collectAsStateWithLifecycle*` functions"
+??? code "`StorageSetting<T>.collectAsStateWithLifecycle(...)` functions"
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycle1"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycle1"
     ```
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycle2"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycle2"
     ```
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycle3"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycle3"
     ```
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycle4"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycle4"
     ```
 
-??? code "`collectAsStateWithLifecycleNotNull*` functions"
+??? code "`StorageSetting<T>.collectAsStateWithLifecycleNotNull(...)` functions"
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycleNotNull1"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycleNotNull1"
     ```
     
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycleNotNull2"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycleNotNull2"
     ```
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycleNotNull3"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycleNotNull3"
     ```
 
     ```kotlin
-    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsWithLifecycleStateExtensions.kt:collectAsStateWithLifecycleNotNull4"
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/CollectAsStateWithLifecycleExtensions.kt:collectAsStateWithLifecycleNotNull4"
     ```
 
-??? code "`asMutableState*` functions"
+??? code "`StorageSetting<T>.asMutableState(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState1"
@@ -85,7 +74,7 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableState2"
     ```
 
-??? code "`asMutableStateNotNull*` functions"
+??? code "`StorageSetting<T>.asMutableStateNotNull(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableStateNotNull1"
@@ -95,7 +84,7 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateExtensions.kt:asMutableStateNotNull2"
     ```
 
-??? code "`asMutableStateWithLifecycle*` functions"
+??? code "`StorageSetting<T>.asMutableStateWithLifecycle(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycle1"
@@ -105,7 +94,15 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycle2"
     ```
 
-??? code "`asMutableStateWithLifecycleNotNull*` functions"
+    ```kotlin
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycle3"
+    ```
+    
+    ```kotlin
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycle4"
+    ```
+
+??? code "`StorageSetting<T>.asMutableStateWithLifecycleNotNull(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycleNotNull1"
@@ -115,7 +112,15 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycleNotNull2"
     ```
 
-??? code "`asMutableStateWithLifecycleNotNull*` functions"
+    ```kotlin
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycleNotNull3"
+    ```
+    
+    ```kotlin
+    --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/MutableStateWithLifecycleExtensions.kt:asMutableStateWithLifecycleNotNull4"
+    ```
+
+??? code "`StorageSetting<T>.asMutableStateWithLifecycleNotNull(...)` functions"
     
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlow1"
@@ -125,7 +130,7 @@ For more details check the signatures below:
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlow1"
     ```
 
-??? code "`asStateFlowNotNull*` functions"
+??? code "`StorageSetting<T>.asStateFlowNotNull(...)` functions"
 
     ```kotlin
     --8<-- "../../library/modules/compose/src/commonMain/kotlin/com/michaelflisar/kotpreferences/compose/StateFlowExtensions.kt:asStateFlowNotNull1"
