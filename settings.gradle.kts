@@ -26,6 +26,7 @@ pluginManagement {
         google()
         gradlePluginPortal()
         maven("https://jitpack.io")
+        mavenLocal()
     }
 }
 
@@ -35,7 +36,7 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "6.2.1" //apply false
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "6.2.2" //apply false
 }
 
 // --------------

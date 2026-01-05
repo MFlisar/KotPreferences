@@ -1,4 +1,4 @@
-It provides following main features:
+This library provides following main features:
 
 * declare preferences via **kotlin delegates**
 * listen to updates from preferences via `kotlin flows`
