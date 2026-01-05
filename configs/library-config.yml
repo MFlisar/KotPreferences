@@ -21,19 +21,19 @@ modules:
   - name: Datastore Storage
     artifact-id: storage-datastore
     description: Provides a storage implementation based on jetpack datastore
-    path: library\modules\storage\datastore
+    path: library/modules/storage/datastore
   - name: Key-Value Storage
     artifact-id: storage-keyvalue
     description: Provides a storage implementation based on a simple key-value text file
-    path:  library\modules\storage\keyvalue
+    path:  library/modules/storage/keyvalue
   - name: Compose Extension
     artifact-id: extension-compose
     description: Provides composable extensions
-    path: library\modules\compose
+    path: library/modules/compose
   - name: AES Encryption
     artifact-id: encryption-aes
     description: Provides AES based encryption
-    path: library\modules\encryption-aes
+    path: library/modules/encryption-aes
   - name: demo shared
     artifact-id: ""
     description: ""
