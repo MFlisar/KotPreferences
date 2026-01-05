@@ -1,0 +1,6 @@
+testString=fgDtYAn94E
+testInt=2
+testClass={"id":3,"name":"684xv"}
+testEnum=1
+color=-16776961
+counter=5

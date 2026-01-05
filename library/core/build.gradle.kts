@@ -1,7 +1,10 @@
-import com.michaelflisar.kmplibrary.BuildFilePlugin
-import com.michaelflisar.kmplibrary.setupDependencies
-import com.michaelflisar.kmplibrary.Target
-import com.michaelflisar.kmplibrary.Targets
+import com.michaelflisar.kmpdevtools.BuildFileUtil
+import com.michaelflisar.kmpdevtools.Targets
+import com.michaelflisar.kmpdevtools.config.LibraryModuleData
+import com.michaelflisar.kmpdevtools.config.sub.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.core.Platform
+import com.michaelflisar.kmpdevtools.core.configs.Config
+import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -9,17 +12,15 @@ plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.binary.compatibility.validator)
-    alias(deps.plugins.kmplibrary.buildplugin)
+    alias(deps.plugins.kmpdevtools.buildplugin)
 }
 
-// get build file plugin
-val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
+// ------------------------
+// Setup
+// ------------------------
 
-// -------------------
-// Informations
-// -------------------
-
-val androidNamespace = "com.michaelflisar.kotpreferences.core"
+val config = Config.read(rootProject)
+val libraryConfig = LibraryConfig.read(rootProject)
 
 val buildTargets = Targets(
     // mobile
@@ -32,17 +33,33 @@ val buildTargets = Targets(
     wasm = true
 )
 
-// -------------------
-// Setup
-// -------------------
+val androidConfig = AndroidLibraryConfig(
+    compileSdk = app.versions.compileSdk,
+    minSdk = app.versions.minSdk
+)
+
+val libraryModuleData = LibraryModuleData(
+    project = project,
+    config = config,
+    libraryConfig = libraryConfig,
+    androidConfig = androidConfig
+)
+
+// ------------------------
+// Kotlin
+// ------------------------
 
 kotlin {
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
 
     //-------------
     // Targets
     //-------------
 
-    buildFilePlugin.setupTargetsLibrary(buildTargets)
+    buildTargets.setupTargetsLibrary(libraryModuleData)
 
     // -------
     // Sources
@@ -59,10 +76,10 @@ kotlin {
         val featureIO by creating { dependsOn(commonMain.get()) }
         val featureNoIO by creating { dependsOn(commonMain.get()) }
 
-        featureBlocking.setupDependencies(sourceSets, buildTargets,listOf(Target.WASM), targetsNotSupported = true)
-        featureNoBlocking.setupDependencies(sourceSets, buildTargets, listOf(Target.WASM))
-        featureIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT)
-        featureNoIO.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT, targetsNotSupported = true)
+        buildTargets.setupDependencies(featureBlocking, sourceSets, buildTargets, listOf(Platform.WASM), platformsNotSupported = true)
+        buildTargets.setupDependencies(featureNoBlocking, sourceSets, buildTargets, listOf(Platform.WASM))
+        buildTargets.setupDependencies(featureIO, sourceSets, buildTargets, Platform.LIST_FILE_SUPPORT)
+        buildTargets.setupDependencies(featureNoIO, sourceSets, buildTargets, Platform.LIST_FILE_SUPPORT, platformsNotSupported = true)
 
         // ---------------------
         // dependencies
@@ -71,40 +88,26 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(kotlinx.coroutines.core)
-            implementation(kotlinx.io.core)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.io.core)
 
         }
 
         androidMain.dependencies {
-            implementation(kotlinx.coroutines.android)
-            implementation(androidx.startup)
+            implementation(libs.kotlinx.coroutines.android)
+            implementation(libs.androidx.startup.runtime)
         }
 
         jvmMain.dependencies {
-            implementation(kotlinx.coroutines.swing)
+            implementation(libs.kotlinx.coroutines.swing)
         }
     }
 }
 
 // -------------------
-// Configurations
+// Publish
 // -------------------
 
-// android configuration
-android {
-    buildFilePlugin.setupAndroidLibrary(
-        androidNamespace = androidNamespace,
-        compileSdk = app.versions.compileSdk,
-        minSdk = app.versions.minSdk,
-        buildConfig = false
-    )
-}
-
 // maven publish configuration
-if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
-    buildFilePlugin.setupMavenPublish()
-
-
-
-
+if (BuildFileUtil.checkGradleProperty(project, "publishToMaven") != false)
+    BuildFileUtil.setupMavenPublish(project, config, libraryConfig)

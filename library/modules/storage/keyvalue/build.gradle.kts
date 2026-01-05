@@ -1,26 +1,27 @@
-import com.michaelflisar.kmplibrary.BuildFilePlugin
-import com.michaelflisar.kmplibrary.setupDependencies
-import com.michaelflisar.kmplibrary.Target
-import com.michaelflisar.kmplibrary.Targets
+import com.michaelflisar.kmpdevtools.BuildFileUtil
+import com.michaelflisar.kmpdevtools.Targets
+import com.michaelflisar.kmpdevtools.config.LibraryModuleData
+import com.michaelflisar.kmpdevtools.config.sub.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.core.Platform
+import com.michaelflisar.kmpdevtools.core.configs.Config
+import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.gradle.maven.publish.plugin)
     alias(libs.plugins.binary.compatibility.validator)
-    alias(deps.plugins.kmplibrary.buildplugin)
+    alias(deps.plugins.kmpdevtools.buildplugin)
 }
 
-// get build file plugin
-val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
+// ------------------------
+// Setup
+// ------------------------
 
-// -------------------
-// Informations
-// -------------------
-
-val androidNamespace = "com.michaelflisar.kotpreferences.keyvalue"
+val config = Config.read(rootProject)
+val libraryConfig = LibraryConfig.read(rootProject)
 
 val buildTargets = Targets(
     // mobile
@@ -33,17 +34,33 @@ val buildTargets = Targets(
     wasm = true
 )
 
-// -------------------
-// Setup
-// -------------------
+val androidConfig = AndroidLibraryConfig(
+    compileSdk = app.versions.compileSdk,
+    minSdk = app.versions.minSdk
+)
+
+val libraryModuleData = LibraryModuleData(
+    project = project,
+    config = config,
+    libraryConfig = libraryConfig,
+    androidConfig = androidConfig
+)
+
+// ------------------------
+// Kotlin
+// ------------------------
 
 kotlin {
+
+    compilerOptions {
+        freeCompilerArgs.add("-Xexpect-actual-classes")
+    }
 
     //-------------
     // Targets
     //-------------
 
-    buildFilePlugin.setupTargetsLibrary(buildTargets)
+    buildTargets.setupTargetsLibrary(libraryModuleData)
 
     // -------
     // Sources
@@ -57,7 +74,7 @@ kotlin {
 
         val featureFile by creating { dependsOn(commonMain.get()) }
 
-        featureFile.setupDependencies(sourceSets, buildTargets, Target.LIST_FILE_SUPPORT)
+        buildTargets.setupDependencies(featureFile, sourceSets, buildTargets, Platform.LIST_FILE_SUPPORT)
 
         // ---------------------
         // dependencies
@@ -66,42 +83,28 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(kotlinx.coroutines.core)
-            implementation(kotlinx.io.core)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.io.core)
 
             // Library
             implementation(project(":kotpreferences:core"))
         }
 
         androidMain.dependencies {
-            implementation(androidx.startup)
+            implementation(libs.androidx.startup.runtime)
         }
 
         wasmJsMain.dependencies {
-            implementation(kotlinx.browser)
-            implementation(kotlinx.serialization.json)
+            implementation(libs.kotlinx.browser)
+            implementation(libs.kotlinx.serialization.json)
         }
     }
 }
 
 // -------------------
-// Configurations
+// Publish
 // -------------------
 
-// android configuration
-android {
-    buildFilePlugin.setupAndroidLibrary(
-        androidNamespace = androidNamespace,
-        compileSdk = app.versions.compileSdk,
-        minSdk = app.versions.minSdk,
-        buildConfig = false
-    )
-}
-
 // maven publish configuration
-if (buildFilePlugin.checkGradleProperty("publishToMaven") != false)
-    buildFilePlugin.setupMavenPublish()
-
-
-
-
+if (BuildFileUtil.checkGradleProperty(project, "publishToMaven") != false)
+    BuildFileUtil.setupMavenPublish(project, config, libraryConfig)

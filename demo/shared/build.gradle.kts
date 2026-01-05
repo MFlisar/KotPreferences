@@ -1,21 +1,26 @@
-import com.michaelflisar.kmplibrary.BuildFilePlugin
-import com.michaelflisar.kmplibrary.setupDependencies
-import com.michaelflisar.kmplibrary.Target
-import com.michaelflisar.kmplibrary.Targets
+import com.michaelflisar.kmpdevtools.Targets
+import com.michaelflisar.kmpdevtools.config.LibraryModuleData
+import com.michaelflisar.kmpdevtools.config.sub.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.core.configs.Config
+import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.compose)
     alias(libs.plugins.kotlin.serialization)
-    alias(deps.plugins.kmplibrary.buildplugin)
+    alias(libs.plugins.compose)
+    alias(libs.plugins.compose.hotreload)
+    alias(deps.plugins.kmpdevtools.buildplugin)
 }
 
-// get build logic plugin
-val buildFilePlugin = project.plugins.getPlugin(BuildFilePlugin::class.java)
+// ------------------------
+// Setup
+// ------------------------
 
-// targets
+val config = Config.read(rootProject)
+val libraryConfig = LibraryConfig.read(rootProject)
+
 val buildTargets = Targets(
     // mobile
     android = true,
@@ -27,11 +32,27 @@ val buildTargets = Targets(
     wasm = true
 )
 
-val androidNamespace = "com.michaelflisar.kotpreferences.demo.shared"
+val androidConfig = AndroidLibraryConfig(
+    compileSdk = app.versions.compileSdk,
+    minSdk = app.versions.minSdk,
+    enableAndroidResources = true
+)
 
-// -------------------
-// Setup
-// -------------------
+val libraryModuleData = LibraryModuleData(
+    project = project,
+    config = config,
+    libraryConfig = libraryConfig,
+    androidConfig = androidConfig
+)
+
+// ------------------------
+// Kotlin
+// ------------------------
+
+compose.resources {
+    packageOfResClass = "${libraryConfig.library.namespace}.shared.resources"
+    publicResClass = true
+}
 
 kotlin {
 
@@ -39,21 +60,33 @@ kotlin {
     // Targets
     //-------------
 
-    buildFilePlugin.setupTargetsLibrary(buildTargets)
+    buildTargets.setupTargetsLibrary(libraryModuleData)
 
-    // -------
-    // Sources
-    // -------
+    // ------------------------
+    // Source Sets
+    // ------------------------
 
     sourceSets {
 
+        // ---------------------
+        // custom source sets
+        // ---------------------
+
+        // --
+
+        // ---------------------
+        // dependencies
+        // ---------------------
 
         commonMain.dependencies {
 
+            // resources
+            api(compose.components.resources)
+
             // Kotlin
-            implementation(kotlinx.coroutines.core)
-            implementation(kotlinx.io.core)
-            implementation(kotlinx.serialization.json)
+            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.kotlinx.io.core)
+            implementation(libs.kotlinx.serialization.json)
 
             // Compose
             implementation(libs.compose.material3)
@@ -68,22 +101,3 @@ kotlin {
         }
     }
 }
-
-// -------------------
-// Configurations
-// -------------------
-
-// android configuration
-android {
-    buildFilePlugin.setupAndroidLibrary(
-        androidNamespace = androidNamespace,
-        compileSdk = app.versions.compileSdk,
-        minSdk = app.versions.minSdk,
-        buildConfig = false
-    )
-}
-
-
-
-
-

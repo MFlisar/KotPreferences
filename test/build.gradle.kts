@@ -23,18 +23,16 @@ kotlin {
 
         commonMain.dependencies {
 
-            //implementation(compose.desktop.currentOs)
-
             // Kotlin
-            implementation(kotlinx.coroutines.core)
+            implementation(libs.kotlinx.coroutines.core)
 
             implementation(libs.kotlin.test)
-            implementation(kotlinx.coroutines.test)
-            implementation(kotlinx.io.core)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.kotlinx.io.core)
 
             implementation(libs.compose.material3)
 
-            implementation(libs.compose.ui.test)
+            implementation(libs.compose.ui.test.junit4)
 
             implementation(project(":kotpreferences:core"))
             implementation(project(":kotpreferences:modules:storage:datastore"))

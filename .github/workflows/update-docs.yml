@@ -1,0 +1,72 @@
+name: Update markdown docs
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+
+  update-docs:
+    name: Update markdown docs
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # 1) Gradle-Task ausführen (updateMarkdownFiles)
+      - name: Setup Java (for Gradle)
+        uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "21"
+          cache: "gradle"
+
+      - name: Run Gradle update task
+        run: |
+          chmod +x ./gradlew
+          ./gradlew updateMarkdownFiles --no-daemon
+
+      # 2a) MarkdownSnippets (install)
+      - name: Setup .NET (for MarkdownSnippets.Tool)
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+      # 2a) MarkdownSnippets (Snippets in .md updaten)
+      - name: Run MarkdownSnippets
+        run: |
+          dotnet tool install --global MarkdownSnippets.Tool
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+          mdsnippets --convention InPlaceOverwrite --omit-snippet-links true
+
+      # 3a) Linkcheck (Markdown, Bilder, intern/extern)
+      - name: Check links with Lychee
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Passe die Globs/Args an dein Repo an
+          args: --root-dir "$(pwd)" --verbose --no-progress './**/*.md' './**/*.html'
+        env:
+          # hilft gegen GitHub rate limiting bei github.com Links
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # 3b) Lychee-Ordner löschen (Cleanup)
+      - name: Remove lychee folder
+        run: rm -rf lychee
+
+      # 4) Änderungen committen & pushen (kostenlos, ohne extra Action)
+      - name: Commit & push changes (if any)
+        run: |
+          if [[ -n "$(git status --porcelain)" ]]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "update-docs: Automated markdown docs update [skip ci]"
+            git push
+          else
+            echo "No changes to commit."
+          fi

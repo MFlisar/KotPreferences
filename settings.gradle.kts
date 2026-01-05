@@ -13,12 +13,6 @@ dependencyResolutionManagement {
         create("app") {
             from(files("gradle/app.versions.toml"))
         }
-        create("androidx") {
-            from(files("gradle/androidx.versions.toml"))
-        }
-        create("kotlinx") {
-            from(files("gradle/kotlinx.versions.toml"))
-        }
         create("deps") {
             from(files("gradle/deps.versions.toml"))
         }
@@ -36,6 +30,15 @@ pluginManagement {
 }
 
 // --------------
+// Settings Plugin
+// --------------
+
+plugins {
+    // version catalogue does not work here!
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "6.2.1" //apply false
+}
+
+// --------------
 // Functions
 // --------------
 
@@ -48,20 +51,29 @@ fun includeModule(path: String, name: String) {
 // Library
 // --------------
 
-includeModule("library/core", ":kotpreferences:core")
-includeModule("library/modules/storage/datastore", ":kotpreferences:modules:storage:datastore")
-includeModule("library/modules/storage/keyvalue", ":kotpreferences:modules:storage:keyvalue")
-includeModule("library/modules/compose", ":kotpreferences:modules:compose")
-includeModule("library/modules/encryption-aes", ":kotpreferences:modules:encryption:aes")
+val libraryConfig = com.michaelflisar.kmpdevtools.core.configs.LibraryConfig.read(rootProject)
+val libraryId = libraryConfig.library.name.lowercase()
+
+// Modules
+includeModule("library", ":$libraryId")
+includeModule("library/core", ":$libraryId:core")
+includeModule("library/modules", ":$libraryId:modules")
+includeModule("library/modules/storage", ":$libraryId:modules:storage")
+includeModule("library/modules/storage/datastore", ":$libraryId:modules:storage:datastore")
+includeModule("library/modules/storage/keyvalue", ":$libraryId:modules:storage:keyvalue")
+includeModule("library/modules/compose", ":$libraryId:modules:compose")
+includeModule("library/modules/encryption-aes", ":$libraryId:modules:encryption-aes")
+
+// Dokka
+include(":dokka")
 
 // --------------
 // Demo
 // --------------
 
+include(":demo")
 include(":demo:shared")
-include(":demo:app:android")
-include(":demo:app:windows")
-include(":demo:app:web")
+include(":demo:app")
 
 // Test
 include(":test")

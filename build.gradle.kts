@@ -1,42 +1,28 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 plugins {
-    // this is necessary to avoid the plugins to be loaded multiple times
-    // in each subproject's classloader
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.compose) apply false
+    alias(libs.plugins.compose.hotreload) apply false
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.kotlin.android) apply false
     alias(libs.plugins.kotlin.parcelize) apply false
     alias(libs.plugins.kotlin.serialization) apply false
     alias(libs.plugins.gradle.maven.publish.plugin) apply false
-    alias(deps.plugins.kmplibrary.buildplugin) apply false
+    alias(libs.plugins.buildkonfig) apply false
+    alias(deps.plugins.kmpdevtools.buildplugin)
 }
 
-// exclude all demo projects from CI builds
-subprojects {
-    if (project.path.contains(":demo:", ignoreCase = true) && System.getenv("CI") == "true") {
-        tasks.configureEach {
-            enabled = false
-        }
-    }
+// ----------------------------
+// Apply custom build file plugin
+// ----------------------------
+
+// provided gradle tasks in root project:
+// * updateMarkdownFiles
+// * macActions
+// * renameProject
+buildFilePlugin {
+
+    // do not build demo projects in CI
+    excludeDemoFromCI.set(true)
 }
-
-// ------------------------
-// Build mkdocs
-// ------------------------
-
-buildscript {
-    dependencies {
-        classpath(deps.kmplibrary.docs)
-    }
-}
-
-com.michaelflisar.kmplibrary.docs.registerBuildDocsTasks(
-    tasks = tasks,
-    project = project,
-    relativeModulesPath = "library",
-    relativeDemosPath = "demo"
-)

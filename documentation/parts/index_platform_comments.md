@@ -1,1 +1,0 @@
-* (1) Currently I only provide an encryption module for android. Pull requests with implementations for other platforms are welcome.
