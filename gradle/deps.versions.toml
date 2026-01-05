@@ -1,0 +1,26 @@
+[versions]
+
+# mflisar (to use local snapshots use "LOCAL-SNAPSHOT" as version)
+kmp-parcelize =             "1.0.1"
+kmpdevtools =               "6.2.1" # also update the version in the root settings.gradle.kts
+democomposables =           "1.0.2"
+cachefileprovider =         "1.0.0"
+
+# others
+# ...
+
+[plugins]
+
+# mflisar
+kmpdevtools-buildplugin =               { id = "io.github.mflisar.kmpdevtools.plugins-build-gradle",    version.ref = "kmpdevtools" }
+
+[libraries]
+
+# mflisar
+kmp-parcelize =                         { module = "io.github.mflisar.parcelize:library", 	            version.ref = "kmp-parcelize" }
+kmpdevtools-core =                      { module = "io.github.mflisar.kmpdevtools:core",                version.ref = "kmpdevtools" }
+democomposables =                       { module = "io.github.mflisar.democomposables:library",         version.ref = "democomposables" }
+cachefileprovider =                     { module = "io.github.mflisar.cachefileprovider:library", 	    version.ref = "cachefileprovider" }
+
+# others
+# ...
