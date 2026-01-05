@@ -14,7 +14,6 @@ This library provides following main features:
 - [Supported Platforms](#computer-supported-platforms)
 - [Setup](#wrench-setup)
 - [Usage](#rocket-usage)
-- [Modules](#file_folder-modules)
 - [Demo](#sparkles-demo)
 - [More](#information_source-more)
 - [API Documentation](#books-api-documentation)
@@ -207,13 +206,6 @@ val name = Preferences.someString.asMutableState()
 
 ```
 
-# :file_folder: Modules
-
-- [Compose](documentation/Modules/Compose.md)
-- [Datastore](documentation/Modules/Datastore.md)
-- [Encryption](documentation/Modules/Encryption.md)
-- [Key Value](documentation/Modules/Key Value.md)
-
 # :sparkles: Demo
 
 A full [demo](/demo) is included inside the demo module, it shows nearly every usage with working examples.
@@ -223,6 +215,10 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
 - [v0.7](documentation/Migration/v0.7.md)
 - [v3.0.0](documentation/Migration/v3.0.0.md)
 - [v4.0.0](documentation/Migration/v4.0.0.md)
+- [Compose](documentation/Modules/Compose.md)
+- [Datastore](documentation/Modules/Datastore.md)
+- [Encryption](documentation/Modules/Encryption.md)
+- [Key Value](documentation/Modules/Key Value.md)
 
 # :books: API Documentation
 
