@@ -5,7 +5,7 @@ on:
   push:
 jobs:
   tools:
-    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@6.3.2
+    uses: MFlisar/kmp-devtools/.github/workflows/gradle-ci.yml@6.3.2
     with:
       run_update_docs: true
       run_dokka_pages: true
