@@ -11,3 +11,9 @@ Markdown:
 ```
 snippet: MySnippetName
 ```
+
+# Gradle Tasks
+
+* `updateMarkdownFiles`
+* `macActions`
+* `renameProject`
