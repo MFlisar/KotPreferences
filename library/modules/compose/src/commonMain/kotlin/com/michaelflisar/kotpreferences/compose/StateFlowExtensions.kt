@@ -20,7 +20,7 @@ fun <T> StorageSetting<T>.asStateFlow(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000)
 ): StateFlow<T?>
-/* --8<-- [end: asStateFlow1] */ {
+/* end-snippet */ {
     return flow.stateIn(
         scope = scope,
         started = started,
@@ -35,7 +35,7 @@ fun <T, T2> StorageSetting<T>.asStateFlow(
     mapper: (T?) -> T2?,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000),
 ): StateFlow<T2?>
-/* --8<-- [end: asStateFlow2] */ {
+/* -end-snippet */ {
     return flow.map { mapper(it) }.stateIn(
         scope = scope,
         started = started,
@@ -53,7 +53,7 @@ fun <T> StorageSetting<T>.asStateFlowNotNull(
     scope: CoroutineScope,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000)
 ): StateFlow<T>
-/* --8<-- [end: asStateFlowNotNull1] */ {
+/* end-snippet */ {
     return flow.stateIn(
         scope = scope,
         started = started,
@@ -68,7 +68,7 @@ fun <T, T2> StorageSetting<T>.asStateFlowNotNull(
     mapper: (T) -> T2,
     started: SharingStarted = SharingStarted.WhileSubscribed(5_000),
 ): StateFlow<T2>
-/* --8<-- [end: asStateFlowNotNull2] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.stateIn(
         scope = scope,
         started = started,

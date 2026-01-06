@@ -20,10 +20,10 @@ import kotlinx.coroutines.withContext
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableState1] */
+/* begin-snippet: MutableStateExtensions::asMutableState1 */
 @Composable
 fun <T> StorageSetting<T>.asMutableState(): MutableState<T?>
-/* --8<-- [end: asMutableState1] */ {
+/* end-snippet */ {
     val state = collectAsState(tryGetValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -34,13 +34,13 @@ fun <T> StorageSetting<T>.asMutableState(): MutableState<T?>
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableState2] */
+/* begin-snippet: MutableStateExtensions::asMutableState2 */
 @Composable
 fun <T, X> StorageSetting<T>.asMutableState(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X?>
-/* --8<-- [end: asMutableState2] */ {
+/* end-snippet */ {
 
     val state = collectAsState(tryGetValueNotNull(), mapper)
     return state.asMutableState {
@@ -56,10 +56,10 @@ fun <T, X> StorageSetting<T>.asMutableState(
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateNotNull1] */
+/* begin-snippet: MutableStateExtensions::asMutableStateNotNull1 */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
-/* --8<-- [end: asMutableStateNotNull1] */ {
+/* end-snippet */ {
     val state = collectAsStateNotNull(getValueNotNull())
     return state.asMutableState {
         withContext(StorageContext) {
@@ -69,13 +69,13 @@ fun <T> StorageSetting<T>.asMutableStateNotNull(): MutableState<T>
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateNotNull2] */
+/* begin-snippet: MutableStateExtensions::asMutableStateNotNull2 */
 @Composable
 fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X>
-/* --8<-- [end: asMutableStateNotNull2] */ {
+/* end-snippet */ {
     val state = collectAsStateNotNull(getValueNotNull(), mapper)
     return state.asMutableState {
         withContext(StorageContext) {

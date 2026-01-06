@@ -13,22 +13,22 @@ import kotlinx.coroutines.flow.map
 // nullable versions
 // ------------------------
 
-/* --8<-- [start: collectAsState1] */
+/* begin-snippet: CollectAsStateExtensions::collectAsState1 */
 @Composable
 fun <T> StorageSetting<T>.collectAsState(
     initialValue: T? = getCachedValue()
 ): State<T?>
-/* --8<-- [end: collectAsState1] */ {
+/* end-snippet */ {
     return flow.collectAsState(initial = initialValue)
 }
 
-/* --8<-- [start: collectAsState2] */
+/* begin-snippet: CollectAsStateExtensions::collectAsState2 */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsState(
     initialValue: T? = getCachedValue(),
     mapper: (T) -> X,
 ): State<X?>
-/* --8<-- [end: collectAsState2] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.collectAsState(initial = initialValue?.let { mapper(it) })
 }
 
@@ -42,7 +42,7 @@ fun <T, X> StorageSetting<T>.collectAsState(
 fun <T> StorageSetting<T>.collectAsStateNotNull(
     initialValue: T = getValueNotNull()
 ): State<T>
-/* --8<-- [end: collectAsStateNotNull1] */ {
+/* end-snippet */ {
     return flow.collectAsState(initial = initialValue)
 }
 
@@ -53,7 +53,7 @@ fun <T, X> StorageSetting<T>.collectAsStateNotNull(
     initialValue: T = getValueNotNull(),
     mapper: (T) -> X,
 ): State<X>
-/* --8<-- [end: collectAsStateNotNull2] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.collectAsState(initial = mapper(initialValue))
 }
 

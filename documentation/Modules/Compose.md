@@ -1,12 +1,19 @@
----
-icon: material/puzzle
----
-
 This module is placed inside the `extension-compose` artifact and offers some helpful compose extensions for the `Storage` class.
 
 All extensions functions are on `StorageSetting<T>` and following are available:
 
 Available extensions are listed below:
+
+<details>
+
+<summary><b><code>StorageSetting<T>.collectAsState(...)</code> functions</b></summary>
+
+snippet: CollectAsStateExtensions::collectAsState1
+
+snippet: CollectAsStateExtensions::collectAsState2
+
+</details>
+
 
 ??? code "`StorageSetting<T>.collectAsState(...)` functions"
 

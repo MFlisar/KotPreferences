@@ -32,7 +32,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T?>
-/* --8<-- [end: asMutableStateWithLifecycle1] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycle(lifecycle, tryGetValueNotNull(), minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -50,7 +50,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T?>
-/* --8<-- [end: asMutableStateWithLifecycle2] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycle(tryGetValueNotNull(), lifecycleOwner, minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -70,7 +70,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X?>
-/* --8<-- [end: asMutableStateWithLifecycle3] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycle(lifecycle, tryGetValueNotNull(), minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -90,7 +90,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X?>
-/* --8<-- [end: asMutableStateWithLifecycle4] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycle(tryGetValueNotNull(), lifecycleOwner, minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -112,7 +112,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T>
-/* --8<-- [end: asMutableStateWithLifecycleNotNull1] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycleNotNull(lifecycle, getValueNotNull(), minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -129,7 +129,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
 ): MutableState<T>
-/* --8<-- [end: asMutableStateWithLifecycleNotNull2] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycleNotNull(getValueNotNull(), lifecycleOwner, minActiveState, context)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -148,7 +148,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X>
-/* --8<-- [end: asMutableStateWithLifecycleNotNull3] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycleNotNull(lifecycle, getValueNotNull(), minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {
@@ -167,7 +167,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     mapper: (T) -> X,
     unmapper: (X) -> T,
 ): MutableState<X>
-/* --8<-- [end: asMutableStateWithLifecycleNotNull4] */ {
+/* end-snippet */ {
     val state = collectAsStateWithLifecycleNotNull(getValueNotNull(), lifecycleOwner, minActiveState, context, mapper)
     return state.asMutableState {
         withContext(StorageContext) {

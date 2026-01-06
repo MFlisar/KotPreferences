@@ -27,7 +27,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Dokka HTML
-        run: ./gradlew :dokka:dokkaGenerate
+        run: ./gradlew :dokka:dokkaGenerate --no-cache
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

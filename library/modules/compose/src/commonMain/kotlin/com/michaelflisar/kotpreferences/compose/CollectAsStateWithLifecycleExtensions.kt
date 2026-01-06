@@ -19,7 +19,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycle1] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycle1 */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
@@ -27,7 +27,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext
 ): State<T?>
-/* --8<-- [end: collectAsStateWithLifecycle1] */ {
+/* end-snippet */{
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycle = lifecycle,
@@ -37,7 +37,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycle2] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycle2 */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     lifecycle: Lifecycle,
@@ -46,7 +46,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
 ): State<X?>
-/* --8<-- [end: collectAsStateWithLifecycle2] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = initialValue?.let { mapper(it) },
         lifecycle = lifecycle,
@@ -56,7 +56,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycle3] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycle3 */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     initialValue: T? = tryGetValueNotNull(),
@@ -64,7 +64,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext
 ): State<T?>
-/* --8<-- [end: collectAsStateWithLifecycle3] */ {
+/* end-snippet */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycleOwner = lifecycleOwner,
@@ -74,7 +74,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycle4] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycle4 */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     initialValue: T? = tryGetValueNotNull(),
@@ -83,7 +83,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
 ): State<X?>
-/* --8<-- [end: collectAsStateWithLifecycle4] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = initialValue?.let { mapper(it) },
         lifecycleOwner = lifecycleOwner,
@@ -97,7 +97,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycleNotNull1] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycleNotNull1 */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
@@ -105,7 +105,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext,
 ): State<T>
-/* --8<-- [end: collectAsStateWithLifecycleNotNull1] */ {
+/* end-snippet */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycle = lifecycle,
@@ -115,7 +115,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycleNotNull2] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycleNotNull2 */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
@@ -124,7 +124,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
 ): State<X>
-/* --8<-- [end: collectAsStateWithLifecycleNotNull2] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = mapper(initialValue),
         lifecycle = lifecycle,
@@ -134,7 +134,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycleNotNull3] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycleNotNull3 */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     initialValue: T = getValueNotNull(),
@@ -142,7 +142,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     minActiveState: Lifecycle.State = Lifecycle.State.STARTED,
     context: CoroutineContext = EmptyCoroutineContext
 ): State<T>
-/* --8<-- [end: collectAsStateWithLifecycleNotNull3] */ {
+/* end-snippet */ {
     return flow.collectAsStateWithLifecycle(
         initialValue = initialValue,
         lifecycleOwner = lifecycleOwner,
@@ -152,7 +152,7 @@ fun <T> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateWithLifecycleNotNull4] */
+/* begin-snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycleNotNull4 */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     initialValue: T = getValueNotNull(),
@@ -161,7 +161,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     context: CoroutineContext = EmptyCoroutineContext,
     mapper: (T) -> X,
 ): State<X>
-/* --8<-- [end: collectAsStateWithLifecycleNotNull4] */ {
+/* end-snippet */ {
     return flow.map { mapper(it) }.collectAsStateWithLifecycle(
         initialValue = mapper(initialValue),
         lifecycleOwner = lifecycleOwner,
