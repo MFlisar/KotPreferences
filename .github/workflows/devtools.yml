@@ -1,0 +1,51 @@
+# source: https://github.com/MFlisar/kmp-devtools/blob/6.3.2/.github/workflows/gradle-ci.yml
+name: Devtools
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "*" ]
+  release:
+    types: [ published ]
+
+env:
+  KMP_DEVTOOLS_VERSION: 6.3.2
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  update-docs:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@${{ env.KMP_DEVTOOLS_VERSION }}
+    with:
+      run_update_docs: true
+      java: "17"
+    secrets: inherit
+
+  dokka-pages:
+    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@${{ env.KMP_DEVTOOLS_VERSION }}
+    with:
+      run_dokka_pages: true
+      java: "17"
+    secrets: inherit
+
+  release-notes:
+    if: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') }}
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@${{ env.KMP_DEVTOOLS_VERSION }}
+    with:
+      run_release_notes: true
+    secrets: inherit
+
+  publish:
+    if: ${{ github.event_name == 'release' }}
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@${{ env.KMP_DEVTOOLS_VERSION }}
+    with:
+      run_publish_maven_central: true
+      java: "17"
+      publish_runs_on: "macos-latest"
+    secrets: inherit
+
