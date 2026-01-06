@@ -29,13 +29,6 @@ modules:
   - artifact-id: encryption-aes
     description: Provides AES based encryption
     path: library/modules/encryption-aes
-  # shared and dokka
-  - artifact-id: ""
-    description: ""
-    path: demo/shared
-  - artifact-id: ""
-    description: ""
-    path: dokka
 
 # XCFrameworks [name, path, targets (ios, macos)]
 xcframeworks: []
