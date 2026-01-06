@@ -15,7 +15,7 @@ permissions:
 jobs:
   update-docs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
-    uses: &devtools MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@6.3.2
+    uses: &devtools MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@6.3.3
     with:
       run_update_docs: true
       java: "17"
