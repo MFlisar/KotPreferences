@@ -71,9 +71,9 @@ snippet: CollectAsStateWithLifecycleExtensions::collectAsStateWithLifecycleNotNu
 
 <summary><b><code>StorageSetting<T>.asMutableState(...)</code> functions</b></summary>
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableState1
+snippet: MutableStateExtensions::asMutableState1
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableState2
+snippet: MutableStateExtensions::asMutableState2
 
 </details>
 
@@ -81,9 +81,9 @@ snippet: CollectAsStateWithLifecycleExtensions::asMutableState2
 
 <summary><b><code>StorageSetting<T>.asMutableStateNotNull(...)</code> functions</b></summary>
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableStateNotNull1
+snippet: MutableStateExtensions::asMutableStateNotNull1
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableStateNotNull2
+snippet: MutableStateExtensions::asMutableStateNotNull2
 
 </details>
 
@@ -91,13 +91,13 @@ snippet: CollectAsStateWithLifecycleExtensions::asMutableStateNotNull2
 
 <summary><b><code>StorageSetting<T>.asMutableStateWithLifecycle(...)</code> functions</b></summary>
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableStateWithLifecycle1
+snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle1
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableStateWithLifecycle2
+snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle2
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableStateWithLifecycle3
+snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle3
 
-snippet: CollectAsStateWithLifecycleExtensions::asMutableStateWithLifecycle4
+snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle4
 
 </details>
 

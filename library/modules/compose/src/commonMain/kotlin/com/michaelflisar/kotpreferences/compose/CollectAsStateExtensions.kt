@@ -37,7 +37,7 @@ fun <T, X> StorageSetting<T>.collectAsState(
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateNotNull1] */
+/* begin-snippet: CollectAsStateExtensions::collectAsStateNotNull1 */
 @Composable
 fun <T> StorageSetting<T>.collectAsStateNotNull(
     initialValue: T = getValueNotNull()
@@ -47,7 +47,7 @@ fun <T> StorageSetting<T>.collectAsStateNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: collectAsStateNotNull2] */
+/* begin-snippet: CollectAsStateExtensions::collectAsStateNotNull2 */
 @Composable
 fun <T, X> StorageSetting<T>.collectAsStateNotNull(
     initialValue: T = getValueNotNull(),
