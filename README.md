@@ -221,8 +221,8 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
 # :information_source: More
 
 - Migration
-  - [v0.7](documentation/Migration/v0.7.md)
-  - [v3.0.0](documentation/Migration/v3.0.0.md)
+  - [Version `0.7` is a kotlin multiplatform rewrite, that's why some fundamantal changes needed to be done!](documentation/Migration/v0.7.md)
+  - [Only the compose module has been changed like following:](documentation/Migration/v3.0.0.md)
   - [v4.0.0](documentation/Migration/v4.0.0.md)
 
 # :books: API
