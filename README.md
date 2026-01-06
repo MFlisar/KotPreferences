@@ -1,6 +1,6 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core) ![API](https://img.shields.io/badge/api-23%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/KotPreferences.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin) [![License](https://img.shields.io/github/license/MFlisar/KotPreferences?style=for-the-badge)](https://github.com/MFlisar/KotPreferences/blob/main/LICENSE)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core) ![API](https://img.shields.io/badge/api-23%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/KotPreferences.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
 # KotPreferences
-![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
+![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
 This library provides following main features:
 
@@ -9,7 +9,7 @@ This library provides following main features:
 * update dependencies via `suspend` functions
 * use those preferences inside compose as `State`, `MutableState` or `StateFlow`
 
-# :information_source: Table of Contents
+# Table of Contents
 
 - [Supported Platforms](#computer-supported-platforms)
 - [Setup](#wrench-setup)
@@ -17,24 +17,24 @@ This library provides following main features:
 - [Modules](#file_folder-modules)
 - [Demo](#sparkles-demo)
 - [More](#information_source-more)
-- [API Documentation](#books-api-documentation)
+- [API](#books-api)
 - [Other Libraries](#bulb-other-libraries)
 
 # :computer: Supported Platforms
 
 | Module | android | iOS | windows | macOS | wasm |
 |---|---|---|---|---|---|
-| Core | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Datastore Storage | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Key-Value Storage | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Compose Extension | ✅ | ✅ | ✅ | ✅ | ✅ |
-| AES Encryption | ✅ | ❌ | ❌ | ❌ | ❌ |
+| core | ✅ | ✅ | ✅ | ✅ | ✅ |
+| storage-datastore | ✅ | ✅ | ✅ | ✅ | ❌ |
+| storage-keyvalue | ✅ | ✅ | ✅ | ✅ | ✅ |
+| extension-compose | ✅ | ✅ | ✅ | ✅ | ✅ |
+| encryption-aes | ✅ | ❌ | ❌ | ❌ | ❌ |
 
 # :wrench: Setup
 
 <details open>
 
-<summary>Version Catalogue</summary>
+<summary><b>Using Version Catalogs</b></summary>
 
 <br>
 
@@ -68,7 +68,7 @@ implementation(libs.encryption.aes)
 
 <details>
 
-<summary>Dependencies</summary>
+<summary><b>Direct Dependency Notation</b></summary>
 
 <br>
 
@@ -225,7 +225,7 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
   - [v3.0.0](documentation/Migration/v3.0.0.md)
   - [v4.0.0](documentation/Migration/v4.0.0.md)
 
-# :books: API Documentation
+# :books: API
 
 Check out the [API documentation](https://MFlisar.github.io/KotPreferences/).
 
