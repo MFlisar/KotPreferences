@@ -39,7 +39,7 @@ jobs:
 
       # 5) Build Dokka HTML
       - name: Build Dokka HTML
-        run: ./gradlew :library:dokka:dokkaGenerate --no-build-cache
+        run: ./gradlew :library:dokka:dokkaGenerate
 
       # 6) Upload Pages artifact
       - name: Upload Pages artifact

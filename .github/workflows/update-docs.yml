@@ -39,7 +39,7 @@ jobs:
 
       # 5) run gradle task
       - name: Run Gradle update task
-        run: ./gradlew updateMarkdownFiles --build-cache --no-daemon
+        run: ./gradlew updateMarkdownFiles
 
       # 6) MarkdownSnippets - install
       - name: Setup .NET (for MarkdownSnippets.Tool)
