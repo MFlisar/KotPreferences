@@ -8,9 +8,24 @@ Available extensions are listed below:
 
 <summary><b><code>StorageSetting<T>.collectAsState(...)</code> functions</b></summary>
 
-snippet: CollectAsStateExtensions::collectAsState1
+<!-- snippet: CollectAsStateExtensions::collectAsState1 -->
+```kt
+@Composable
+fun <T> StorageSetting<T>.collectAsState(
+    initialValue: T? = getCachedValue()
+): State<T?>
+```
+<!-- endSnippet -->
 
-snippet: CollectAsStateExtensions::collectAsState2
+<!-- snippet: CollectAsStateExtensions::collectAsState2 -->
+```kt
+@Composable
+fun <T, X> StorageSetting<T>.collectAsState(
+    initialValue: T? = getCachedValue(),
+    mapper: (T) -> X,
+): State<X?>
+```
+<!-- endSnippet -->
 
 </details>
 
