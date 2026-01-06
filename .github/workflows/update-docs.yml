@@ -21,17 +21,22 @@ jobs:
           fetch-depth: 0
 
       # 1) Gradle-Task ausführen (updateMarkdownFiles)
-      - name: Setup Java (for Gradle)
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          distribution: "temurin"
-          java-version: "21"
-          cache: "gradle"
+          distribution: temurin
+          java-version: 17
+
+      - name: Grant Permission to Execute Gradle
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
 
       - name: Run Gradle update task
-        run: |
-          chmod +x ./gradlew
-          ./gradlew updateMarkdownFiles --no-daemon
+        run: ./gradlew updateMarkdownFiles --no-daemon
 
       # 2a) MarkdownSnippets (install)
       - name: Setup .NET (for MarkdownSnippets.Tool)

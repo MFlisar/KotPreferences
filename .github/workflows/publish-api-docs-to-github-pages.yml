@@ -26,6 +26,11 @@ jobs:
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
 
+      - name: Build with Gradle
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: build
+
       - name: Build Dokka HTML
         run: ./gradlew :library:dokka:dokkaGenerate --no-build-cache
 

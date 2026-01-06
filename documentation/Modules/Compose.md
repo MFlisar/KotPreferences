@@ -4,7 +4,7 @@ All extensions functions are on `StorageSetting<T>` and following are available:
 
 Available extensions are listed below:
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.collectAsState(...)</code> functions</b></summary>
 
@@ -29,7 +29,7 @@ fun <T, X> StorageSetting<T>.collectAsState(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.collectAsStateNotNull(...)</code> functions</b></summary>
 
@@ -54,7 +54,7 @@ fun <T, X> StorageSetting<T>.collectAsStateNotNull(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.collectAsStateNotNull(...)</code> functions</b></summary>
 
@@ -110,7 +110,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.collectAsStateWithLifecycleNotNull(...)</code> functions</b></summary>
 
@@ -166,7 +166,7 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.asMutableState(...)</code> functions</b></summary>
 
@@ -189,7 +189,7 @@ fun <T, X> StorageSetting<T>.asMutableState(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.asMutableStateNotNull(...)</code> functions</b></summary>
 
@@ -212,7 +212,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateNotNull(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.asMutableStateWithLifecycle(...)</code> functions</b></summary>
 
@@ -266,7 +266,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.asMutableStateWithLifecycleNotNull(...)</code> functions</b></summary>
 
@@ -320,7 +320,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.asStateFlow(...)</code> functions</b></summary>
 
@@ -345,7 +345,7 @@ fun <T, T2> StorageSetting<T>.asStateFlow(
 
 </details>
 
-<details open>
+<details>
 
 <summary><b><code>StorageSetting<T>.asStateFlowNotNull(...)</code> functions</b></summary>
 
