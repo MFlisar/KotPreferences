@@ -1,4 +1,4 @@
-name: Update markdown docs
+name: Update Readme.md
 
 on:
   push:

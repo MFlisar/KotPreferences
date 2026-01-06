@@ -6,10 +6,9 @@ plugins {
     alias(libs.plugins.dokka)
 }
 
-val libraryConfig = LibraryConfig.read(rootProject)
-val libraryId = libraryConfig.library.name.lowercase()
-
 dependencies {
+    val libraryConfig = LibraryConfig.read(rootProject)
+    val libraryId = libraryConfig.library.name.lowercase()
     libraryConfig.modules
         .filter { it.artifactId.isNotEmpty() }
         .forEach {
@@ -19,5 +18,6 @@ dependencies {
 }
 
 dokka {
+    val libraryConfig = LibraryConfig.read(rootProject)
     moduleName.set(libraryConfig.library.name)
 }
