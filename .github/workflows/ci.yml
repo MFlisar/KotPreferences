@@ -1,0 +1,15 @@
+# source: https://github.com/MFlisar/kmp-devtools/blob/6.3.2/.github/workflows/gradle-ci.yml
+name: CI
+on:
+  workflow_dispatch:
+  push:
+jobs:
+  tools:
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools.yml@6.3.2
+    with:
+      run_update_docs: true
+      run_dokka_pages: true
+      run_release_notes: true
+      run_publish_maven_central: true
+      java: "17"
+    secrets: inherit
