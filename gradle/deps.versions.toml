@@ -2,7 +2,7 @@
 
 # mflisar (to use local snapshots use "LOCAL-SNAPSHOT" as version)
 kmp-parcelize =             "1.0.1"
-kmpdevtools =               "6.3.1" # also update the version in the root settings.gradle.kts
+kmpdevtools =               "6.4.0" # also update the version in the root settings.gradle.kts + github workflow files
 democomposables =           "1.0.2"
 cachefileprovider =         "1.0.0"
 
