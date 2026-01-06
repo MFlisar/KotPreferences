@@ -15,42 +15,46 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+      # 1) Repo checkout
       - name: Checkout
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      # 1) Gradle-Task ausführen (updateMarkdownFiles)
+      # 2) set up JDK
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
+      # 3) make gradle executable
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
+      # 4) set up gradle
+      - name: Set up Gradle (with caching)
+        uses: gradle/actions/setup-gradle@v3
 
+      # 5) run gradle task
       - name: Run Gradle update task
-        run: ./gradlew updateMarkdownFiles --no-daemon
+        run: ./gradlew updateMarkdownFiles --build-cache --no-daemon
 
-      # 2a) MarkdownSnippets (install)
+      # 6) MarkdownSnippets - install
       - name: Setup .NET (for MarkdownSnippets.Tool)
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
-      # 2a) MarkdownSnippets (Snippets in .md updaten)
+
+      # 7) MarkdownSnippets - Snippets in .md updaten
       - name: Run MarkdownSnippets
         run: |
           dotnet tool install --global MarkdownSnippets.Tool
           echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
           mdsnippets --convention InPlaceOverwrite --omit-snippet-links true
 
-      # 3a) Linkcheck (Markdown, Bilder, intern/extern)
+      # 8) Linkcheck (Markdown, Bilder, intern/extern)
       - name: Check links with Lychee
         uses: lycheeverse/lychee-action@v2
         with:
@@ -59,11 +63,12 @@ jobs:
         env:
           # hilft gegen GitHub rate limiting bei github.com Links
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      # 3b) Lychee-Ordner löschen (Cleanup)
+
+      # 9) Lychee-Ordner löschen (Cleanup)
       - name: Remove lychee folder
         run: rm -rf lychee
 
-      # 4) Änderungen committen & pushen (kostenlos, ohne extra Action)
+      # 10) Änderungen committen
       - name: Commit & push changes (if any)
         run: |
           if [[ -n "$(git status --porcelain)" ]]; then
