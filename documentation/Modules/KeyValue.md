@@ -7,33 +7,33 @@ key2=value2
 
 This module is placed inside the `storage-keyvalue` artifact and can simply be used like following:
 
-=== "Android/iOS"
+#### Android/iOS
 
-    ```kotlin
-    object SettingsModel : SettingsModel(
-        KeyValueStorage.create(
-            fileName: String = "settings.txt",
-            delimiter: String = "=",
-            encryption: StorageEncryption? = null,
-            cache: Boolean = true
-        )
-    ) {
-        // ...
-    }
-    ```
+```kotlin
+object SettingsModel : SettingsModel(
+    KeyValueStorage.create(
+        fileName: String = "settings.txt",
+        delimiter: String = "=",
+        encryption: StorageEncryption? = null,
+        cache: Boolean = true
+    )
+) {
+    // ...
+}
+```
 
-=== "JVM"
+#### JVM
 
-    ```kotlin
-    object SettingsModel : SettingsModel(
-        KeyValueStorage.create(
-            folder = File(System.getProperty("user.dir")),
-            fileName = "data.txt",
-            delimiter: String = "=",
-            encryption: StorageEncryption? = null,
-            cache: Boolean = true
-        )
-    ) {
-        // ...
-    }
-    ```
+```kotlin
+object SettingsModel : SettingsModel(
+    KeyValueStorage.create(
+        folder = File(System.getProperty("user.dir")),
+        fileName = "data.txt",
+        delimiter: String = "=",
+        encryption: StorageEncryption? = null,
+        cache: Boolean = true
+    )
+) {
+    // ...
+}
+```

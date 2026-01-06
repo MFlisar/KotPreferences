@@ -25,7 +25,7 @@ import kotlin.coroutines.EmptyCoroutineContext
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycle1] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle1 */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycle: Lifecycle,
@@ -43,7 +43,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycle2] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle2 */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -61,7 +61,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycle3] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle3 */
 @Composable
 fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycle: Lifecycle,
@@ -81,7 +81,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycle4] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycle4 */
 @Composable
 fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -105,7 +105,7 @@ fun <T, X> StorageSetting<T>.asMutableStateWithLifecycle(
 // ------------------------
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycleNotNull1] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycleNotNull1 */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
@@ -122,7 +122,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycleNotNull2] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycleNotNull2 */
 @Composable
 fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,
@@ -139,7 +139,7 @@ fun <T> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycleNotNull3] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycleNotNull3 */
 @Composable
 fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycle: Lifecycle,
@@ -158,7 +158,7 @@ fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
 }
 
 @OptIn(InternalApi::class)
-/* --8<-- [start: asMutableStateWithLifecycleNotNull4] */
+/* begin-snippet: MutableStateWithLifecycleExtensions::asMutableStateWithLifecycleNotNull4 */
 @Composable
 fun <T : Any, X : Any> StorageSetting<T>.asMutableStateWithLifecycleNotNull(
     lifecycleOwner: LifecycleOwner = LocalLifecycleOwner.current,

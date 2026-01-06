@@ -42,28 +42,13 @@ plugins {
 val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFilePlugin::class.java)
 
 // --------------
-// Functions
-// --------------
-
-fun includeModule(path: String, libraryId: String) {
-    val libraryFolder = "library"
-    val name =  if (path == libraryFolder) {
-        ":$libraryId"
-    } else {
-        ":$libraryId:" + path.replace("$libraryFolder/", "").replace("/", ":")
-    }
-    include(name)
-    project(name).projectDir = file(path)
-}
-
-// --------------
 // Library
 // --------------
 
 val libraryConfig = com.michaelflisar.kmpdevtools.core.configs.LibraryConfig.read(rootProject)
 val libraryId = libraryConfig.library.name.lowercase()
 
-// libraryId
+// Library Modules
 settingsPlugin.includeModules(libraryId, libraryConfig)
 
 // Dokka
