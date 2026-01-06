@@ -21,5 +21,3 @@ dokka {
     val libraryConfig = LibraryConfig.read(rootProject)
     moduleName.set(libraryConfig.library.name)
 }
-
-

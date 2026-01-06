@@ -15,25 +15,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
 
+      # 1) Repo checkout
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      # 2) set up JDK
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: 17
 
+      # 3) make gradle executable
       - name: Grant Permission to Execute Gradle
         run: chmod +x gradlew
 
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@v2
-        with:
-          arguments: build
+      # 4) set up gradle
+      - name: Set up Gradle (with caching)
+        uses: gradle/actions/setup-gradle@v3
 
+      # 5) Build Dokka HTML
       - name: Build Dokka HTML
         run: ./gradlew :library:dokka:dokkaGenerate --no-build-cache
 
+      # 6) Upload Pages artifact
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
