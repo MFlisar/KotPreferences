@@ -11,7 +11,7 @@ permissions:
 jobs:
 
   update-docs:
-    name: Update markdown docs
+    name: Update Readme.md
     runs-on: ubuntu-latest
 
     steps:

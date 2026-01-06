@@ -12,33 +12,30 @@ maven:
   group-id: io.github.mflisar.kotpreferences
   primary-artifact-id: core # used to detect latest release version of the library (dynamically on the published homepage)
 
-# Modules - list of modules [name, artifact-id, description, path, exclude-from-docs (optional)]
+# Modules - list of modules [artifact-id, description, path]
 modules:
-  - name: Core
-    artifact-id: core
+  - artifact-id: core
     description: This is the core module that holds the android app context
     path: library/core
-  - name: Datastore Storage
-    artifact-id: storage-datastore
+  - artifact-id: storage-datastore
     description: Provides a storage implementation based on jetpack datastore
     path: library/modules/storage/datastore
-  - name: Key-Value Storage
-    artifact-id: storage-keyvalue
+  - artifact-id: storage-keyvalue
     description: Provides a storage implementation based on a simple key-value text file
     path:  library/modules/storage/keyvalue
-  - name: Compose Extension
-    artifact-id: extension-compose
+  - artifact-id: extension-compose
     description: Provides composable extensions
     path: library/modules/compose
-  - name: AES Encryption
-    artifact-id: encryption-aes
+  - artifact-id: encryption-aes
     description: Provides AES based encryption
     path: library/modules/encryption-aes
-  - name: demo shared
-    artifact-id: ""
+  # shared and dokka
+  - artifact-id: ""
     description: ""
     path: demo/shared
-    exclude-from-docs: true
+  - artifact-id: ""
+    description: ""
+    path: dokka
 
 # XCFrameworks [name, path, targets (ios, macos)]
 xcframeworks: []

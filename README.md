@@ -212,7 +212,7 @@ val name = Preferences.someString.asMutableState()
 - [Compose](documentation/Modules/Compose.md)
 - [Datastore](documentation/Modules/Datastore.md)
 - [Encryption](documentation/Modules/Encryption.md)
-- [Key Value](documentation/Modules/Key Value.md)
+- [KeyValue](documentation/Modules/KeyValue.md)
 
 # :sparkles: Demo
 
@@ -220,9 +220,10 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
 
 # :information_source: More
 
-- [v0.7](documentation/Migration/v0.7.md)
-- [v3.0.0](documentation/Migration/v3.0.0.md)
-- [v4.0.0](documentation/Migration/v4.0.0.md)
+- Migration
+  - [v0.7](documentation/Migration/v0.7.md)
+  - [v3.0.0](documentation/Migration/v3.0.0.md)
+  - [v4.0.0](documentation/Migration/v4.0.0.md)
 
 # :books: API Documentation
 

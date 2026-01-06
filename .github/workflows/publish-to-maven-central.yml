@@ -8,7 +8,7 @@ env:
 
 jobs:
   publish:
-    name: Publish
+    name: Publish to Maven Central
     runs-on: macos-latest
 
     steps:

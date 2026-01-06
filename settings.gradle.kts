@@ -36,14 +36,22 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "6.2.2" //apply false
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "6.3.0" //apply false
 }
+
+val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFilePlugin::class.java)
 
 // --------------
 // Functions
 // --------------
 
-fun includeModule(path: String, name: String) {
+fun includeModule(path: String, libraryId: String) {
+    val libraryFolder = "library"
+    val name =  if (path == libraryFolder) {
+        ":$libraryId"
+    } else {
+        ":$libraryId:" + path.replace("$libraryFolder/", "").replace("/", ":")
+    }
     include(name)
     project(name).projectDir = file(path)
 }
@@ -55,15 +63,8 @@ fun includeModule(path: String, name: String) {
 val libraryConfig = com.michaelflisar.kmpdevtools.core.configs.LibraryConfig.read(rootProject)
 val libraryId = libraryConfig.library.name.lowercase()
 
-// Modules
-includeModule("library", ":$libraryId")
-includeModule("library/core", ":$libraryId:core")
-includeModule("library/modules", ":$libraryId:modules")
-includeModule("library/modules/storage", ":$libraryId:modules:storage")
-includeModule("library/modules/storage/datastore", ":$libraryId:modules:storage:datastore")
-includeModule("library/modules/storage/keyvalue", ":$libraryId:modules:storage:keyvalue")
-includeModule("library/modules/compose", ":$libraryId:modules:compose")
-includeModule("library/modules/encryption-aes", ":$libraryId:modules:encryption-aes")
+// libraryId
+settingsPlugin.includeModules(libraryId, libraryConfig)
 
 // Dokka
 include(":dokka")
