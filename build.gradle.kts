@@ -1,26 +1,31 @@
 plugins {
+    // kmp + app/library
+    alias(libs.plugins.jetbrains.kotlin.multiplatform) apply false
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.android.library) apply false
-    alias(libs.plugins.kotlin.compose) apply false
-    alias(libs.plugins.compose) apply false
-    alias(libs.plugins.compose.hotreload) apply false
-    alias(libs.plugins.kotlin.multiplatform) apply false
-    alias(libs.plugins.kotlin.android) apply false
-    alias(libs.plugins.kotlin.parcelize) apply false
-    alias(libs.plugins.kotlin.serialization) apply false
-    alias(libs.plugins.gradle.maven.publish.plugin) apply false
-    alias(libs.plugins.buildkonfig) apply false
+    // org.jetbrains.kotlin
+    alias(libs.plugins.jetbrains.kotlin.android) apply false
+    alias(libs.plugins.jetbrains.kotlin.compose) apply false
+    alias(libs.plugins.jetbrains.kotlin.parcelize) apply false
+    alias(libs.plugins.jetbrains.kotlin.serialization) apply false
+    // org.jetbrains.compose
+    alias(libs.plugins.jetbrains.compose) apply false
+    alias(libs.plugins.jetbrains.compose.hotreload) apply false
+    // docs, publishing, validation
+    alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.vanniktech.maven.publish.base) apply false
+    alias(libs.plugins.binary.compatibility.validator) apply false
+    // build tools
     alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(libs.plugins.buildkonfig) apply false
+    // others
+    // ...
 }
 
 // ----------------------------
 // Apply custom build file plugin
 // ----------------------------
 
-// provided gradle tasks in root project:
-// * updateMarkdownFiles
-// * macActions
-// * renameProject
 buildFilePlugin {
 
     // do not build demo projects in CI

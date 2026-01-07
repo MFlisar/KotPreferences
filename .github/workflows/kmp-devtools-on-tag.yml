@@ -1,6 +1,6 @@
 # This workflow uses MFlisar/kmp-devtools to handle documentation, release notes and publishing to Maven Central.
-# Link: https://github.com/MFlisar/kmp-devtools/blob/6.3.3/.github/workflows/gradle-ci.yml
-name: Devtools
+# Link: https://github.com/MFlisar/kmp-devtools/
+name: devtools-on-tag
 
 on:
   push:
@@ -15,5 +15,5 @@ permissions:
 jobs:
 
   kmp-devtools-on-tag:
-    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools-on-tag.yml@6.4.0
+    uses: MFlisar/kmp-devtools/.github/workflows/kmp-devtools-on-tag.yml@6.4.2
     secrets: inherit

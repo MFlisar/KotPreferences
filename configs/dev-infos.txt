@@ -17,3 +17,4 @@ snippet: MySnippetName
 * `updateMarkdownFiles`
 * `macActions`
 * `renameProject`
+* `updateDevToolsVersion`

@@ -1,13 +1,13 @@
 [versions]
 
-# mflisar (to use local snapshots use "LOCAL-SNAPSHOT" as version)
+# mflisar (local snapshot: "LOCAL-SNAPSHOT")
 kmp-parcelize =             "1.0.1"
-kmpdevtools =               "6.4.0" # also update the version in the root settings.gradle.kts + github workflow files
+kmpdevtools =               "6.4.2" # change via "updateDevToolsVersion" gradle task!
 democomposables =           "1.0.2"
 cachefileprovider =         "1.0.0"
 
 # others
-# ...
+compose-unstyled =          "1.49.5"
 
 [plugins]
 
@@ -23,4 +23,8 @@ democomposables =                       { module = "io.github.mflisar.democompos
 cachefileprovider =                     { module = "io.github.mflisar.cachefileprovider:library", 	    version.ref = "cachefileprovider" }
 
 # others
-# ...
+composeunstyled-theming =               { module = "com.composables:composeunstyled-theming",           version.ref = "compose-unstyled" }
+composeunstyled-primitives =            { module = "com.composables:composeunstyled-primitives",        version.ref = "compose-unstyled" }
+composeunstyled-platformtheme =         { module = "com.composables:composeunstyled-platformtheme",     version.ref = "compose-unstyled" }
+
+

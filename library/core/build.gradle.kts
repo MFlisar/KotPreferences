@@ -7,12 +7,21 @@ import com.michaelflisar.kmpdevtools.core.configs.Config
 import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
+    // kmp + app/library
+    alias(libs.plugins.jetbrains.kotlin.multiplatform)
     alias(libs.plugins.android.library)
+    // org.jetbrains.kotlin
+    // --
+    // org.jetbrains.compose
+    // --
+    // docs, publishing, validation
     alias(libs.plugins.dokka)
-    alias(libs.plugins.gradle.maven.publish.plugin)
+    alias(libs.plugins.vanniktech.maven.publish.base)
     alias(libs.plugins.binary.compatibility.validator)
+    // build tools
     alias(deps.plugins.kmpdevtools.buildplugin)
+    // others
+    // ...
 }
 
 // ------------------------

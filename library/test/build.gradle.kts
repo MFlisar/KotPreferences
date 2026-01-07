@@ -1,7 +1,16 @@
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.compose)
+    // kmp + app/library
+    alias(libs.plugins.jetbrains.kotlin.multiplatform)
+    // org.jetbrains.kotlin
+    alias(libs.plugins.jetbrains.kotlin.compose)
+    // org.jetbrains.compose
+    alias(libs.plugins.jetbrains.compose)
+    // docs, publishing, validation
+    // --
+    // build tools
+    // ...
+    // others
+    // ...
 }
 
 kotlin {
