@@ -91,8 +91,8 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.io.core)
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
+            implementation(libs.jetbrains.kotlinx.io.core)
 
             // Library
             implementation(project(":kotpreferences:core"))
@@ -103,8 +103,8 @@ kotlin {
         }
 
         wasmJsMain.dependencies {
-            implementation(libs.kotlinx.browser)
-            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.jetbrains.kotlinx.browser)
+            implementation(libs.jetbrains.kotlinx.serialization.json)
         }
     }
 }

@@ -89,18 +89,18 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
 
             // AndroidX / Google
-            implementation(libs.compose.runtime)
-            api(libs.lifecycle.runtime.compose)
+            implementation(libs.jetbrains.compose.runtime)
+            api(libs.jetbrains.androidx.lifecycle.runtime.compose)
 
             // Library
             implementation(project(":kotpreferences:core"))
         }
 
         androidMain.dependencies {
-            implementation(libs.androidx.lifecycle.runtime.compose)
+            //implementation(libs.androidx.lifecycle.runtime.compose)
         }
     }
 }

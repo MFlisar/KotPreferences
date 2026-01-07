@@ -18,9 +18,7 @@ plugins {
     // org.jetbrains.compose
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.vanniktech.maven.publish.base)
-    alias(libs.plugins.binary.compatibility.validator)
+    // --
     // build tools
     alias(deps.plugins.kmpdevtools.buildplugin)
     alias(libs.plugins.buildkonfig)
@@ -119,9 +117,9 @@ kotlin {
         commonMain.dependencies {
 
             // AndroidX/Compose/Material
-            implementation(libs.compose.material3)
-            implementation(libs.compose.material.icons.core)
-            implementation(libs.compose.material.icons.extended)
+            implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.material.icons.core)
+            implementation(libs.jetbrains.compose.material.icons.extended)
 
             // Modules
             implementation(project(":demo:shared"))

@@ -33,15 +33,15 @@ kotlin {
         commonMain.dependencies {
 
             // Kotlin
-            implementation(libs.kotlinx.coroutines.core)
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
 
             implementation(libs.kotlin.test)
-            implementation(libs.kotlinx.coroutines.test)
-            implementation(libs.kotlinx.io.core)
+            implementation(libs.jetbrains.kotlinx.coroutines.test)
+            implementation(libs.jetbrains.kotlinx.io.core)
 
-            implementation(libs.compose.material3)
+            implementation(libs.jetbrains.compose.material3)
 
-            implementation(libs.compose.ui.test.junit4)
+            implementation(libs.jetbrains.compose.ui.test.junit4)
 
             implementation(project(":kotpreferences:core"))
             implementation(project(":kotpreferences:modules:storage:datastore"))

@@ -48,7 +48,6 @@ val libraryId = libraryConfig.library.name.lowercase()
 
 // Library Modules
 settingsPlugin.includeModules(libraryId, libraryConfig, includeDokka = true)
-settingsPlugin.includeModule("library/test", ":$libraryId:test")
 
 // --------------
 // App

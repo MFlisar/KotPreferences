@@ -13,9 +13,7 @@ plugins {
     // org.jetbrains.compose
     alias(libs.plugins.jetbrains.compose)
     // docs, publishing, validation
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.vanniktech.maven.publish.base)
-    alias(libs.plugins.binary.compatibility.validator)
+    // --
     // build tools
     alias(deps.plugins.kmpdevtools.buildplugin)
     // others
@@ -92,14 +90,14 @@ kotlin {
             api(compose.components.resources)
 
             // Kotlin
-            implementation(libs.kotlinx.coroutines.core)
-            implementation(libs.kotlinx.io.core)
-            implementation(libs.kotlinx.serialization.json)
+            implementation(libs.jetbrains.kotlinx.coroutines.core)
+            implementation(libs.jetbrains.kotlinx.io.core)
+            implementation(libs.jetbrains.kotlinx.serialization.json)
 
             // Compose
-            implementation(libs.compose.material3)
-            implementation(libs.compose.material.icons.core)
-            implementation(libs.compose.material.icons.extended)
+            implementation(libs.jetbrains.compose.material3)
+            implementation(libs.jetbrains.compose.material.icons.core)
+            implementation(libs.jetbrains.compose.material.icons.extended)
 
             // library
             implementation(project(":kotpreferences:core"))
