@@ -1,7 +1,6 @@
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.Targets
-import com.michaelflisar.kmpdevtools.config.LibraryModuleData
-import com.michaelflisar.kmpdevtools.config.sub.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.configs.library.AndroidLibraryConfig
 import com.michaelflisar.kmpdevtools.core.Platform
 import com.michaelflisar.kmpdevtools.core.configs.Config
 import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
@@ -11,7 +10,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     // org.jetbrains.kotlin
-    // --
+    alias(libs.plugins.jetbrains.kotlin.serialization)
     // org.jetbrains.compose
     // --
     // docs, publishing, validation
@@ -42,16 +41,12 @@ val buildTargets = Targets(
     wasm = true
 )
 
-val androidConfig = AndroidLibraryConfig(
+val androidConfig = AndroidLibraryConfig.create(
     compileSdk = app.versions.compileSdk,
-    minSdk = app.versions.minSdk
-)
-
-val libraryModuleData = LibraryModuleData(
+    minSdk = app.versions.minSdk,
+    enableAndroidResources = false,
     project = project,
-    config = config,
-    libraryConfig = libraryConfig,
-    androidConfig = androidConfig
+    libraryConfig = libraryConfig
 )
 
 // ------------------------
@@ -68,7 +63,10 @@ kotlin {
     // Targets
     //-------------
 
-    buildTargets.setupTargetsLibrary(libraryModuleData)
+    buildTargets.setupTargetsLibrary(project)
+    android {
+        buildTargets.setupTargetsAndroidLibrary(project, config, libraryConfig, androidConfig, this)
+    }
 
     // -------
     // Sources

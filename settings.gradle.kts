@@ -1,3 +1,6 @@
+import com.michaelflisar.kmpdevtools.core.configs.AppConfig
+import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
+
 dependencyResolutionManagement {
 
     repositories {
@@ -35,7 +38,7 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "6.4.2"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "7.0.0"
 }
 val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFilePlugin::class.java)
 
@@ -43,8 +46,8 @@ val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFil
 // Library
 // --------------
 
-val libraryConfig = com.michaelflisar.kmpdevtools.core.configs.LibraryConfig.read(rootProject)
-val libraryId = libraryConfig.library.name.lowercase()
+val libraryConfig = LibraryConfig.read(rootProject)
+val libraryId = libraryConfig.libraryId()
 
 // Library Modules
 settingsPlugin.includeModules(libraryId, libraryConfig, includeDokka = true)
@@ -53,5 +56,16 @@ settingsPlugin.includeModules(libraryId, libraryConfig, includeDokka = true)
 // App
 // --------------
 
+// global data
+val appConfig = AppConfig(
+    appName = "${libraryConfig.library.name} Demo",
+    packageName = "com.michaelflisar.kotpreferences.demo",
+    versionCode = 1,
+    versionName = "1.0.0"
+)
+appConfig.save(gradle.extra)
+
+// modules
 include(":demo:shared")
-include(":demo:app")
+include(":demo:app:compose")
+include(":demo:app:android")
