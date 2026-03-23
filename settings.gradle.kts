@@ -1,4 +1,3 @@
-import com.michaelflisar.kmpdevtools.core.configs.AppConfig
 import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
 
 dependencyResolutionManagement {
@@ -38,7 +37,7 @@ pluginManagement {
 
 plugins {
     // version catalogue does not work here!
-    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "7.0.0"
+    id("io.github.mflisar.kmpdevtools.plugins-settings-gradle") version "7.1.0"
 }
 val settingsPlugin = plugins.getPlugin(com.michaelflisar.kmpdevtools.SettingsFilePlugin::class.java)
 
@@ -55,15 +54,6 @@ settingsPlugin.includeModules(libraryId, libraryConfig, includeDokka = true)
 // --------------
 // App
 // --------------
-
-// global data
-val appConfig = AppConfig(
-    appName = "${libraryConfig.library.name} Demo",
-    packageName = "com.michaelflisar.kotpreferences.demo",
-    versionCode = 1,
-    versionName = "1.0.0"
-)
-appConfig.save(gradle.extra)
 
 // modules
 include(":demo:shared")

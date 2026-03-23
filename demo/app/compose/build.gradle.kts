@@ -32,7 +32,7 @@ plugins {
 
 val config = Config.read(rootProject)
 val libraryConfig = LibraryConfig.read(rootProject)
-val appConfig = AppConfig.read(gradle.extra)
+val appConfig = AppConfig.read(rootProject)
 
 val buildTargets = Targets(
     // mobile
@@ -73,7 +73,7 @@ buildkonfig {
         buildConfigField(Type.STRING, "versionName", appConfig.versionName)
         buildConfigField(Type.INT, "versionCode", appConfig.versionCode.toString())
         buildConfigField(Type.STRING, "packageName", appConfig.packageName)
-        buildConfigField(Type.STRING, "appName", appConfig.appName)
+        buildConfigField(Type.STRING, "appName", appConfig.name)
     }
 }
 

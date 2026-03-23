@@ -1,13 +1,7 @@
 [versions]
 
 # mflisar (local snapshot: "LOCAL-SNAPSHOT")
-kmp-parcelize =             "1.0.1"
-kmpdevtools =               "7.0.0" # change via "updateDevToolsVersion" gradle task!
-democomposables =           "1.0.2"
-cachefileprovider =         "1.0.0"
-
-# others
-compose-unstyled =          "1.49.5"
+kmpdevtools =               "7.1.0" # change via "updateDevToolsVersion" gradle task!
 
 [plugins]
 
@@ -17,14 +11,4 @@ kmpdevtools-buildplugin =               { id = "io.github.mflisar.kmpdevtools.pl
 [libraries]
 
 # mflisar
-kmp-parcelize =                         { module = "io.github.mflisar.parcelize:library", 	            version.ref = "kmp-parcelize" }
-kmpdevtools-core =                      { module = "io.github.mflisar.kmpdevtools:core",                version.ref = "kmpdevtools" }
-democomposables =                       { module = "io.github.mflisar.democomposables:library",         version.ref = "democomposables" }
-cachefileprovider =                     { module = "io.github.mflisar.cachefileprovider:library", 	    version.ref = "cachefileprovider" }
-
-# others
-composeunstyled-theming =               { module = "com.composables:composeunstyled-theming",           version.ref = "compose-unstyled" }
-composeunstyled-primitives =            { module = "com.composables:composeunstyled-primitives",        version.ref = "compose-unstyled" }
-composeunstyled-platformtheme =         { module = "com.composables:composeunstyled-platformtheme",     version.ref = "compose-unstyled" }
-
-
+# --
