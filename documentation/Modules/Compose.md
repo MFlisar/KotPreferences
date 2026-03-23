@@ -1,3 +1,5 @@
+# Compose Extensions
+
 This module is placed inside the `extension-compose` artifact and offers some helpful compose extensions for the `Storage` class.
 
 All extensions functions are on `StorageSetting<T>` and following are available:

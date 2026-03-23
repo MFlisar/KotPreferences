@@ -1,4 +1,6 @@
-> :warning: This extension does only support android!
+# Encryption
+ 
+> > :warning: This extension does only support android!
 
 Currently there only exists the AES encryption module. It simple implements a predefined interface that encrypts and decrypts all data before it get's persisted by a storage implementation.
 

@@ -1,3 +1,5 @@
+# Key-Value Storage
+
 The `Storage` is an abstraction to support any storage implementation. The `storage-keyvalue` module provides an implementation based on a plain text file that will look like following:
 
 ```text
