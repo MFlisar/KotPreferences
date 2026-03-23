@@ -67,6 +67,7 @@ kotlin {
     android {
         buildTargets.setupTargetsAndroidLibrary(project, config, libraryConfig, androidConfig, this)
     }
+
     // -------
     // Sources
     // -------
