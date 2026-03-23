@@ -209,10 +209,10 @@ val name = Preferences.someString.asMutableState()
 
 # :file_folder: Modules
 
-- [Compose](documentation/Modules/Compose.md)
-- [Datastore](documentation/Modules/Datastore.md)
+- [Compose Extensions](documentation/Modules/Compose.md)
+- [Storage Datastore](documentation/Modules/Datastore.md)
 - [Encryption](documentation/Modules/Encryption.md)
-- [KeyValue](documentation/Modules/KeyValue.md)
+- [Key-Value Storage](documentation/Modules/KeyValue.md)
 
 # :sparkles: Demo
 
@@ -221,9 +221,9 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
 # :information_source: More
 
 - Migration
-  - [v0.7](documentation/Migration/v0.7.md)
-  - [v3.0.0](documentation/Migration/v3.0.0.md)
-  - [v4.0.0](documentation/Migration/v4.0.0.md)
+  - [Migration to version 0.7](documentation/Migration/v0.7.md)
+  - [Migration to version 3.0.0](documentation/Migration/v3.0.0.md)
+  - [Migration to v4.0.0](documentation/Migration/v4.0.0.md)
 
 # :books: API
 
