@@ -47,21 +47,21 @@ kotpreferences = "<LATEST-VERSION>"
 
 [libraries]
 
-core = { module = "io.github.mflisar.kotpreferences:core", version.ref = "kotpreferences" }
-storage.datastore = { module = "io.github.mflisar.kotpreferences:storage-datastore", version.ref = "kotpreferences" }
-storage.keyvalue = { module = "io.github.mflisar.kotpreferences:storage-keyvalue", version.ref = "kotpreferences" }
-extension.compose = { module = "io.github.mflisar.kotpreferences:extension-compose", version.ref = "kotpreferences" }
-encryption.aes = { module = "io.github.mflisar.kotpreferences:encryption-aes", version.ref = "kotpreferences" }
+kotpreferences-core = { module = "io.github.mflisar.kotpreferences:core", version.ref = "kotpreferences" }
+kotpreferences-storage-datastore = { module = "io.github.mflisar.kotpreferences:storage-datastore", version.ref = "kotpreferences" }
+kotpreferences-storage-keyvalue = { module = "io.github.mflisar.kotpreferences:storage-keyvalue", version.ref = "kotpreferences" }
+kotpreferences-extension-compose = { module = "io.github.mflisar.kotpreferences:extension-compose", version.ref = "kotpreferences" }
+kotpreferences-encryption-aes = { module = "io.github.mflisar.kotpreferences:encryption-aes", version.ref = "kotpreferences" }
 ```
 
 And then use the definitions in your projects **build.gradle.kts** file like following:
 
 ```java
-implementation(libs.core)
-implementation(libs.storage.datastore)
-implementation(libs.storage.keyvalue)
-implementation(libs.extension.compose)
-implementation(libs.encryption.aes)
+implementation(libs.kotpreferences.core})
+implementation(libs.kotpreferences.storage.datastore})
+implementation(libs.kotpreferences.storage.keyvalue})
+implementation(libs.kotpreferences.extension.compose})
+implementation(libs.kotpreferences.encryption.aes})
 ```
 
 </details>
@@ -209,10 +209,10 @@ val name = Preferences.someString.asMutableState()
 
 # :file_folder: Modules
 
-- [Compose](documentation/Modules/Compose.md)
-- [Datastore](documentation/Modules/Datastore.md)
-- [Encryption](documentation/Modules/Encryption.md)
-- [KeyValue](documentation/Modules/KeyValue.md)
+- [Compose](documentation%2FModules%2FCompose.md)
+- [Datastore](documentation%2FModules%2FDatastore.md)
+- [Encryption](documentation%2FModules%2FEncryption.md)
+- [KeyValue](documentation%2FModules%2FKeyValue.md)
 
 # :sparkles: Demo
 
@@ -221,9 +221,9 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
 # :information_source: More
 
 - Migration
-  - [v0.7](documentation/Migration/v0.7.md)
-  - [v3.0.0](documentation/Migration/v3.0.0.md)
-  - [v4.0.0](documentation/Migration/v4.0.0.md)
+  - [v0.7](documentation%2FMigration%2Fv0.7.md)
+  - [v3.0.0](documentation%2FMigration%2Fv3.0.0.md)
+  - [v4.0.0](documentation%2FMigration%2Fv4.0.0.md)
 
 # :books: API
 
