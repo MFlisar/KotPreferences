@@ -57,11 +57,11 @@ kotpreferences-encryption-aes = { module = "io.github.mflisar.kotpreferences:enc
 And then use the definitions in your projects **build.gradle.kts** file like following:
 
 ```java
-implementation(libs.kotpreferences.core})
-implementation(libs.kotpreferences.storage.datastore})
-implementation(libs.kotpreferences.storage.keyvalue})
-implementation(libs.kotpreferences.extension.compose})
-implementation(libs.kotpreferences.encryption.aes})
+implementation(libs.kotpreferences.core)
+implementation(libs.kotpreferences.storage.datastore)
+implementation(libs.kotpreferences.storage.keyvalue)
+implementation(libs.kotpreferences.extension.compose)
+implementation(libs.kotpreferences.encryption.aes)
 ```
 
 </details>
@@ -209,10 +209,10 @@ val name = Preferences.someString.asMutableState()
 
 # :file_folder: Modules
 
-- [Compose](documentation%2FModules%2FCompose.md)
-- [Datastore](documentation%2FModules%2FDatastore.md)
-- [Encryption](documentation%2FModules%2FEncryption.md)
-- [KeyValue](documentation%2FModules%2FKeyValue.md)
+- [Compose](documentation/Modules/Compose.md)
+- [Datastore](documentation/Modules/Datastore.md)
+- [Encryption](documentation/Modules/Encryption.md)
+- [KeyValue](documentation/Modules/KeyValue.md)
 
 # :sparkles: Demo
 
@@ -221,9 +221,9 @@ A full [demo](/demo) is included inside the demo module, it shows nearly every u
 # :information_source: More
 
 - Migration
-  - [v0.7](documentation%2FMigration%2Fv0.7.md)
-  - [v3.0.0](documentation%2FMigration%2Fv3.0.0.md)
-  - [v4.0.0](documentation%2FMigration%2Fv4.0.0.md)
+  - [v0.7](documentation/Migration/v0.7.md)
+  - [v3.0.0](documentation/Migration/v3.0.0.md)
+  - [v4.0.0](documentation/Migration/v4.0.0.md)
 
 # :books: API
 
