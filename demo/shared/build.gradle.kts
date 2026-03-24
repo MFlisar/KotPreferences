@@ -83,15 +83,13 @@ kotlin {
 
         commonMain.dependencies {
 
-            // resources
-            api(compose.components.resources)
-
             // Kotlin
             implementation(libs.jetbrains.kotlinx.coroutines.core)
             implementation(libs.jetbrains.kotlinx.io.core)
             implementation(libs.jetbrains.kotlinx.serialization.json)
 
             // Compose
+            implementation(libs.jetbrains.compose.components.resources)
             implementation(libs.jetbrains.compose.material3)
             implementation(libs.jetbrains.compose.material.icons.core)
             implementation(libs.jetbrains.compose.material.icons.extended)
