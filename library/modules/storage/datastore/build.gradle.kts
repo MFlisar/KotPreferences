@@ -45,8 +45,6 @@ val androidConfig = AndroidLibraryConfig.create(
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
     enableAndroidResources = false,
-    project = project,
-    libraryConfig = libraryConfig
 )
 
 // ------------------------
@@ -80,7 +78,7 @@ kotlin {
 
         val nativeMain by creating { dependsOn(commonMain.get()) }
 
-        buildTargets.setupDependencies(nativeMain, sourceSets, buildTargets, Platform.LIST_APPLE)
+        buildTargets.setupDependencies(nativeMain, sourceSets, Platform.LIST_APPLE)
 
         // ---------------------
         // dependencies

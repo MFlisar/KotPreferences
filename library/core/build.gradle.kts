@@ -44,9 +44,7 @@ val buildTargets = Targets(
 val androidConfig = AndroidLibraryConfig.create(
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
-    enableAndroidResources = false,
-    project = project,
-    libraryConfig = libraryConfig
+    enableAndroidResources = false
 )
 
 // ------------------------
@@ -83,10 +81,10 @@ kotlin {
         val featureIO by creating { dependsOn(commonMain.get()) }
         val featureNoIO by creating { dependsOn(commonMain.get()) }
 
-        buildTargets.setupDependencies(featureBlocking, sourceSets, buildTargets, listOf(Platform.WASM), platformsNotSupported = true)
-        buildTargets.setupDependencies(featureNoBlocking, sourceSets, buildTargets, listOf(Platform.WASM))
-        buildTargets.setupDependencies(featureIO, sourceSets, buildTargets, Platform.LIST_FILE_SUPPORT)
-        buildTargets.setupDependencies(featureNoIO, sourceSets, buildTargets, Platform.LIST_FILE_SUPPORT, platformsNotSupported = true)
+        buildTargets.setupDependencies(featureBlocking, sourceSets, listOf(Platform.WASM), platformsNotSupported = true)
+        buildTargets.setupDependencies(featureNoBlocking, sourceSets, listOf(Platform.WASM))
+        buildTargets.setupDependencies(featureIO, sourceSets, Platform.LIST_FILE_SUPPORT)
+        buildTargets.setupDependencies(featureNoIO, sourceSets, Platform.LIST_FILE_SUPPORT, platformsNotSupported = true)
 
         // ---------------------
         // dependencies

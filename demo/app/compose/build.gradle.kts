@@ -101,8 +101,8 @@ kotlin {
         val iosMain by creating { dependsOn(commonMain.get()) }
         val featureDatastoreMain by creating { dependsOn(commonMain.get()) }
 
-        buildTargets.setupDependencies(iosMain, sourceSets, buildTargets, listOf(Platform.IOS))
-        buildTargets.setupDependencies(featureDatastoreMain, sourceSets, buildTargets, listOf(Platform.WASM), platformsNotSupported = true)
+        buildTargets.setupDependencies(iosMain, sourceSets, listOf(Platform.IOS))
+        buildTargets.setupDependencies(featureDatastoreMain, sourceSets, listOf(Platform.WASM), platformsNotSupported = true)
 
         // ------------------------
         // dependencies
