@@ -12,6 +12,7 @@ This library provides following main features:
 # Table of Contents
 
 - [Supported Platforms](#computer-supported-platforms)
+- [Versions](#arrow_right-versions)
 - [Setup](#wrench-setup)
 - [Usage](#rocket-usage)
 - [Modules](#file_folder-modules)
@@ -29,6 +30,20 @@ This library provides following main features:
 | storage-keyvalue | ✅ | ✅ | ✅ | ✅ | ✅ |
 | extension-compose | ✅ | ✅ | ✅ | ✅ | ✅ |
 | encryption-aes | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+# :arrow_right: Versions
+
+| Dependency | Version |
+|---|---|
+| Kotlin | `2.3.20` |
+| Jetbrains Compose | `1.10.3` |
+| Jetbrains Compose Material3 | `1.9.0` |
+
+> :warning: Following experimental annotations are used:
+> - `kotlinx.cinterop.ExperimentalForeignApi` (3x)
+> - `InternalApi` (1x)
+>
+> I try to use as less experimental features as possible, but in this case the ones above are needed!
 
 # :wrench: Setup
 
