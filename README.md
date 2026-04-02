@@ -41,7 +41,6 @@ This library provides following main features:
 
 > :warning: Following experimental annotations are used:
 > - `kotlinx.cinterop.ExperimentalForeignApi` (3x)
-> - `InternalApi` (1x)
 >
 > I try to use as less experimental features as possible, but in this case the ones above are needed!
 
