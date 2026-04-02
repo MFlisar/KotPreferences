@@ -2,7 +2,6 @@
 github:
   name: KotPreferences
   release: 2021
-  namespace: com.michaelflisar.kotpreferences
   license:
     name: Apache License 2.0
     path: blob/main/LICENSE

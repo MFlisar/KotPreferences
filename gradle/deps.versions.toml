@@ -1,7 +1,7 @@
 [versions]
 
 # mflisar (local snapshot: "LOCAL-SNAPSHOT")
-kmpdevtools =               "7.1.8" # change via "updateDevToolsVersion" gradle task!
+kmpdevtools =               "7.6.0" # change via "updateDevToolsVersion" gradle task!
 
 [plugins]
 

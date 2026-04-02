@@ -1,13 +1,11 @@
-import com.codingfeline.buildkonfig.compiler.FieldSpec.Type
 import com.michaelflisar.kmpdevtools.Targets
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.core.Platform
 import com.michaelflisar.kmpdevtools.configs.library.AndroidLibraryConfig
 import com.michaelflisar.kmpdevtools.configs.app.DesktopAppConfig
 import com.michaelflisar.kmpdevtools.configs.app.WasmAppConfig
-import com.michaelflisar.kmpdevtools.core.configs.AppConfig
-import com.michaelflisar.kmpdevtools.core.configs.Config
-import com.michaelflisar.kmpdevtools.core.configs.LibraryConfig
+import com.michaelflisar.kmpdevtools.configs.module.AppModuleConfig
+import com.michaelflisar.kmpdevtools.setupDependencies
 
 plugins {
     // kmp + app/library
@@ -21,7 +19,6 @@ plugins {
     // --
     // build tools
     alias(deps.plugins.kmpdevtools.buildplugin)
-    alias(libs.plugins.buildkonfig)
     // others
     // ...
 }
@@ -30,9 +27,7 @@ plugins {
 // Setup
 // ------------------------
 
-val config = Config.read(rootProject)
-val libraryConfig = LibraryConfig.read(rootProject)
-val appConfig = AppConfig.read(rootProject)
+val module = AppModuleConfig.readManual(project)
 
 val buildTargets = Targets(
     // mobile
@@ -45,11 +40,11 @@ val buildTargets = Targets(
     wasm = true
 )
 
-val androidConfig = AndroidLibraryConfig.createManualNamespace(
+val androidConfig = AndroidLibraryConfig.createFromPath(
+    appModuleConfig = module,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
-    enableAndroidResources = true,
-    namespaceAddon = "demo.app.compose"
+    enableAndroidResources = true
 )
 
 val desktopConfig = DesktopAppConfig(
@@ -66,26 +61,15 @@ val wasmConfig = WasmAppConfig(
 // Kotlin
 // ------------------------
 
-buildkonfig {
-    packageName = appConfig.packageName
-    exposeObjectWithName = "BuildKonfig"
-    defaultConfigs {
-        buildConfigField(Type.STRING, "versionName", appConfig.versionName)
-        buildConfigField(Type.INT, "versionCode", appConfig.versionCode.toString())
-        buildConfigField(Type.STRING, "packageName", appConfig.packageName)
-        buildConfigField(Type.STRING, "appName", appConfig.name)
-    }
-}
-
 kotlin {
 
     //-------------
     // Targets
     //-------------
 
-    buildTargets.setupTargetsApp(project, wasmAppConfig = wasmConfig)
+    buildTargets.setupTargetsApp(module, wasmAppConfig = wasmConfig)
     android {
-        buildTargets.setupTargetsAndroidLibrary(project, config, libraryConfig, androidConfig, this)
+        buildTargets.setupTargetsAndroidLibrary(module, androidConfig, this)
     }
 
     // ------------------------
@@ -101,8 +85,13 @@ kotlin {
         val iosMain by creating { dependsOn(commonMain.get()) }
         val featureDatastoreMain by creating { dependsOn(commonMain.get()) }
 
-        buildTargets.setupDependencies(iosMain, sourceSets, listOf(Platform.IOS))
-        buildTargets.setupDependencies(featureDatastoreMain, sourceSets, listOf(Platform.WASM), platformsNotSupported = true)
+        setupDependencies(buildTargets, sourceSets) {
+
+            Platform.IOS addSourceSet iosMain
+
+            featureDatastoreMain supportedBy !Platform.WASM
+
+        }
 
         // ------------------------
         // dependencies
@@ -147,10 +136,8 @@ kotlin {
 compose.desktop {
     application {
         BuildFileUtil.setupWindowsApp(
-            project = project,
-            config = config,
+            appModuleConfig = module,
             application = this,
-            appConfig = appConfig,
             desktopAppConfig = desktopConfig
         )
     }
