@@ -1,4 +1,4 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core) ![API](https://img.shields.io/badge/api-23%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/KotPreferences.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/KotPreferences.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
 # KotPreferences
 ![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
 
@@ -23,24 +23,25 @@ This library provides following main features:
 
 # :computer: Supported Platforms
 
-| Module | android | iOS | windows | macOS | wasm |
-|---|---|---|---|---|---|
-| core | ✅ | ✅ | ✅ | ✅ | ✅ |
-| storage-datastore | ✅ | ✅ | ✅ | ✅ | ❌ |
-| storage-keyvalue | ✅ | ✅ | ✅ | ✅ | ✅ |
-| extension-compose | ✅ | ✅ | ✅ | ✅ | ✅ |
-| encryption-aes | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Module | android | iOS | windows | macOS | wasm | Notes |
+|---|---|---|---|---|---|---|
+| core | ✅ | ✅ | ✅ | ✅ | ✅ | This is the core module that holds the android app context |
+| storage-datastore | ✅ | ✅ | ✅ | ✅ | ❌ | Provides a storage implementation based on jetpack datastore |
+| storage-keyvalue | ✅ | ✅ | ✅ | ✅ | ✅ | Provides a storage implementation based on a simple key-value text file |
+| extension-compose | ✅ | ✅ | ✅ | ✅ | ✅ | Provides composable extensions |
+| encryption-aes | ✅ | ❌ | ❌ | ❌ | ❌ | Provides AES based encryption |
 
 # :arrow_right: Versions
 
 | Dependency | Version |
 |---|---|
-| Kotlin | `2.3.20` |
-| Jetbrains Compose | `1.10.3` |
+| Kotlin | `2.4.0` |
+| Jetbrains Compose | `1.11.1` |
 | Jetbrains Compose Material3 | `1.9.0` |
 
 > :warning: Following experimental annotations are used:
-> - `kotlinx.cinterop.ExperimentalForeignApi` (3x)
+> - **OptIn**
+>   - `kotlinx.cinterop.ExperimentalForeignApi` (3x)
 >
 > I try to use as less experimental features as possible, but in this case the ones above are needed!
 
