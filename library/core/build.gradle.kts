@@ -1,7 +1,6 @@
 import com.michaelflisar.kmpdevtools.BuildFileUtil
 import com.michaelflisar.kmpdevtools.Targets
-import com.michaelflisar.kmpdevtools.configs.library.AndroidLibraryConfig
-import com.michaelflisar.kmpdevtools.configs.module.LibraryModuleConfig
+import com.michaelflisar.kmpdevtools.configs.*
 import com.michaelflisar.kmpdevtools.core.Platform
 import com.michaelflisar.kmpdevtools.setupDependencies
 
@@ -18,7 +17,7 @@ plugins {
     alias(libs.plugins.vanniktech.maven.publish.base)
     alias(libs.plugins.binary.compatibility.validator)
     // build tools
-    alias(deps.plugins.kmpdevtools.buildplugin)
+    alias(mflisar.plugins.kmpdevtools.buildplugin)
     // others
     // ...
 }
@@ -81,10 +80,10 @@ kotlin {
         val featureIO by creating { dependsOn(commonMain.get()) }
         val featureNoIO by creating { dependsOn(commonMain.get()) }
 
-        setupDependencies(buildTargets, sourceSets) {
+        setupDependencies(module, buildTargets, sourceSets) {
 
-            featureBlocking supportedBy Platform.WASM
-            featureNoBlocking supportedBy !Platform.WASM
+            featureBlocking supportedBy !Platform.WASM
+            featureNoBlocking supportedBy Platform.WASM
             featureIO supportedBy Platform.LIST_FILE_SUPPORT
             featureNoIO supportedBy !Platform.LIST_FILE_SUPPORT
 

@@ -1,9 +1,8 @@
 package com.michaelflisar.kotpreferences.core
 
-import com.michaelflisar.kotpreferences.core.settings.AbstractSetting
 import com.michaelflisar.kotpreferences.core.classes.SettingsGroup
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
-import kotlinx.coroutines.Dispatchers
+import com.michaelflisar.kotpreferences.core.settings.AbstractSetting
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 
