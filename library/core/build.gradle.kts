@@ -79,7 +79,6 @@ kotlin {
         val featureNoBlocking by creating { dependsOn(commonMain.get()) }
         val featureIO by creating { dependsOn(commonMain.get()) }
         val featureNoIO by creating { dependsOn(commonMain.get()) }
-        val featureFile by creating { dependsOn(commonMain.get()) }
 
 
         setupDependencies(module, buildTargets, sourceSets) {
@@ -88,7 +87,6 @@ kotlin {
             featureNoBlocking supportedBy Target.WASM
             featureIO supportedBy Target.LIST_FILE_SUPPORT
             featureNoIO supportedBy !Target.LIST_FILE_SUPPORT
-            featureFile supportedBy Target.LIST_FILE_SUPPORT
 
         }
 
@@ -103,7 +101,7 @@ kotlin {
 
         }
 
-        featureFile.dependencies {
+        featureIO.dependencies {
             implementation(libs.jetbrains.kotlinx.io.core)
         }
 
