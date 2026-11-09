@@ -2,6 +2,7 @@ package com.michaelflisar.kotpreferences.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
+import androidx.compose.runtime.remember
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -47,7 +48,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     mapper: (T) -> X,
 ): State<X?>
 /* end-snippet */ {
-    return flow.map { mapper(it) }.collectAsStateWithLifecycle(
+    val mappedFlow = remember(flow, mapper) { flow.map(mapper) }
+    return mappedFlow.collectAsStateWithLifecycle(
         initialValue = initialValue?.let { mapper(it) },
         lifecycle = lifecycle,
         minActiveState = minActiveState,
@@ -84,7 +86,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycle(
     mapper: (T) -> X,
 ): State<X?>
 /* end-snippet */ {
-    return flow.map { mapper(it) }.collectAsStateWithLifecycle(
+    val mappedFlow = remember(flow, mapper) { flow.map(mapper) }
+    return mappedFlow.collectAsStateWithLifecycle(
         initialValue = initialValue?.let { mapper(it) },
         lifecycleOwner = lifecycleOwner,
         minActiveState = minActiveState,
@@ -125,7 +128,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     mapper: (T) -> X,
 ): State<X>
 /* end-snippet */ {
-    return flow.map { mapper(it) }.collectAsStateWithLifecycle(
+    val mappedFlow = remember(flow, mapper) { flow.map(mapper) }
+    return mappedFlow.collectAsStateWithLifecycle(
         initialValue = mapper(initialValue),
         lifecycle = lifecycle,
         minActiveState = minActiveState,
@@ -162,7 +166,8 @@ fun <T, X> StorageSetting<T>.collectAsStateWithLifecycleNotNull(
     mapper: (T) -> X,
 ): State<X>
 /* end-snippet */ {
-    return flow.map { mapper(it) }.collectAsStateWithLifecycle(
+    val mappedFlow = remember(flow, mapper) { flow.map(mapper) }
+    return mappedFlow.collectAsStateWithLifecycle(
         initialValue = mapper(initialValue),
         lifecycleOwner = lifecycleOwner,
         minActiveState = minActiveState,

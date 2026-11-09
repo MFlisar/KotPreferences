@@ -3,6 +3,7 @@ package com.michaelflisar.kotpreferences.compose
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import com.michaelflisar.kotpreferences.core.InternalApi
 import com.michaelflisar.kotpreferences.core.getValueNotNull
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
@@ -29,7 +30,8 @@ fun <T, X> StorageSetting<T>.collectAsState(
     mapper: (T) -> X,
 ): State<X?>
 /* end-snippet */ {
-    return flow.map { mapper(it) }.collectAsState(initial = initialValue?.let { mapper(it) })
+    val mappedFlow = remember(flow, mapper) { flow.map(mapper) }
+    return mappedFlow.collectAsState(initial = initialValue?.let(mapper))
 }
 
 // ------------------------
@@ -54,9 +56,9 @@ fun <T, X> StorageSetting<T>.collectAsStateNotNull(
     mapper: (T) -> X,
 ): State<X>
 /* end-snippet */ {
-    return flow.map { mapper(it) }.collectAsState(initial = mapper(initialValue))
+    val mappedFlow = remember(flow, mapper) { flow.map(mapper) }
+    return mappedFlow.collectAsState(initial = mapper(initialValue))
 }
-
 
 
 

@@ -1,6 +1,6 @@
-testString=fgDtYAn94E
-testInt=2
-testClass={"id":3,"name":"684xv"}
-testEnum=1
-color=-16777216
-counter=8
+color=-65536
+testString=1Yy8Hifzdz
+counter=12
+testInt=4
+testClass={"id":5,"name":"CsSMp"}
+testEnum=0

@@ -1,12 +1,7 @@
 package com.michaelflisar.kotpreferences.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
@@ -15,7 +10,6 @@ import com.michaelflisar.kotpreferences.core.StorageContext
 import com.michaelflisar.kotpreferences.core.getValueNotNull
 import com.michaelflisar.kotpreferences.core.interfaces.StorageSetting
 import com.michaelflisar.kotpreferences.core.tryGetValueNotNull
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
