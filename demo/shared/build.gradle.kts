@@ -1,9 +1,10 @@
 import com.michaelflisar.kmpdevtools.Targets
-import com.michaelflisar.kmpdevtools.BuildFileUtil
-import com.michaelflisar.kmpdevtools.core.Platform
-import com.michaelflisar.kmpdevtools.configs.*
-import com.michaelflisar.kmpdevtools.setupDependencies
+import com.michaelflisar.kmpdevtools.configs.AndroidLibraryConfig
+import com.michaelflisar.kmpdevtools.configs.AppModuleConfig
+import com.michaelflisar.kmpdevtools.configs.LibraryModuleConfig
+import com.michaelflisar.kmpdevtools.core.Target
 import com.michaelflisar.kmpdevtools.setupBuildKonfig
+import com.michaelflisar.kmpdevtools.setupDependencies
 
 plugins {
     // kmp + app/library
@@ -27,21 +28,22 @@ plugins {
 // Setup
 // ------------------------
 
-val module = LibraryModuleConfig.readManual(project)
+val module = AppModuleConfig.read(project)
+val libraryModule = LibraryModuleConfig.read(project)
 
 val buildTargets = Targets(
     // mobile
-    android = true,
-    iOS = true,
+    Target.ANDROID,
+    Target.IOS,
     // desktop
-    windows = true,
-    macOS = true,
+    Target.JVM,
+    Target.MACOS,
     // web
-    wasm = true
+    Target.WASM
 )
 
-val androidConfig = AndroidLibraryConfig.createFromPath(
-    libraryModuleConfig = module,
+val androidConfig = AndroidLibraryConfig.create(
+    libraryModuleConfig = libraryModule,
     compileSdk = app.versions.compileSdk,
     minSdk = app.versions.minSdk,
     enableAndroidResources = true
@@ -52,7 +54,7 @@ val androidConfig = AndroidLibraryConfig.createFromPath(
 // ------------------------
 
 buildkonfig {
-    setupBuildKonfig(module.appConfig)
+    setupBuildKonfig(project = project, config = module.config)
 }
 
 compose.resources {
@@ -66,13 +68,13 @@ kotlin {
     // Targets
     //-------------
 
-    buildTargets.setupTargetsLibrary(module)
+    buildTargets.setupTargetsLibrary(libraryModule)
     android {
-        buildTargets.setupTargetsAndroidLibrary(module, androidConfig, this)
+        buildTargets.setupTargetsAndroidLibrary(libraryModule, androidConfig, this)
     }
 
     // ------------------------
-    // Source Sets
+    // Sources
     // ------------------------
 
     sourceSets {
@@ -81,7 +83,11 @@ kotlin {
         // custom source sets
         // ---------------------
 
-        // --
+        val iosMain by creating { dependsOn(commonMain.get()) }
+
+        setupDependencies(module, buildTargets, sourceSets) {
+            Target.IOS addSourceSet iosMain
+        }
 
         // ---------------------
         // dependencies
@@ -100,11 +106,14 @@ kotlin {
             implementation(libs.jetbrains.compose.material.icons.core)
             implementation(libs.jetbrains.compose.material.icons.extended)
 
-            // library
+            // Library
             implementation(project(":kotpreferences:core"))
             implementation(project(":kotpreferences:modules:storage:keyvalue"))
             implementation(project(":kotpreferences:modules:compose"))
+        }
 
+        iosMain.dependencies {
+            implementation(project(":kotpreferences:modules:storage:datastore"))
         }
     }
 }

@@ -5,7 +5,8 @@
 
 # plugins only
 kmpicon-plugin =            "0.0.1"
-kmpdevtools =               "7.9.7" # use the "devTools" task to change the version
+kmpdevtools =               "9.3.3" # use the "devTools" task to change the version
+launch4j =                  "3.0.7"
 
 # demos
 # --
@@ -18,6 +19,7 @@ kmpdevtools =               "7.9.7" # use the "devTools" task to change the vers
 # plugins only
 kmpdevtools-buildplugin =           { id = "io.github.mflisar.kmpdevtools.plugins-build-gradle",        version.ref = "kmpdevtools" }
 kmpicon-plugin =                    { id = "io.github.mflisar.kmpicon.plugin",                          version.ref = "kmpicon-plugin" }
+launch4j =                           { id = "edu.sc.seis.launch4j",                                     version.ref = "launch4j" }
 
 [libraries]
 

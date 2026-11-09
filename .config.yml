@@ -1,0 +1,84 @@
+# -------------------
+# Publishing
+# -------------------
+publish:
+  group-id: io.github.mflisar.kotpreferences
+  github:
+    user: MFlisar
+    repo: maven-repository
+    branch: main
+    path: artifacts
+  release-target: maven-central # [none, maven-central, github]
+  test-target: github # [none, maven-central, github]
+
+# -------------------
+# General configuration
+# -------------------
+config:
+  java-version: 17
+  developer:
+    name: Michael Flisar
+    mail: mflisar.development@gmail.com
+    maven-id: mflisar
+    github-user-name: MFlisar
+
+# -------------------
+# Demo applications
+# -------------------
+apps:
+  - name: KotPreferences Demo
+    namespace: com.michaelflisar.kotpreferences.demo
+    version-name: 1.0.0
+    module-paths:
+      - demo/app/android
+      - demo/app/jvm
+      - demo/app/wasm
+      - demo/shared
+    # optional - if set, the app will be published to the homepage and linked in the readme
+    publish:
+      url-path: demo
+      description: Explore the interactive demo
+      module-path: demo/app/wasm
+
+# -------------------
+# Project information
+# -------------------
+project:
+  namespace: com.michaelflisar.kotpreferences
+  repo-name: KotPreferences
+  release: 2021
+  license:
+    name: Apache License 2.0
+    path: blob/main/LICENSE
+
+# -------------------
+# Library modules
+# -------------------
+modules:
+  primary-artifact-id: core
+  modules:
+    - artifact-id: core
+      description: This is the core module that holds the android app context
+      path: library/core
+    - artifact-id: storage-datastore
+      description: Provides a storage implementation based on jetpack datastore
+      path: library/modules/storage/datastore
+    - artifact-id: storage-keyvalue
+      description: Provides a storage implementation based on a simple key-value text file
+      path: library/modules/storage/keyvalue
+    - artifact-id: extension-compose
+      description: Provides composable extensions
+      path: library/modules/compose
+    - artifact-id: encryption-aes
+      description: Provides AES based encryption
+      path: library/modules/encryption-aes
+  xcframeworks: []
+
+# -------------------
+# Documentation
+# -------------------
+documentation:
+  path: documentation
+  relative-paths:
+    partials: _partials
+    screenshots: Screenshots

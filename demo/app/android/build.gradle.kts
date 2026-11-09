@@ -20,7 +20,7 @@ plugins {
 // Setup
 // ------------------------
 
-val module = AppModuleConfig.readManual(project)
+val module = AppModuleConfig.read(project)
 
 val androidConfig = AndroidAppConfig(
     compileSdk = app.versions.compileSdk,
@@ -52,7 +52,7 @@ dependencies {
     implementation(libs.jetbrains.compose.material3)
 
     // Library
-    implementation(project(":demo:app:compose"))
+    implementation(project(":demo:shared"))
     implementation(project(":kotpreferences:core"))
     implementation(project(":kotpreferences:modules:storage:datastore"))
     implementation(project(":kotpreferences:modules:encryption-aes"))
