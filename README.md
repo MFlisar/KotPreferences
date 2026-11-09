@@ -1,6 +1,6 @@
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?style=for-the-badge&color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg?style=for-the-badge) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/KotPreferences.svg?style=for-the-badge&amp;color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?style=for-the-badge&amp;label=Kotlin)
+[![Maven Central](https://img.shields.io/maven-central/v/io.github.mflisar.kotpreferences/core?color=blue)](https://central.sonatype.com/artifact/io.github.mflisar.kotpreferences/core) ![API](https://img.shields.io/badge/api-24%2B-brightgreen.svg) ![Kotlin](https://img.shields.io/github/languages/top/MFlisar/KotPreferences.svg?color=blueviolet) ![Kotlin Multiplatform](https://img.shields.io/badge/Kotlin_Multiplatform-blue?label=Kotlin)
 # KotPreferences
-![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge) ![Android](https://img.shields.io/badge/android-3DDC84?style=for-the-badge) ![iOS](https://img.shields.io/badge/ios-A2AAAD?style=for-the-badge) ![Windows](https://img.shields.io/badge/windows-5382A1?style=for-the-badge) ![macOS](https://img.shields.io/badge/macos-B0B0B0?style=for-the-badge) ![WebAssembly](https://img.shields.io/badge/wasm-624DE7?style=for-the-badge)
+![Platforms](https://img.shields.io/badge/PLATFORMS-black?style=for-the-badge)
 
 This library provides following main features:
 
@@ -9,27 +9,30 @@ This library provides following main features:
 * update dependencies via `suspend` functions
 * use those preferences inside compose as `State`, `MutableState` or `StateFlow`
 
+> [!TIP]
+> Try the interactive demo:
+> 
+> [![Open Interactive Demo](https://img.shields.io/badge/KotPreferences_Demo-2962FF?style=for-the-badge&logo=googlechrome&logoColor=white)](https://mflisar.github.io/KotPreferences/demo/)
+
 # Table of Contents
 
 - [Supported Platforms](#computer-supported-platforms)
 - [Versions](#arrow_right-versions)
 - [Setup](#wrench-setup)
 - [Usage](#rocket-usage)
-- [Modules](#file_folder-modules)
 - [Demo](#sparkles-demo)
-- [More](#information_source-more)
 - [API](#books-api)
 - [Other Libraries](#bulb-other-libraries)
 
 # :computer: Supported Platforms
 
-| Module | android | iOS | windows | macOS | wasm | Notes |
-|---|---|---|---|---|---|---|
-| core | ✅ | ✅ | ✅ | ✅ | ✅ | This is the core module that holds the android app context |
-| storage-datastore | ✅ | ✅ | ✅ | ✅ | ❌ | Provides a storage implementation based on jetpack datastore |
-| storage-keyvalue | ✅ | ✅ | ✅ | ✅ | ✅ | Provides a storage implementation based on a simple key-value text file |
-| extension-compose | ✅ | ✅ | ✅ | ✅ | ✅ | Provides composable extensions |
-| encryption-aes | ✅ | ❌ | ❌ | ❌ | ❌ | Provides AES based encryption |
+| Module | Notes |
+|---|---|
+| core | This is the core module that holds the android app context |
+| storage-datastore | Provides a storage implementation based on jetpack datastore |
+| storage-keyvalue | Provides a storage implementation based on a simple key-value text file |
+| extension-compose | Provides composable extensions |
+| encryption-aes | Provides AES based encryption |
 
 # :arrow_right: Versions
 
@@ -41,6 +44,7 @@ This library provides following main features:
 
 > :warning: Following experimental annotations are used:
 > - **OptIn**
+>   - `InternalApi` (1x)
 >   - `kotlinx.cinterop.ExperimentalForeignApi` (3x)
 >
 > I try to use as less experimental features as possible, but in this case the ones above are needed!
@@ -222,28 +226,18 @@ val name = Preferences.someString.asMutableState()
 
 ```
 
-# :file_folder: Modules
-
-- [Compose Extensions](documentation/Modules/Compose.md)
-- [Storage Datastore](documentation/Modules/Datastore.md)
-- [Encryption](documentation/Modules/Encryption.md)
-- [Key-Value Storage](documentation/Modules/KeyValue.md)
-
 # :sparkles: Demo
 
-A full [demo](/demo) is included inside the demo module, it shows nearly every usage with working examples.
-
-# :information_source: More
-
-- Migration
-  - [Migration to version 0.7](documentation/Migration/v0.7.md)
-  - [Migration to version 3.0.0](documentation/Migration/v3.0.0.md)
-  - [Migration to v4.0.0](documentation/Migration/v4.0.0.md)
+A [demo project](demo) is included.
 
 # :books: API
 
-Check out the [API documentation](https://MFlisar.github.io/KotPreferences/).
+Check out the [API documentation](https://MFlisar.github.io/KotPreferences/api/).
 
 # :bulb: Other Libraries
 
-You can find more libraries (all multiplatform) of mine that all do work together nicely [here](https://mflisar.github.io/Libraries/).
+You can find more of my multiplatform libraries that work well together [here](https://mflisar.github.io/Libraries/).
+
+# :twisted_rightwards_arrows: Compatibility
+
+When combining my libraries, you can find compatibility information [here](https://mflisar.github.io/Libraries/compatibilities/).
